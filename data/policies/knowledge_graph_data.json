@@ -1,0 +1,1692 @@
+{
+  "entities": [
+    {
+      "id": "e1",
+      "type": "SustainabilityIndicator",
+      "name": "Reduction of Groundwater Storage",
+      "properties": {}
+    },
+    {
+      "id": "e2",
+      "type": "SustainabilityIndicator",
+      "name": "Degraded Water Quality",
+      "properties": {}
+    },
+    {
+      "id": "e3",
+      "type": "SustainabilityIndicator",
+      "name": "Seawater Intrusion",
+      "properties": {}
+    },
+    {
+      "id": "e4",
+      "type": "SustainabilityIndicator",
+      "name": "Land Subsidence",
+      "properties": {}
+    },
+    {
+      "id": "e5",
+      "type": "SustainabilityIndicator",
+      "name": "Interconnected Surface Water",
+      "properties": {}
+    },
+    {
+      "id": "e6",
+      "type": "Threshold",
+      "name": "Subsidence projected to 2040 not leading to loss of conveyance capacity",
+      "properties": {
+        "year": "2040",
+        "impact": "no loss of conveyance capacity"
+      }
+    },
+    {
+      "id": "e7",
+      "type": "Threshold",
+      "name": "Average historical rate of land subsidence in each HCM Area from 2015-2023",
+      "properties": {
+        "start_year": "2015",
+        "end_year": "2023"
+      }
+    },
+    {
+      "id": "e8",
+      "type": "Basin",
+      "name": "Kern Subbasin",
+      "properties": {}
+    },
+    {
+      "id": "e9",
+      "type": "Statute",
+      "name": "California Water Code \u00a710721(u)",
+      "properties": {}
+    },
+    {
+      "id": "e10",
+      "type": "Statute",
+      "name": "CWC \u00a710727(a)",
+      "properties": {}
+    },
+    {
+      "id": "e11",
+      "type": "Statute",
+      "name": "CWC \u00a710727.2(b)(1)",
+      "properties": {}
+    },
+    {
+      "id": "e12",
+      "type": "Statute",
+      "name": "23 CCR \u00a7 354.22",
+      "properties": {}
+    },
+    {
+      "id": "e13",
+      "type": "Project",
+      "name": "2025 Plan",
+      "properties": {}
+    },
+    {
+      "id": "e14",
+      "type": "HydrogeologicUnit",
+      "name": "E-clay",
+      "properties": {}
+    },
+    {
+      "id": "e15",
+      "type": "HydrogeologicUnit",
+      "name": "Lake Deposits",
+      "properties": {}
+    },
+    {
+      "id": "e16",
+      "type": "WaterBudgetComponent",
+      "name": "Surface Water Supply",
+      "properties": {}
+    },
+    {
+      "id": "e17",
+      "type": "GSA",
+      "name": "Kern County",
+      "properties": {}
+    },
+    {
+      "id": "e18",
+      "type": "Statute",
+      "name": "Section 5200",
+      "properties": {}
+    },
+    {
+      "id": "e19",
+      "type": "Statute",
+      "name": "Section 10723.8",
+      "properties": {}
+    },
+    {
+      "id": "e20",
+      "type": "Statute",
+      "name": "Section 1798.3 of the Civil Code",
+      "properties": {}
+    },
+    {
+      "id": "e21",
+      "type": "Statute",
+      "name": "Section 116275 of the Health and Safety Code",
+      "properties": {}
+    },
+    {
+      "id": "e22",
+      "type": "Requirement",
+      "name": "Groundwater Extraction Reporting",
+      "properties": {}
+    },
+    {
+      "id": "e23",
+      "type": "SustainabilityIndicator",
+      "name": "Chronic lowering of groundwater levels",
+      "properties": {}
+    },
+    {
+      "id": "e24",
+      "type": "SustainabilityIndicator",
+      "name": "Significant and unreasonable reduction of groundwater storage",
+      "properties": {}
+    },
+    {
+      "id": "e25",
+      "type": "SustainabilityIndicator",
+      "name": "Significant and unreasonable seawater intrusion",
+      "properties": {}
+    },
+    {
+      "id": "e26",
+      "type": "SustainabilityIndicator",
+      "name": "Significant and unreasonable degraded water quality",
+      "properties": {}
+    },
+    {
+      "id": "e27",
+      "type": "SustainabilityIndicator",
+      "name": "Significant and unreasonable land subsidence",
+      "properties": {}
+    },
+    {
+      "id": "e28",
+      "type": "SustainabilityIndicator",
+      "name": "Depletion of interconnected surface waters",
+      "properties": {}
+    },
+    {
+      "id": "e29",
+      "type": "Statute",
+      "name": "SGMA",
+      "properties": {}
+    },
+    {
+      "id": "e30",
+      "type": "Rule",
+      "name": "Spacing requirements on new groundwater well construction",
+      "properties": {}
+    },
+    {
+      "id": "e31",
+      "type": "Rule",
+      "name": "Reasonable operating regulations on existing groundwater wells",
+      "properties": {}
+    },
+    {
+      "id": "e32",
+      "type": "Rule",
+      "name": "Control groundwater extractions",
+      "properties": {}
+    },
+    {
+      "id": "kern_subbasin",
+      "type": "Basin",
+      "name": "Kern Subbasin",
+      "properties": {}
+    },
+    {
+      "id": "cwc_10735",
+      "type": "Statute",
+      "name": "California Water Code \u00a710735 et seq.",
+      "properties": {}
+    },
+    {
+      "id": "swrcb",
+      "type": "Entity",
+      "name": "SWRCB",
+      "properties": {}
+    },
+    {
+      "id": "kern_subbasin_gsp",
+      "type": "Entity",
+      "name": "Kern Subbasin GSP",
+      "properties": {}
+    },
+    {
+      "id": "historical_water_budget",
+      "type": "WaterBudgetComponent",
+      "name": "Historical Water Budget",
+      "properties": {}
+    },
+    {
+      "id": "current_water_budget",
+      "type": "WaterBudgetComponent",
+      "name": "Current Water Budget",
+      "properties": {}
+    },
+    {
+      "id": "projected_water_budget",
+      "type": "WaterBudgetComponent",
+      "name": "Projected Water Budget",
+      "properties": {}
+    },
+    {
+      "id": "natural_recharge",
+      "type": "WaterBudgetComponent",
+      "name": "Natural Recharge",
+      "properties": {}
+    },
+    {
+      "id": "artificial_recharge",
+      "type": "WaterBudgetComponent",
+      "name": "Artificial Recharge",
+      "properties": {}
+    },
+    {
+      "id": "groundwater_extraction",
+      "type": "WaterBudgetComponent",
+      "name": "Groundwater Extraction",
+      "properties": {}
+    },
+    {
+      "id": "evapotranspiration",
+      "type": "WaterBudgetComponent",
+      "name": "Evapotranspiration",
+      "properties": {}
+    },
+    {
+      "id": "surface_water_interactions",
+      "type": "WaterBudgetComponent",
+      "name": "Surface Water Interactions",
+      "properties": {}
+    },
+    {
+      "id": "subsurface_flows",
+      "type": "WaterBudgetComponent",
+      "name": "Subsurface Flows",
+      "properties": {}
+    },
+    {
+      "id": "c2vsimfg_kern",
+      "type": "Entity",
+      "name": "C2VSimFG-Kern",
+      "properties": {}
+    },
+    {
+      "id": "reduction_groundwater_storage",
+      "type": "SustainabilityIndicator",
+      "name": "Reduction in Groundwater Storage",
+      "properties": {}
+    },
+    {
+      "id": "seawater_intrusion",
+      "type": "SustainabilityIndicator",
+      "name": "Seawater Intrusion",
+      "properties": {}
+    },
+    {
+      "id": "degraded_water_quality",
+      "type": "SustainabilityIndicator",
+      "name": "Degraded Water Quality",
+      "properties": {}
+    },
+    {
+      "id": "land_subsidence",
+      "type": "SustainabilityIndicator",
+      "name": "Land Subsidence",
+      "properties": {}
+    },
+    {
+      "id": "depletions_interconnected_surface_water",
+      "type": "SustainabilityIndicator",
+      "name": "Depletions of Interconnected Surface Water",
+      "properties": {}
+    },
+    {
+      "id": "groundwater_level_measurements",
+      "type": "Entity",
+      "name": "Groundwater Level Measurements",
+      "properties": {}
+    },
+    {
+      "id": "water_quality_sampling",
+      "type": "Entity",
+      "name": "Water Quality Sampling",
+      "properties": {}
+    },
+    {
+      "id": "land_subsidence_measurements",
+      "type": "Entity",
+      "name": "Land Subsidence Measurements",
+      "properties": {}
+    },
+    {
+      "id": "chronic_lowering_groundwater_levels",
+      "type": "SustainabilityIndicator",
+      "name": "Chronic Lowering of Groundwater Levels",
+      "properties": {}
+    },
+    {
+      "id": "increased_pumping_lift",
+      "type": "Entity",
+      "name": "Increased pumping lift",
+      "properties": {}
+    },
+    {
+      "id": "sustainable_yield",
+      "type": "Entity",
+      "name": "Sustainable Yield",
+      "properties": {}
+    },
+    {
+      "id": "groundwater_pumping",
+      "type": "WaterBudgetComponent",
+      "name": "Groundwater Pumping",
+      "properties": {}
+    },
+    {
+      "id": "groundwater_storage_decline",
+      "type": "WaterBudgetComponent",
+      "name": "Groundwater Storage Decline",
+      "properties": {}
+    },
+    {
+      "id": "groundwater_recharge",
+      "type": "WaterBudgetComponent",
+      "name": "Groundwater Recharge",
+      "properties": {}
+    },
+    {
+      "id": "subsurface_outflow",
+      "type": "WaterBudgetComponent",
+      "name": "Subsurface Outflow",
+      "properties": {}
+    },
+    {
+      "id": "23_CCR_354.26b1",
+      "type": "Statute",
+      "name": "23 CCR \u00a7 354.26(b)(1)",
+      "properties": {}
+    },
+    {
+      "id": "23_CCR_354.28",
+      "type": "Statute",
+      "name": "\u00a7 354.28. Minimum Thresholds",
+      "properties": {}
+    },
+    {
+      "id": "minimum_threshold",
+      "type": "Threshold",
+      "name": "Minimum Threshold",
+      "properties": {}
+    },
+    {
+      "id": "groundwater_levels_mt",
+      "type": "Threshold",
+      "name": "Groundwater Levels MT",
+      "properties": {}
+    },
+    {
+      "id": "groundwater_quality_mt",
+      "type": "Threshold",
+      "name": "Groundwater Quality MT",
+      "properties": {}
+    },
+    {
+      "id": "land_subsidence_mt",
+      "type": "Threshold",
+      "name": "Land Subsidence MT",
+      "properties": {}
+    },
+    {
+      "id": "kern_subbasin_exceedance_policy",
+      "type": "Rule",
+      "name": "Kern Subbasin Exceedance Policy",
+      "properties": {}
+    },
+    {
+      "id": "basin_study",
+      "type": "Project",
+      "name": "Basin Study",
+      "properties": {}
+    },
+    {
+      "id": "kern_river",
+      "type": "Entity",
+      "name": "Kern River",
+      "properties": {}
+    },
+    {
+      "id": "city_of_bakersfield",
+      "type": "Entity",
+      "name": "City of Bakersfield",
+      "properties": {}
+    },
+    {
+      "id": "nccag_vegetation",
+      "type": "Entity",
+      "name": "NCCAG vegetation",
+      "properties": {}
+    },
+    {
+      "id": "wetland_areas",
+      "type": "Entity",
+      "name": "wetland areas",
+      "properties": {}
+    },
+    {
+      "id": "annual_hydrographic_reports",
+      "type": "Entity",
+      "name": "annual hydrographic reports",
+      "properties": {}
+    },
+    {
+      "id": "first_point",
+      "type": "Entity",
+      "name": "First Point",
+      "properties": {}
+    },
+    {
+      "id": "second_point",
+      "type": "Entity",
+      "name": "Second Point",
+      "properties": {}
+    },
+    {
+      "id": "sgma_10733.8",
+      "type": "Statute",
+      "name": "Section 10733.8",
+      "properties": {}
+    },
+    {
+      "id": "sgma_1433.1",
+      "type": "Statute",
+      "name": "Section 1433.1",
+      "properties": {}
+    },
+    {
+      "id": "sgma_10720.5",
+      "type": "Statute",
+      "name": "Section 10720.5",
+      "properties": {}
+    },
+    {
+      "id": "sgma_10722.5",
+      "type": "Statute",
+      "name": "Section 10722.5",
+      "properties": {}
+    },
+    {
+      "id": "sgma_10725",
+      "type": "Statute",
+      "name": "Section 10725",
+      "properties": {}
+    },
+    {
+      "id": "sgma_10726",
+      "type": "Statute",
+      "name": "Section 10726",
+      "properties": {}
+    },
+    {
+      "id": "sgma_10726.9",
+      "type": "Statute",
+      "name": "Section 10726.9",
+      "properties": {}
+    },
+    {
+      "id": "sgma_10727.2",
+      "type": "Statute",
+      "name": "Section 10727.2",
+      "properties": {}
+    },
+    {
+      "id": "sgma_10727.4",
+      "type": "Statute",
+      "name": "Section 10727.4",
+      "properties": {}
+    },
+    {
+      "id": "sgma_10727.6",
+      "type": "Statute",
+      "name": "Section 10727.6",
+      "properties": {}
+    },
+    {
+      "id": "sgma_10732.2",
+      "type": "Statute",
+      "name": "Section 10732.2",
+      "properties": {}
+    },
+    {
+      "id": "metering",
+      "type": "Requirement",
+      "name": "Metering",
+      "properties": {}
+    },
+    {
+      "id": "reporting",
+      "type": "Requirement",
+      "name": "Reporting",
+      "properties": {}
+    },
+    {
+      "id": "groundwater_extraction_facility",
+      "type": "Entity",
+      "name": "groundwater extraction facility",
+      "properties": {}
+    },
+    {
+      "id": "annual_statement",
+      "type": "Entity",
+      "name": "annual statement",
+      "properties": {}
+    },
+    {
+      "id": "water_measuring_devices",
+      "type": "Entity",
+      "name": "Water-measuring devices",
+      "properties": {}
+    },
+    {
+      "id": "calibration",
+      "type": "Requirement",
+      "name": "Calibration",
+      "properties": {}
+    },
+    {
+      "id": "banking_mous",
+      "type": "Entity",
+      "name": "Banking Memorandums of Understanding (MOUs)",
+      "properties": {}
+    },
+    {
+      "id": "sampling_monitoring_wells",
+      "type": "Requirement",
+      "name": "Sampling of monitoring wells",
+      "properties": {}
+    },
+    {
+      "id": "adherence_mitigation_measures",
+      "type": "Requirement",
+      "name": "Adherence to mitigation measures",
+      "properties": {}
+    },
+    {
+      "id": "investigation_exceedance",
+      "type": "Requirement",
+      "name": "Investigation into the exceedance",
+      "properties": {}
+    },
+    {
+      "id": "notifications_nearby_beneficial_users",
+      "type": "Requirement",
+      "name": "Notifications to nearby beneficial users",
+      "properties": {}
+    },
+    {
+      "id": "documentation_activities",
+      "type": "Requirement",
+      "name": "Documentation of those activities",
+      "properties": {}
+    },
+    {
+      "id": "groundwater_dependent_ecosystems",
+      "type": "Entity",
+      "name": "Impacts on groundwater dependent ecosystems",
+      "properties": {}
+    },
+    {
+      "id": "efficient_water_management_practices",
+      "type": "Entity",
+      "name": "Efficient water management practices",
+      "properties": {}
+    },
+    {
+      "id": "state_federal_regulatory_agencies",
+      "type": "Entity",
+      "name": "Efforts to develop relationships with state and federal regulatory agencies",
+      "properties": {}
+    },
+    {
+      "id": "land_use_plans",
+      "type": "Entity",
+      "name": "Processes to review land use plans and efforts to coordinate with land use planning agencies to assess activities that potentially create risks to groundwater quality or quantity",
+      "properties": {}
+    },
+    {
+      "id": "penalties",
+      "type": "Entity",
+      "name": "Penalties",
+      "properties": {}
+    },
+    {
+      "id": "groundwater_sustainability_plans",
+      "type": "Entity",
+      "name": "groundwater sustainability plans",
+      "properties": {}
+    },
+    {
+      "id": "coordination_agreement",
+      "type": "Entity",
+      "name": "coordination agreement",
+      "properties": {}
+    },
+    {
+      "id": "alternative",
+      "type": "Entity",
+      "name": "alternative",
+      "properties": {}
+    },
+    {
+      "id": "conditional_temporary_permit",
+      "type": "Entity",
+      "name": "conditional temporary permit",
+      "properties": {}
+    },
+    {
+      "id": "diversion_surface_water_underground_storage",
+      "type": "TransferType",
+      "name": "Diversion of surface water to underground storage",
+      "properties": {}
+    },
+    {
+      "id": "flood_stage",
+      "type": "Entity",
+      "name": "flood stage",
+      "properties": {}
+    },
+    {
+      "id": "water_availability_analysis",
+      "type": "Entity",
+      "name": "water availability analysis",
+      "properties": {}
+    },
+    {
+      "id": "accounting_method",
+      "type": "Entity",
+      "name": "accounting method",
+      "properties": {}
+    },
+    {
+      "id": "groundwater_contamination_cleanup",
+      "type": "Project",
+      "name": "groundwater contamination cleanup",
+      "properties": {}
+    },
+    {
+      "id": "in_lieu_use",
+      "type": "Project",
+      "name": "in-lieu use",
+      "properties": {}
+    },
+    {
+      "id": "diversions_to_storage",
+      "type": "Project",
+      "name": "diversions to storage",
+      "properties": {}
+    },
+    {
+      "id": "conservation",
+      "type": "Project",
+      "name": "conservation",
+      "properties": {}
+    },
+    {
+      "id": "water_recycling",
+      "type": "Project",
+      "name": "water recycling",
+      "properties": {}
+    },
+    {
+      "id": "conveyance",
+      "type": "Project",
+      "name": "conveyance",
+      "properties": {}
+    },
+    {
+      "id": "extraction_projects",
+      "type": "Project",
+      "name": "extraction projects",
+      "properties": {}
+    },
+    {
+      "id": "north_subbasin_hcm_area",
+      "type": "HydrogeologicUnit",
+      "name": "North Subbasin HCM Area",
+      "properties": {}
+    },
+    {
+      "id": "kern_river_fan",
+      "type": "HydrogeologicUnit",
+      "name": "Kern River Fan",
+      "properties": {}
+    },
+    {
+      "id": "south_basin",
+      "type": "HydrogeologicUnit",
+      "name": "South Basin",
+      "properties": {}
+    },
+    {
+      "id": "western_fold_belt",
+      "type": "HydrogeologicUnit",
+      "name": "Western Fold Belt",
+      "properties": {}
+    },
+    {
+      "id": "east_margin",
+      "type": "HydrogeologicUnit",
+      "name": "East Margin",
+      "properties": {}
+    },
+    {
+      "id": "groundwater_levels",
+      "type": "SustainabilityIndicator",
+      "name": "Chronic Lowering of Groundwater Levels",
+      "properties": {}
+    },
+    {
+      "id": "groundwater_storage",
+      "type": "SustainabilityIndicator",
+      "name": "Reduction in Groundwater Storage",
+      "properties": {}
+    },
+    {
+      "id": "water_quality",
+      "type": "SustainabilityIndicator",
+      "name": "Degraded Water Quality",
+      "properties": {}
+    },
+    {
+      "id": "measurable_objective",
+      "type": "Threshold",
+      "name": "Measurable Objective",
+      "properties": {}
+    },
+    {
+      "id": "interim_milestone",
+      "type": "Threshold",
+      "name": "Interim Milestone",
+      "properties": {}
+    },
+    {
+      "id": "sustainable_management_criteria",
+      "type": "Rule",
+      "name": "Sustainable Management Criteria",
+      "properties": {}
+    },
+    {
+      "id": "sgma",
+      "type": "Statute",
+      "name": "Sustainable Groundwater Management Act",
+      "properties": {}
+    },
+    {
+      "id": "projects_management_actions",
+      "type": "Project",
+      "name": "Projects and Management Actions",
+      "properties": {}
+    },
+    {
+      "id": "rosedale_rio_bravo_water_storage_district_gsa",
+      "type": "GSA",
+      "name": "Rosedale-Rio Bravo Water Storage District GSA",
+      "properties": {}
+    },
+    {
+      "id": "semitropic_water_storage_district_gsa",
+      "type": "GSA",
+      "name": "Semitropic Water Storage District GSA",
+      "properties": {}
+    },
+    {
+      "id": "shafter_wasco_irrigation_district_gsa",
+      "type": "GSA",
+      "name": "Shafter-Wasco Irrigation District GSA",
+      "properties": {}
+    },
+    {
+      "id": "southern_san_joaquin_municipal_utility_district_gsa",
+      "type": "GSA",
+      "name": "Southern San Joaquin Municipal Utility District GSA",
+      "properties": {}
+    },
+    {
+      "id": "tejon_castac_water_district_gsa",
+      "type": "GSA",
+      "name": "Tejon-Castac Water District GSA",
+      "properties": {}
+    },
+    {
+      "id": "west_kern_water_district_gsa",
+      "type": "GSA",
+      "name": "West Kern Water District GSA",
+      "properties": {}
+    },
+    {
+      "id": "westside_district_water_authority_gsa",
+      "type": "GSA",
+      "name": "Westside District Water Authority (WDWA) GSA",
+      "properties": {}
+    },
+    {
+      "id": "wheeler_ridge_maricopa_gsa",
+      "type": "GSA",
+      "name": "Wheeler Ridge-Maricopa GSA",
+      "properties": {}
+    },
+    {
+      "id": "groundwater_extraction_reporting",
+      "type": "Requirement",
+      "name": "Groundwater Extraction Reporting",
+      "properties": {}
+    },
+    {
+      "id": "well_permit_request",
+      "type": "Requirement",
+      "name": "Well Permit Request",
+      "properties": {}
+    }
+  ],
+  "relationships": [
+    {
+      "source": "e8",
+      "target": "e1",
+      "type": "HAS_INDICATOR",
+      "properties": {}
+    },
+    {
+      "source": "e8",
+      "target": "e2",
+      "type": "HAS_INDICATOR",
+      "properties": {}
+    },
+    {
+      "source": "e8",
+      "target": "e3",
+      "type": "HAS_INDICATOR",
+      "properties": {}
+    },
+    {
+      "source": "e8",
+      "target": "e4",
+      "type": "HAS_INDICATOR",
+      "properties": {}
+    },
+    {
+      "source": "e8",
+      "target": "e5",
+      "type": "HAS_INDICATOR",
+      "properties": {}
+    },
+    {
+      "source": "e4",
+      "target": "e6",
+      "type": "HAS_THRESHOLD",
+      "properties": {}
+    },
+    {
+      "source": "e4",
+      "target": "e7",
+      "type": "HAS_THRESHOLD",
+      "properties": {}
+    },
+    {
+      "source": "e9",
+      "target": "e29",
+      "type": "REFERENCES",
+      "properties": {}
+    },
+    {
+      "source": "e10",
+      "target": "e29",
+      "type": "REFERENCES",
+      "properties": {}
+    },
+    {
+      "source": "e11",
+      "target": "e29",
+      "type": "REFERENCES",
+      "properties": {}
+    },
+    {
+      "source": "e12",
+      "target": "e29",
+      "type": "REFERENCES",
+      "properties": {}
+    },
+    {
+      "source": "e17",
+      "target": "e8",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "e22",
+      "target": "e18",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "e29",
+      "target": "e23",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "e29",
+      "target": "e24",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "e29",
+      "target": "e25",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "e29",
+      "target": "e26",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "e29",
+      "target": "e27",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "e29",
+      "target": "e28",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "e30",
+      "target": "e29",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "e31",
+      "target": "e29",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "e32",
+      "target": "e29",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "cwc_10735",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "swrcb",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "kern_subbasin_gsp",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin_gsp",
+      "target": "historical_water_budget",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin_gsp",
+      "target": "current_water_budget",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin_gsp",
+      "target": "projected_water_budget",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin_gsp",
+      "target": "natural_recharge",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin_gsp",
+      "target": "artificial_recharge",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin_gsp",
+      "target": "groundwater_extraction",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin_gsp",
+      "target": "evapotranspiration",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin_gsp",
+      "target": "surface_water_interactions",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin_gsp",
+      "target": "subsurface_flows",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "c2vsimfg_kern",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "reduction_groundwater_storage",
+      "type": "HAS_INDICATOR",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "seawater_intrusion",
+      "type": "HAS_INDICATOR",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "degraded_water_quality",
+      "type": "HAS_INDICATOR",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "land_subsidence",
+      "type": "HAS_INDICATOR",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "depletions_interconnected_surface_water",
+      "type": "HAS_INDICATOR",
+      "properties": {}
+    },
+    {
+      "source": "reduction_groundwater_storage",
+      "target": "groundwater_level_measurements",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "degraded_water_quality",
+      "target": "water_quality_sampling",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "land_subsidence",
+      "target": "land_subsidence_measurements",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "chronic_lowering_groundwater_levels",
+      "type": "HAS_INDICATOR",
+      "properties": {}
+    },
+    {
+      "source": "chronic_lowering_groundwater_levels",
+      "target": "increased_pumping_lift",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "groundwater_pumping",
+      "target": "sustainable_yield",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "groundwater_storage_decline",
+      "target": "sustainable_yield",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "groundwater_recharge",
+      "target": "sustainable_yield",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "subsurface_outflow",
+      "target": "sustainable_yield",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "chronic_lowering_groundwater_levels",
+      "target": "reduction_groundwater_storage",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "chronic_lowering_groundwater_levels",
+      "target": "land_subsidence",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "chronic_lowering_groundwater_levels",
+      "target": "degraded_water_quality",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "23_CCR_354.26b1",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "23_CCR_354.28",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "minimum_threshold",
+      "type": "HAS_THRESHOLD",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "groundwater_levels_mt",
+      "type": "HAS_THRESHOLD",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "groundwater_quality_mt",
+      "type": "HAS_THRESHOLD",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "land_subsidence_mt",
+      "type": "HAS_THRESHOLD",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "kern_subbasin_exceedance_policy",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "basin_study",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "kern_river",
+      "target": "city_of_bakersfield",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "kern_river",
+      "target": "nccag_vegetation",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "kern_river",
+      "target": "wetland_areas",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "city_of_bakersfield",
+      "target": "annual_hydrographic_reports",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "kern_river",
+      "target": "first_point",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "kern_river",
+      "target": "second_point",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "sgma_10733.8",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "sgma_1433.1",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "sgma_10720.5",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "sgma_10722.5",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "sgma_10725",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "sgma_10726",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "sgma_10726.9",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "sgma_10727.2",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "sgma_10727.4",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "sgma_10727.6",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "sgma_10732.2",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "groundwater_extraction_facility",
+      "target": "metering",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "groundwater_extraction_facility",
+      "target": "reporting",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "groundwater_extraction_facility",
+      "target": "annual_statement",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "groundwater_extraction_facility",
+      "target": "water_measuring_devices",
+      "type": "HAS_INDICATOR",
+      "properties": {}
+    },
+    {
+      "source": "water_measuring_devices",
+      "target": "calibration",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "banking_mous",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "banking_mous",
+      "target": "sampling_monitoring_wells",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "banking_mous",
+      "target": "adherence_mitigation_measures",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin_exceedance_policy",
+      "target": "investigation_exceedance",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin_exceedance_policy",
+      "target": "notifications_nearby_beneficial_users",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin_exceedance_policy",
+      "target": "documentation_activities",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "groundwater_dependent_ecosystems",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "efficient_water_management_practices",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "state_federal_regulatory_agencies",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "land_use_plans",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "penalties",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "groundwater_sustainability_plans",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "coordination_agreement",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "alternative",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "conditional_temporary_permit",
+      "type": "ALLOWS",
+      "properties": {}
+    },
+    {
+      "source": "conditional_temporary_permit",
+      "target": "diversion_surface_water_underground_storage",
+      "type": "ALLOWS",
+      "properties": {}
+    },
+    {
+      "source": "conditional_temporary_permit",
+      "target": "flood_stage",
+      "type": "ALLOWS",
+      "properties": {}
+    },
+    {
+      "source": "conditional_temporary_permit",
+      "target": "water_availability_analysis",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "groundwater_contamination_cleanup",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "in_lieu_use",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "diversions_to_storage",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "conservation",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "water_recycling",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "conveyance",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "extraction_projects",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "rosedale_rio_bravo_water_storage_district_gsa",
+      "target": "kern_subbasin",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "semitropic_water_storage_district_gsa",
+      "target": "kern_subbasin",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "shafter_wasco_irrigation_district_gsa",
+      "target": "kern_subbasin",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "southern_san_joaquin_municipal_utility_district_gsa",
+      "target": "kern_subbasin",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "tejon_castac_water_district_gsa",
+      "target": "kern_subbasin",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "west_kern_water_district_gsa",
+      "target": "kern_subbasin",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "westside_district_water_authority_gsa",
+      "target": "kern_subbasin",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "wheeler_ridge_maricopa_gsa",
+      "target": "kern_subbasin",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "groundwater_levels",
+      "type": "HAS_INDICATOR",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "groundwater_storage",
+      "type": "HAS_INDICATOR",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "water_quality",
+      "type": "HAS_INDICATOR",
+      "properties": {}
+    },
+    {
+      "source": "land_subsidence",
+      "target": "minimum_threshold",
+      "type": "HAS_THRESHOLD",
+      "properties": {}
+    },
+    {
+      "source": "land_subsidence",
+      "target": "measurable_objective",
+      "type": "HAS_THRESHOLD",
+      "properties": {}
+    },
+    {
+      "source": "groundwater_levels",
+      "target": "minimum_threshold",
+      "type": "HAS_THRESHOLD",
+      "properties": {}
+    },
+    {
+      "source": "groundwater_levels",
+      "target": "measurable_objective",
+      "type": "HAS_THRESHOLD",
+      "properties": {}
+    },
+    {
+      "source": "groundwater_storage",
+      "target": "minimum_threshold",
+      "type": "HAS_THRESHOLD",
+      "properties": {}
+    },
+    {
+      "source": "groundwater_storage",
+      "target": "measurable_objective",
+      "type": "HAS_THRESHOLD",
+      "properties": {}
+    },
+    {
+      "source": "water_quality",
+      "target": "minimum_threshold",
+      "type": "HAS_THRESHOLD",
+      "properties": {}
+    },
+    {
+      "source": "water_quality",
+      "target": "measurable_objective",
+      "type": "HAS_THRESHOLD",
+      "properties": {}
+    },
+    {
+      "source": "sustainable_management_criteria",
+      "target": "minimum_threshold",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "sustainable_management_criteria",
+      "target": "measurable_objective",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "sustainable_management_criteria",
+      "target": "interim_milestone",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "sgma",
+      "type": "DEFINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "projects_management_actions",
+      "type": "REFERENCES",
+      "properties": {}
+    },
+    {
+      "source": "north_subbasin_hcm_area",
+      "target": "kern_subbasin",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "kern_river_fan",
+      "target": "kern_subbasin",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "south_basin",
+      "target": "kern_subbasin",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "western_fold_belt",
+      "target": "kern_subbasin",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "east_margin",
+      "target": "kern_subbasin",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "groundwater_extraction_reporting",
+      "target": "kern_subbasin",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "well_permit_request",
+      "target": "gsa",
+      "type": "REQUIRES",
+      "properties": {}
+    }
+  ]
+}

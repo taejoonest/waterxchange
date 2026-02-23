@@ -1,0 +1,218 @@
+{
+  "gsas": [
+    {
+      "id": "kern_gsa",
+      "name": "Kern Groundwater Authority",
+      "region": "Kern County",
+      "contact": "info@kerngwa.org",
+      "established": "2017"
+    },
+    {
+      "id": "sjv_gsa",
+      "name": "San Joaquin Valley GSA",
+      "region": "San Joaquin Valley",
+      "contact": "info@sjvgsa.org",
+      "established": "2017"
+    },
+    {
+      "id": "tulare_gsa",
+      "name": "Tulare Lake GSA",
+      "region": "Tulare Lake",
+      "contact": "info@tularelakegsa.org",
+      "established": "2017"
+    },
+    {
+      "id": "kings_gsa",
+      "name": "Kings County GSA",
+      "region": "Kings County",
+      "contact": "info@kingsgsa.org",
+      "established": "2017"
+    },
+    {
+      "id": "fresno_gsa",
+      "name": "Fresno County GSA",
+      "region": "Fresno County",
+      "contact": "info@fresnogsa.org",
+      "established": "2017"
+    },
+    {
+      "id": "madera_gsa",
+      "name": "Madera County GSA",
+      "region": "Madera County",
+      "contact": "info@maderagsa.org",
+      "established": "2017"
+    }
+  ],
+  "basins": [
+    {
+      "id": "kern",
+      "name": "Kern County",
+      "gsa": "kern_gsa",
+      "priority": "critically_overdrafted",
+      "dwr_basin_number": "5-022.18",
+      "area_sq_miles": 2141,
+      "avg_annual_recharge_af": 450000,
+      "sustainable_yield_af": 400000
+    },
+    {
+      "id": "sjv",
+      "name": "San Joaquin Valley",
+      "gsa": "sjv_gsa",
+      "priority": "high",
+      "dwr_basin_number": "5-022.01",
+      "area_sq_miles": 3500,
+      "avg_annual_recharge_af": 800000,
+      "sustainable_yield_af": 750000
+    },
+    {
+      "id": "tulare",
+      "name": "Tulare Lake",
+      "gsa": "tulare_gsa",
+      "priority": "critically_overdrafted",
+      "dwr_basin_number": "5-022.12",
+      "area_sq_miles": 1890,
+      "avg_annual_recharge_af": 350000,
+      "sustainable_yield_af": 300000
+    },
+    {
+      "id": "kings",
+      "name": "Kings County",
+      "gsa": "kings_gsa",
+      "priority": "medium",
+      "dwr_basin_number": "5-022.08",
+      "area_sq_miles": 1125,
+      "avg_annual_recharge_af": 280000,
+      "sustainable_yield_af": 260000
+    },
+    {
+      "id": "fresno",
+      "name": "Fresno County",
+      "gsa": "fresno_gsa",
+      "priority": "high",
+      "dwr_basin_number": "5-022.07",
+      "area_sq_miles": 2890,
+      "avg_annual_recharge_af": 520000,
+      "sustainable_yield_af": 480000
+    },
+    {
+      "id": "madera",
+      "name": "Madera County",
+      "gsa": "madera_gsa",
+      "priority": "critically_overdrafted",
+      "dwr_basin_number": "5-022.06",
+      "area_sq_miles": 980,
+      "avg_annual_recharge_af": 180000,
+      "sustainable_yield_af": 150000
+    }
+  ],
+  "transfer_rules": [
+    {
+      "id": "rule_intra_basin",
+      "name": "Intra-basin Transfer",
+      "description": "Transfers within the same basin are generally allowed without additional permits. The GSA must be notified of transfers exceeding 10 AF.",
+      "source": "SGMA Section 10726.4",
+      "conditions": ["same_basin"],
+      "requires_permit": false,
+      "notification_threshold_af": 10
+    },
+    {
+      "id": "rule_inter_basin_adjacent",
+      "name": "Inter-basin Transfer (Adjacent)",
+      "description": "Transfers between adjacent basins require GSA notification but no permit if under 100 AF annually. Both GSAs must be notified.",
+      "source": "SGMA Section 10726.4(a)(2)",
+      "conditions": ["adjacent_basin", "quantity_under_100af"],
+      "requires_permit": false,
+      "requires_notification": true,
+      "notification_parties": ["source_gsa", "destination_gsa"]
+    },
+    {
+      "id": "rule_inter_basin_permit",
+      "name": "Inter-basin Transfer (Permit Required)",
+      "description": "Large inter-basin transfers (>100 AF annually) require permit approval from both GSAs. Environmental review may be required under CEQA.",
+      "source": "SGMA Section 10726.4(b)",
+      "conditions": ["different_basin", "quantity_over_100af"],
+      "requires_permit": true,
+      "permit_process": "Joint GSA review, 45-day public comment period",
+      "estimated_timeline_days": 90
+    },
+    {
+      "id": "rule_critically_overdrafted",
+      "name": "Critically Overdrafted Basin Restriction",
+      "description": "Transfers OUT of critically overdrafted basins may be restricted during drought conditions or when basin levels are below minimum thresholds.",
+      "source": "SGMA Section 10720.7",
+      "conditions": ["source_critically_overdrafted", "drought_conditions"],
+      "requires_permit": true,
+      "may_be_denied": true,
+      "appeal_process": "State Water Resources Control Board"
+    },
+    {
+      "id": "rule_seasonal_ag",
+      "name": "Agricultural Season Priority",
+      "description": "During peak agricultural season (April through September), local agricultural use has priority over transfers. Emergency transfers for crop preservation may be expedited.",
+      "source": "Local GSA Policy",
+      "conditions": ["agricultural_season"],
+      "priority_to": "local_agriculture",
+      "season_months": [4, 5, 6, 7, 8, 9],
+      "emergency_provisions": true
+    },
+    {
+      "id": "rule_minimum_allocation",
+      "name": "Minimum Allocation Preservation",
+      "description": "Farmers must maintain a minimum of 20% of their annual allocation as reserve. Transfers that would reduce balance below this threshold require special approval.",
+      "source": "Local GSA Policy",
+      "conditions": ["balance_below_minimum"],
+      "minimum_reserve_percent": 20,
+      "requires_permit": true
+    },
+    {
+      "id": "rule_new_well_restriction",
+      "name": "New Well Restriction Zone",
+      "description": "In designated restriction zones, new wells require GSA approval and existing allocations may be reduced to achieve basin sustainability.",
+      "source": "SGMA Section 10726.4(c)",
+      "conditions": ["restriction_zone"],
+      "requires_permit": true,
+      "allocation_reduction_possible": true
+    }
+  ],
+  "basin_adjacency": {
+    "Kern County": ["Tulare Lake", "Kings County"],
+    "San Joaquin Valley": ["Fresno County", "Madera County"],
+    "Tulare Lake": ["Kern County", "Kings County"],
+    "Kings County": ["Kern County", "Tulare Lake", "Fresno County"],
+    "Fresno County": ["San Joaquin Valley", "Kings County", "Madera County"],
+    "Madera County": ["San Joaquin Valley", "Fresno County"]
+  },
+  "pricing_guidance": {
+    "description": "Historical market pricing for water transfers in California Central Valley",
+    "unit": "USD per acre-foot",
+    "historical_ranges": {
+      "2020": {"low": 200, "high": 400, "avg": 280},
+      "2021": {"low": 250, "high": 500, "avg": 350},
+      "2022": {"low": 400, "high": 800, "avg": 550},
+      "2023": {"low": 350, "high": 700, "avg": 480},
+      "2024": {"low": 300, "high": 600, "avg": 420}
+    },
+    "factors_affecting_price": [
+      "Drought conditions",
+      "Basin priority status",
+      "Distance of transfer",
+      "Time of year (irrigation season)",
+      "Type of water rights",
+      "Regulatory requirements"
+    ]
+  },
+  "compliance_deadlines": {
+    "critically_overdrafted_basins": {
+      "gsp_adoption": "2020-01-31",
+      "sustainability_deadline": "2040-01-31"
+    },
+    "high_priority_basins": {
+      "gsp_adoption": "2022-01-31",
+      "sustainability_deadline": "2042-01-31"
+    },
+    "medium_priority_basins": {
+      "gsp_adoption": "2022-01-31",
+      "sustainability_deadline": "2042-01-31"
+    }
+  }
+}

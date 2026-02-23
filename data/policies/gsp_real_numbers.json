@@ -1,0 +1,216 @@
+
+{
+  "basin_overview": {
+    "basin_name": "Kern Subbasin",
+    "dwr_basin_number": "5-22.14",
+    "basin_priority": "high",
+    "basin_area": {
+      "value": 1.78,
+      "unit": "million acres",
+      "page": 39
+    },
+    "number_of_gsas": {
+      "value": 20,
+      "page": 43
+    },
+    "gsa_names": [
+      "Arvin GSA",
+      "Buena Vista GSA",
+      "Cawelo Water District GSA",
+      "Eastside Water Management Area",
+      "Henry Miller Water District GSA",
+      "KNDLA",
+      "Kern River GSA",
+      "Kern-Tulare Water District GSA",
+      "Kern Water Bank GSA",
+      "North Kern Water Storage District GSA",
+      "Olcese Water District GSA",
+      "Pioneer GSA",
+      "Rosedale-Rio Bravo Water Storage District GSA",
+      "Semitropic Water Storage District GSA",
+      "Shafter-Wasco Irrigation District GSA",
+      "Southern San Joaquin Municipal Utility District GSA",
+      "Tejon-Castac Water District GSA",
+      "West Kern Water District GSA",
+      "Westside District Water Authority (WDWA) GSA",
+      "Wheeler Ridge-Maricopa GSA"
+    ]
+  },
+  "sustainable_yield": {
+    "total_afy": {
+      "value": 1312218,
+      "page": 595
+    },
+    "groundwater_recharge_afy": {
+      "value": 1399299,
+      "page": 595
+    },
+    "subsurface_outflow_afy": {
+      "value": 87080,
+      "page": 595
+    },
+    "native_yield_afy": {
+      "value": 280754,
+      "page": 596
+    }
+  },
+  "water_budget": {
+    "projected_deficit_afy": {
+      "value": 372120,
+      "scenario": "2030 Climate Change",
+      "page": 776
+    },
+    "change_in_storage_baseline_afy": {
+      "value": -274200,
+      "page": 54
+    },
+    "change_in_storage_with_projects_afy": {
+      "value": 85578,
+      "page": 627
+    },
+    "total_groundwater_pumping_afy": {
+      "value": 1586417,
+      "page": 595
+    }
+  },
+  "groundwater_levels": {
+    "by_hcm_area": [
+      {
+        "area": "North Basin",
+        "avg_decline_ft_per_yr": -5.2,
+        "mt_depth_ft": 0.37,
+        "page": 681
+      },
+      {
+        "area": "Kern River Fan",
+        "avg_decline_ft_per_yr": -3.7,
+        "mt_depth_ft": 0.2,
+        "page": 681
+      },
+      {
+        "area": "South Basin",
+        "avg_decline_ft_per_yr": -4.9,
+        "mt_depth_ft": 0.21,
+        "page": 681
+      },
+      {
+        "area": "Western Fold Belt",
+        "avg_decline_ft_per_yr": -4.1,
+        "mt_depth_ft": 0.1,
+        "page": 681
+      },
+      {
+        "area": "East Margin",
+        "avg_decline_ft_per_yr": -6.5,
+        "mt_depth_ft": 0.04,
+        "page": 681
+      }
+    ]
+  },
+  "subsidence": {
+    "by_hcm_area": [
+      {
+        "area": "North Basin",
+        "rate_ft_per_yr": 0.059,
+        "extent_mt_ft": 0.85,
+        "rate_mt_ft_per_yr": 0.053,
+        "page": 681
+      },
+      {
+        "area": "Kern River Fan",
+        "rate_ft_per_yr": 0.022,
+        "extent_mt_ft": 0.27,
+        "rate_mt_ft_per_yr": 0.029,
+        "page": 681
+      },
+      {
+        "area": "South Basin",
+        "rate_ft_per_yr": 0.037,
+        "extent_mt_ft": 0.48,
+        "rate_mt_ft_per_yr": 0.030,
+        "page": 681
+      },
+      {
+        "area": "Western Fold Belt",
+        "rate_ft_per_yr": 0.008,
+        "extent_mt_ft": 0.1,
+        "rate_mt_ft_per_yr": "N/A6",
+        "page": 681
+      },
+      {
+        "area": "East Margin",
+        "rate_ft_per_yr": 0.006,
+        "extent_mt_ft": 0.14,
+        "rate_mt_ft_per_yr": 0.006,
+        "page": 681
+      }
+    ],
+    "projected_2024_2040": "Subsidence is to be minimized with zero inelastic subsidence attributable to groundwater pumping under GSA jurisdiction. "
+  },
+  "water_quality": {
+    "constituents_of_concern": [
+      "arsenic",
+      "nitrate/nitrite",
+      "TDS",
+      "1,2,3-TCP",
+      "uranium"
+    ],
+    "nitrate_data": {
+      "description": "Table 8-16. Nitrate, Nitrite, and Nitrate + Nitrite Range and Median Summary by HCM Area",
+      "page": 16
+    },
+    "tds_data": {
+      "description": "Table 8-25. Total Dissolved Solids Range and Median Summary by HCM Area",
+      "page": 16
+    },
+    "arsenic_data": {
+      "description": "no specific arsenic data described",
+      "page": "not found in extracted text"
+    }
+  },
+  "well_data": {
+    "total_wells_inventoried": {
+      "value": "accurate well inventory needs to be developed",
+      "page": 795
+    },
+    "typical_well_depths": {
+      "description": "not found in extracted text",
+      "page": "not found in extracted text"
+    },
+    "aquifer_systems": [
+      "Primary Alluvial Principal Aquifer",
+      "Santa Margarita Principal Aquifer",
+      "Olcese Principal Aquifer"
+    ]
+  },
+  "gsa_specific": {
+    "rosedale_rio_bravo": {
+      "any_numbers_found": "not found in extracted text",
+      "page": "not found in extracted text"
+    },
+    "semitropic": {
+      "any_numbers_found": "water quality conditions are evaluated in and around banking projects",
+      "page": 179
+    }
+  },
+  "crop_and_land_use": {
+    "total_irrigated_acres": {
+      "value": "not found in extracted text",
+      "page": "not found in extracted text"
+    },
+    "crop_types_mentioned": [
+      "cotton",
+      "native vegetation",
+      "agriculture"
+    ],
+    "water_demand_data": {
+      "description": "The Kern Subbasin has annually contracted with either Cal Poly’s Irrigation Training Research Center and/or LandIQ for monthly evapotranspiration data of the Kern Subbasin for both planning and, in some GSAs, for groundwater extraction fee calculation purposes.",
+      "page": 795
+    }
+  },
+  "transfer_rules": {
+    "any_transfer_provisions": "water transfers out of GSAs mentioned",
+    "inter_gsa_coordination": "not found in extracted text",
+    "page": 596
+  }
+}

@@ -1,0 +1,2717 @@
+{
+  "entities": [
+    {
+      "id": "statute_sgma",
+      "type": "Statute",
+      "name": "SGMA (Water Code \u00a710720-10737.8)",
+      "properties": {
+        "enacted": "2014",
+        "description": "Sustainable Groundwater Management Act"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "statute_10720",
+      "type": "Statute",
+      "name": "WC \u00a710720 \u2014 Legislative Intent",
+      "properties": {
+        "description": "Legislature intent for sustainable groundwater management"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "statute_10723",
+      "type": "Statute",
+      "name": "WC \u00a710723 \u2014 GSA Formation",
+      "properties": {
+        "description": "Requirements for forming a Groundwater Sustainability Agency"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "statute_10725",
+      "type": "Statute",
+      "name": "WC \u00a710725 \u2014 GSA Powers",
+      "properties": {
+        "description": "Powers and authorities granted to GSAs"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "statute_10725_2",
+      "type": "Statute",
+      "name": "WC \u00a710725.2 \u2014 Extraction Metering",
+      "properties": {
+        "description": "GSA may require extraction facilities to have meters"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "statute_10726_4",
+      "type": "Statute",
+      "name": "WC \u00a710726.4 \u2014 Allocation & Transfers",
+      "properties": {
+        "description": "GSA authority to regulate groundwater extraction and allocations"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "statute_10727",
+      "type": "Statute",
+      "name": "WC \u00a710727 \u2014 GSP Requirements",
+      "properties": {
+        "description": "Contents of Groundwater Sustainability Plans"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "statute_10727_2",
+      "type": "Statute",
+      "name": "WC \u00a710727.2 \u2014 Sustainability Criteria",
+      "properties": {
+        "description": "GSP must establish sustainability criteria for 6 indicators"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "statute_10728_2",
+      "type": "Statute",
+      "name": "WC \u00a710728.2 \u2014 Annual Reporting",
+      "properties": {
+        "description": "GSP annual reporting requirements"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "statute_10732",
+      "type": "Statute",
+      "name": "WC \u00a710732 \u2014 Enforcement",
+      "properties": {
+        "description": "GSA enforcement powers for GSP implementation"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "statute_10735",
+      "type": "Statute",
+      "name": "WC \u00a710735 \u2014 State Intervention",
+      "properties": {
+        "description": "State Water Board intervention for critically overdrafted basins"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "gsa_rosedale",
+      "type": "GSA",
+      "name": "Rosedale-Rio Bravo Water Storage District GSA",
+      "properties": {
+        "area": "Northwest Kern"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "gsa_semitropic",
+      "type": "GSA",
+      "name": "Semitropic Water Storage District GSA",
+      "properties": {
+        "area": "North-central Kern"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "gsa_shafter_wasco",
+      "type": "GSA",
+      "name": "Shafter-Wasco Irrigation District GSA",
+      "properties": {
+        "area": "North Kern"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "gsa_north_kern",
+      "type": "GSA",
+      "name": "North Kern Water Storage District GSA",
+      "properties": {
+        "area": "North Kern"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "gsa_kern_delta",
+      "type": "GSA",
+      "name": "Kern Delta Water District GSA",
+      "properties": {
+        "area": "South-central Kern"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "gsa_wheeler_ridge",
+      "type": "GSA",
+      "name": "Wheeler Ridge-Maricopa Water Storage District GSA",
+      "properties": {
+        "area": "South Kern"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "gsa_buena_vista",
+      "type": "GSA",
+      "name": "Buena Vista Water Storage District GSA",
+      "properties": {
+        "area": "Central Kern"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "gsa_kern_water_bank",
+      "type": "GSA",
+      "name": "Kern Water Bank Authority GSA",
+      "properties": {
+        "area": "Southwest Kern"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "gsa_tejon_castac",
+      "type": "GSA",
+      "name": "Tejon-Castac Water District GSA",
+      "properties": {
+        "area": "Southeast Kern"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "gsa_west_kern",
+      "type": "GSA",
+      "name": "West Kern Water District GSA",
+      "properties": {
+        "area": "West Kern"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "gsa_olcese",
+      "type": "GSA",
+      "name": "Olcese Water District GSA",
+      "properties": {
+        "area": "Northeast Kern"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "kern_gsp",
+      "type": "GSP",
+      "name": "Kern County Subbasin GSP 2025",
+      "properties": {
+        "adopted": "August 2025",
+        "basin_number": "5-22.14",
+        "priority": "Critically Overdrafted",
+        "deadline": "2040"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "alloc_rosedale",
+      "type": "AllocationRule",
+      "name": "Rosedale-Rio Bravo Allocation Framework",
+      "properties": {
+        "method": "historical pumping basis"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "alloc_semitropic",
+      "type": "AllocationRule",
+      "name": "Semitropic Allocation Framework",
+      "properties": {
+        "method": "acreage-based allocation"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "alloc_shafter_wasco",
+      "type": "AllocationRule",
+      "name": "Shafter-Wasco Allocation Framework",
+      "properties": {
+        "method": "proportional to irrigated acres"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "alloc_north_kern",
+      "type": "AllocationRule",
+      "name": "North Kern Allocation Framework",
+      "properties": {
+        "method": "contract-based"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "alloc_kern_delta",
+      "type": "AllocationRule",
+      "name": "Kern Delta Allocation Framework",
+      "properties": {
+        "method": "historical use basis"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "req_metering",
+      "type": "Requirement",
+      "name": "Well Metering",
+      "properties": {
+        "statute": "WC \u00a710725.2",
+        "description": "All extraction wells must be metered"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "req_reporting",
+      "type": "Requirement",
+      "name": "Annual Extraction Reporting",
+      "properties": {
+        "statute": "WC \u00a710728.2",
+        "description": "Report extraction volumes annually"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "req_notification",
+      "type": "Requirement",
+      "name": "GSA Transfer Notification",
+      "properties": {
+        "description": "Both GSAs must be notified of inter-GSA transfers"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "req_accounting",
+      "type": "Requirement",
+      "name": "Transfer Accounting",
+      "properties": {
+        "description": "Transfer must be recorded in both GSA allocation ledgers"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "req_monitoring_compliance",
+      "type": "Requirement",
+      "name": "Post-Transfer Monitoring",
+      "properties": {
+        "description": "Monitor water levels and quality after transfer"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "enforce_gsa",
+      "type": "EnforcementAction",
+      "name": "GSA Enforcement (fees, penalties, curtailment)",
+      "properties": {
+        "statute": "WC \u00a710732"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "enforce_state",
+      "type": "EnforcementAction",
+      "name": "State Water Board Intervention",
+      "properties": {
+        "statute": "WC \u00a710735",
+        "trigger": "Inadequate GSP implementation"
+      },
+      "tree": "governance"
+    },
+    {
+      "id": "wb_extraction",
+      "type": "WaterBudgetComponent",
+      "name": "Groundwater Extraction",
+      "properties": {
+        "wy2024": "1,950,000 AF",
+        "direction": "outflow"
+      },
+      "tree": "hydrology"
+    },
+    {
+      "id": "wb_recharge_natural",
+      "type": "WaterBudgetComponent",
+      "name": "Natural Recharge (Deep Percolation)",
+      "properties": {
+        "wy2024": "700,000 AF",
+        "direction": "inflow"
+      },
+      "tree": "hydrology"
+    },
+    {
+      "id": "wb_recharge_applied",
+      "type": "WaterBudgetComponent",
+      "name": "Applied/Managed Recharge",
+      "properties": {
+        "wy2024": "350,000 AF",
+        "direction": "inflow"
+      },
+      "tree": "hydrology"
+    },
+    {
+      "id": "wb_surface_inflow",
+      "type": "WaterBudgetComponent",
+      "name": "Surface Water Inflow",
+      "properties": {
+        "wy2024": "620,000 AF",
+        "direction": "inflow"
+      },
+      "tree": "hydrology"
+    },
+    {
+      "id": "wb_subsurface_inflow",
+      "type": "WaterBudgetComponent",
+      "name": "Subsurface Inflow",
+      "properties": {
+        "wy2024": "180,000 AF",
+        "direction": "inflow"
+      },
+      "tree": "hydrology"
+    },
+    {
+      "id": "wb_subsurface_outflow",
+      "type": "WaterBudgetComponent",
+      "name": "Subsurface Outflow",
+      "properties": {
+        "wy2024": "120,000 AF",
+        "direction": "outflow"
+      },
+      "tree": "hydrology"
+    },
+    {
+      "id": "wb_riparian_et",
+      "type": "WaterBudgetComponent",
+      "name": "Riparian & GDE Evapotranspiration",
+      "properties": {
+        "wy2024": "130,000 AF",
+        "direction": "outflow"
+      },
+      "tree": "hydrology"
+    },
+    {
+      "id": "water_budget",
+      "type": "WaterBudget",
+      "name": "Kern Subbasin Water Budget",
+      "properties": {
+        "total_inflow": "1,850,000 AF",
+        "total_outflow": "2,200,000 AF",
+        "change_in_storage": "-350,000 AF",
+        "sustainable_yield": "1,650,000 AF",
+        "current_overdraft": "300,000 AF/yr"
+      },
+      "tree": "hydrology"
+    },
+    {
+      "id": "sustainable_yield",
+      "type": "HydrogeologicUnit",
+      "name": "Sustainable Yield Estimate",
+      "properties": {
+        "value": "1,650,000 AF/yr",
+        "basis": "50-year projected water budget"
+      },
+      "tree": "hydrology"
+    },
+    {
+      "id": "hgu_upper_aquifer",
+      "type": "HydrogeologicUnit",
+      "name": "Upper Aquifer System",
+      "properties": {
+        "depth": "0-260 ft",
+        "description": "Above Corcoran Clay"
+      },
+      "tree": "hydrology"
+    },
+    {
+      "id": "hgu_corcoran_clay",
+      "type": "HydrogeologicUnit",
+      "name": "Corcoran Clay (E-clay)",
+      "properties": {
+        "depth": "~240-280 ft",
+        "description": "Confining layer, subsidence-critical"
+      },
+      "tree": "hydrology"
+    },
+    {
+      "id": "hgu_lower_aquifer",
+      "type": "HydrogeologicUnit",
+      "name": "Lower Aquifer System",
+      "properties": {
+        "depth": "260-600+ ft",
+        "description": "Below Corcoran Clay"
+      },
+      "tree": "hydrology"
+    },
+    {
+      "id": "hgu_kern_river_fan",
+      "type": "HydrogeologicUnit",
+      "name": "Kern River Fan",
+      "properties": {
+        "description": "Primary recharge area"
+      },
+      "tree": "hydrology"
+    },
+    {
+      "id": "hgu_tulare_formation",
+      "type": "HydrogeologicUnit",
+      "name": "Tulare Formation",
+      "properties": {
+        "description": "Main water-bearing formation"
+      },
+      "tree": "hydrology"
+    },
+    {
+      "id": "ma_rosedale",
+      "type": "ManagementArea",
+      "name": "Rosedale HCM Area",
+      "properties": {
+        "gsa": "gsa_rosedale",
+        "description": "Northwest, primary banking area"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "ma_semitropic",
+      "type": "ManagementArea",
+      "name": "Semitropic HCM Area",
+      "properties": {
+        "gsa": "gsa_semitropic",
+        "description": "North-central, subsidence concern"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "ma_shafter_wasco",
+      "type": "ManagementArea",
+      "name": "Shafter-Wasco HCM Area",
+      "properties": {
+        "gsa": "gsa_shafter_wasco",
+        "description": "North"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "ma_north_kern",
+      "type": "ManagementArea",
+      "name": "North Kern HCM Area",
+      "properties": {
+        "gsa": "gsa_north_kern",
+        "description": "North, Kern River channel"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "ma_kern_delta",
+      "type": "ManagementArea",
+      "name": "Kern Delta HCM Area",
+      "properties": {
+        "gsa": "gsa_kern_delta",
+        "description": "South-central"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "ma_kern_fan",
+      "type": "ManagementArea",
+      "name": "Kern Fan HCM Area",
+      "properties": {
+        "gsa": "gsa_buena_vista",
+        "description": "Central, primary recharge zone"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "ma_white_wolf",
+      "type": "ManagementArea",
+      "name": "White Wolf HCM Area",
+      "properties": {
+        "gsa": "gsa_wheeler_ridge",
+        "description": "South, near mountain front"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "ma_west_kern",
+      "type": "ManagementArea",
+      "name": "West Kern HCM Area",
+      "properties": {
+        "gsa": "gsa_west_kern",
+        "description": "West, oil production area"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "mon_gw_levels",
+      "type": "MonitoringNetwork",
+      "name": "Groundwater Level Monitoring Network",
+      "properties": {
+        "indicator": "Chronic Lowering of GW Levels",
+        "sites": "~200 wells"
+      },
+      "tree": "hydrology"
+    },
+    {
+      "id": "mon_storage",
+      "type": "MonitoringNetwork",
+      "name": "Storage Change Monitoring Network",
+      "properties": {
+        "indicator": "Reduction in GW Storage",
+        "method": "water budget + level change"
+      },
+      "tree": "hydrology"
+    },
+    {
+      "id": "mon_subsidence",
+      "type": "MonitoringNetwork",
+      "name": "Subsidence Monitoring Network",
+      "properties": {
+        "indicator": "Land Subsidence",
+        "method": "InSAR, extensometers, GPS benchmarks"
+      },
+      "tree": "hydrology"
+    },
+    {
+      "id": "mon_water_quality",
+      "type": "MonitoringNetwork",
+      "name": "Water Quality Monitoring Network",
+      "properties": {
+        "indicator": "Degraded Water Quality",
+        "parameters": "nitrate, arsenic, TDS, 1,2,3-TCP"
+      },
+      "tree": "hydrology"
+    },
+    {
+      "id": "mon_isw",
+      "type": "MonitoringNetwork",
+      "name": "Interconnected Surface Water Monitoring",
+      "properties": {
+        "indicator": "ISW Depletion",
+        "method": "stream gauges, shallow wells"
+      },
+      "tree": "hydrology"
+    },
+    {
+      "id": "ind_gw_levels",
+      "type": "SustainabilityIndicator",
+      "name": "Chronic Lowering of Groundwater Levels",
+      "properties": {
+        "sgma_section": "10727.2(b)(1)",
+        "monitoring": "mon_gw_levels"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "ind_storage",
+      "type": "SustainabilityIndicator",
+      "name": "Reduction in Groundwater Storage",
+      "properties": {
+        "sgma_section": "10727.2(b)(2)",
+        "monitoring": "mon_storage"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "ind_subsidence",
+      "type": "SustainabilityIndicator",
+      "name": "Land Subsidence",
+      "properties": {
+        "sgma_section": "10727.2(b)(3)",
+        "monitoring": "mon_subsidence"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "ind_water_quality",
+      "type": "SustainabilityIndicator",
+      "name": "Degraded Water Quality",
+      "properties": {
+        "sgma_section": "10727.2(b)(4)",
+        "monitoring": "mon_water_quality"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "ind_isw",
+      "type": "SustainabilityIndicator",
+      "name": "Depletion of Interconnected Surface Water",
+      "properties": {
+        "sgma_section": "10727.2(b)(6)",
+        "monitoring": "mon_isw"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "mt_gw_rosedale",
+      "type": "MinimumThreshold",
+      "name": "GW Level MT \u2014 Rosedale",
+      "properties": {
+        "value": "Historical low (2015-2016)",
+        "metric": "depth to water"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "mt_gw_semitropic",
+      "type": "MinimumThreshold",
+      "name": "GW Level MT \u2014 Semitropic",
+      "properties": {
+        "value": "Historical low (2015-2016)",
+        "metric": "depth to water"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "mt_sub_semitropic",
+      "type": "MinimumThreshold",
+      "name": "Subsidence MT \u2014 Semitropic",
+      "properties": {
+        "value": "Projected to 2040 not exceeding loss of conveyance capacity",
+        "rate": "avg 2015-2023 rate"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "mt_sub_kern_fan",
+      "type": "MinimumThreshold",
+      "name": "Subsidence MT \u2014 Kern Fan",
+      "properties": {
+        "value": "Projected to 2040 not exceeding loss of conveyance capacity"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "mt_wq_nitrate",
+      "type": "MinimumThreshold",
+      "name": "Water Quality MT \u2014 Nitrate",
+      "properties": {
+        "value": "10 mg/L (MCL)",
+        "parameter": "nitrate as N"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "mt_wq_arsenic",
+      "type": "MinimumThreshold",
+      "name": "Water Quality MT \u2014 Arsenic",
+      "properties": {
+        "value": "10 \u00b5g/L (MCL)",
+        "parameter": "arsenic"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "mt_storage",
+      "type": "MinimumThreshold",
+      "name": "Storage MT \u2014 Basin-wide",
+      "properties": {
+        "value": "Not to exceed cumulative overdraft that prevents reaching sustainability by 2040"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "mo_gw_rosedale",
+      "type": "MeasurableObjective",
+      "name": "GW Level MO \u2014 Rosedale",
+      "properties": {
+        "value": "2015 average water level or better"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "mo_gw_semitropic",
+      "type": "MeasurableObjective",
+      "name": "GW Level MO \u2014 Semitropic",
+      "properties": {
+        "value": "2015 average water level or better"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "mo_sub_semitropic",
+      "type": "MeasurableObjective",
+      "name": "Subsidence MO \u2014 Semitropic",
+      "properties": {
+        "value": "Rate not exceeding 2015-2023 average"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "ur_gw_levels",
+      "type": "UndesirableResult",
+      "name": "Significant & unreasonable decline in groundwater levels",
+      "properties": {
+        "trigger": "Water levels at >25% of RMP sites fall below Minimum Threshold for 2+ consecutive years"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "ur_subsidence",
+      "type": "UndesirableResult",
+      "name": "Significant & unreasonable land subsidence",
+      "properties": {
+        "trigger": "Subsidence causes loss of critical infrastructure capacity"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "ur_water_quality",
+      "type": "UndesirableResult",
+      "name": "Significant & unreasonable degradation of water quality",
+      "properties": {
+        "trigger": "Constituent concentrations exceed MCL at monitoring sites due to GSP management activities"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "tt_intra_gsa",
+      "type": "TransferRule",
+      "name": "Intra-GSA Transfer",
+      "properties": {
+        "description": "Transfer between users within the same GSA",
+        "complexity": "low",
+        "permit_required": "no"
+      },
+      "tree": "bridge"
+    },
+    {
+      "id": "tt_inter_gsa",
+      "type": "TransferRule",
+      "name": "Inter-GSA Transfer (within basin)",
+      "properties": {
+        "description": "Transfer between users in different GSAs within Kern Subbasin",
+        "complexity": "medium",
+        "permit_required": "GSA notification + accounting"
+      },
+      "tree": "bridge"
+    }
+  ],
+  "relationships": [
+    {
+      "source": "statute_10723",
+      "target": "gsa_rosedale",
+      "type": "EMPOWERS",
+      "properties": {
+        "scope": "formation and authority"
+      }
+    },
+    {
+      "source": "statute_10725",
+      "target": "gsa_rosedale",
+      "type": "GRANTS_AUTHORITY",
+      "properties": {
+        "scope": "powers to manage groundwater"
+      }
+    },
+    {
+      "source": "statute_10726_4",
+      "target": "gsa_rosedale",
+      "type": "AUTHORIZES",
+      "properties": {
+        "scope": "regulate extraction and allocations"
+      }
+    },
+    {
+      "source": "statute_10723",
+      "target": "gsa_semitropic",
+      "type": "EMPOWERS",
+      "properties": {
+        "scope": "formation and authority"
+      }
+    },
+    {
+      "source": "statute_10725",
+      "target": "gsa_semitropic",
+      "type": "GRANTS_AUTHORITY",
+      "properties": {
+        "scope": "powers to manage groundwater"
+      }
+    },
+    {
+      "source": "statute_10726_4",
+      "target": "gsa_semitropic",
+      "type": "AUTHORIZES",
+      "properties": {
+        "scope": "regulate extraction and allocations"
+      }
+    },
+    {
+      "source": "statute_10723",
+      "target": "gsa_shafter_wasco",
+      "type": "EMPOWERS",
+      "properties": {
+        "scope": "formation and authority"
+      }
+    },
+    {
+      "source": "statute_10725",
+      "target": "gsa_shafter_wasco",
+      "type": "GRANTS_AUTHORITY",
+      "properties": {
+        "scope": "powers to manage groundwater"
+      }
+    },
+    {
+      "source": "statute_10726_4",
+      "target": "gsa_shafter_wasco",
+      "type": "AUTHORIZES",
+      "properties": {
+        "scope": "regulate extraction and allocations"
+      }
+    },
+    {
+      "source": "statute_10723",
+      "target": "gsa_north_kern",
+      "type": "EMPOWERS",
+      "properties": {
+        "scope": "formation and authority"
+      }
+    },
+    {
+      "source": "statute_10725",
+      "target": "gsa_north_kern",
+      "type": "GRANTS_AUTHORITY",
+      "properties": {
+        "scope": "powers to manage groundwater"
+      }
+    },
+    {
+      "source": "statute_10726_4",
+      "target": "gsa_north_kern",
+      "type": "AUTHORIZES",
+      "properties": {
+        "scope": "regulate extraction and allocations"
+      }
+    },
+    {
+      "source": "statute_10723",
+      "target": "gsa_kern_delta",
+      "type": "EMPOWERS",
+      "properties": {
+        "scope": "formation and authority"
+      }
+    },
+    {
+      "source": "statute_10725",
+      "target": "gsa_kern_delta",
+      "type": "GRANTS_AUTHORITY",
+      "properties": {
+        "scope": "powers to manage groundwater"
+      }
+    },
+    {
+      "source": "statute_10726_4",
+      "target": "gsa_kern_delta",
+      "type": "AUTHORIZES",
+      "properties": {
+        "scope": "regulate extraction and allocations"
+      }
+    },
+    {
+      "source": "statute_10723",
+      "target": "gsa_wheeler_ridge",
+      "type": "EMPOWERS",
+      "properties": {
+        "scope": "formation and authority"
+      }
+    },
+    {
+      "source": "statute_10725",
+      "target": "gsa_wheeler_ridge",
+      "type": "GRANTS_AUTHORITY",
+      "properties": {
+        "scope": "powers to manage groundwater"
+      }
+    },
+    {
+      "source": "statute_10726_4",
+      "target": "gsa_wheeler_ridge",
+      "type": "AUTHORIZES",
+      "properties": {
+        "scope": "regulate extraction and allocations"
+      }
+    },
+    {
+      "source": "statute_10723",
+      "target": "gsa_buena_vista",
+      "type": "EMPOWERS",
+      "properties": {
+        "scope": "formation and authority"
+      }
+    },
+    {
+      "source": "statute_10725",
+      "target": "gsa_buena_vista",
+      "type": "GRANTS_AUTHORITY",
+      "properties": {
+        "scope": "powers to manage groundwater"
+      }
+    },
+    {
+      "source": "statute_10726_4",
+      "target": "gsa_buena_vista",
+      "type": "AUTHORIZES",
+      "properties": {
+        "scope": "regulate extraction and allocations"
+      }
+    },
+    {
+      "source": "statute_10723",
+      "target": "gsa_kern_water_bank",
+      "type": "EMPOWERS",
+      "properties": {
+        "scope": "formation and authority"
+      }
+    },
+    {
+      "source": "statute_10725",
+      "target": "gsa_kern_water_bank",
+      "type": "GRANTS_AUTHORITY",
+      "properties": {
+        "scope": "powers to manage groundwater"
+      }
+    },
+    {
+      "source": "statute_10726_4",
+      "target": "gsa_kern_water_bank",
+      "type": "AUTHORIZES",
+      "properties": {
+        "scope": "regulate extraction and allocations"
+      }
+    },
+    {
+      "source": "statute_10723",
+      "target": "gsa_tejon_castac",
+      "type": "EMPOWERS",
+      "properties": {
+        "scope": "formation and authority"
+      }
+    },
+    {
+      "source": "statute_10725",
+      "target": "gsa_tejon_castac",
+      "type": "GRANTS_AUTHORITY",
+      "properties": {
+        "scope": "powers to manage groundwater"
+      }
+    },
+    {
+      "source": "statute_10726_4",
+      "target": "gsa_tejon_castac",
+      "type": "AUTHORIZES",
+      "properties": {
+        "scope": "regulate extraction and allocations"
+      }
+    },
+    {
+      "source": "statute_10723",
+      "target": "gsa_west_kern",
+      "type": "EMPOWERS",
+      "properties": {
+        "scope": "formation and authority"
+      }
+    },
+    {
+      "source": "statute_10725",
+      "target": "gsa_west_kern",
+      "type": "GRANTS_AUTHORITY",
+      "properties": {
+        "scope": "powers to manage groundwater"
+      }
+    },
+    {
+      "source": "statute_10726_4",
+      "target": "gsa_west_kern",
+      "type": "AUTHORIZES",
+      "properties": {
+        "scope": "regulate extraction and allocations"
+      }
+    },
+    {
+      "source": "statute_10723",
+      "target": "gsa_olcese",
+      "type": "EMPOWERS",
+      "properties": {
+        "scope": "formation and authority"
+      }
+    },
+    {
+      "source": "statute_10725",
+      "target": "gsa_olcese",
+      "type": "GRANTS_AUTHORITY",
+      "properties": {
+        "scope": "powers to manage groundwater"
+      }
+    },
+    {
+      "source": "statute_10726_4",
+      "target": "gsa_olcese",
+      "type": "AUTHORIZES",
+      "properties": {
+        "scope": "regulate extraction and allocations"
+      }
+    },
+    {
+      "source": "gsa_rosedale",
+      "target": "kern_gsp",
+      "type": "ADOPTS",
+      "properties": {}
+    },
+    {
+      "source": "gsa_semitropic",
+      "target": "kern_gsp",
+      "type": "ADOPTS",
+      "properties": {}
+    },
+    {
+      "source": "gsa_shafter_wasco",
+      "target": "kern_gsp",
+      "type": "ADOPTS",
+      "properties": {}
+    },
+    {
+      "source": "gsa_north_kern",
+      "target": "kern_gsp",
+      "type": "ADOPTS",
+      "properties": {}
+    },
+    {
+      "source": "gsa_kern_delta",
+      "target": "kern_gsp",
+      "type": "ADOPTS",
+      "properties": {}
+    },
+    {
+      "source": "gsa_wheeler_ridge",
+      "target": "kern_gsp",
+      "type": "ADOPTS",
+      "properties": {}
+    },
+    {
+      "source": "gsa_buena_vista",
+      "target": "kern_gsp",
+      "type": "ADOPTS",
+      "properties": {}
+    },
+    {
+      "source": "gsa_kern_water_bank",
+      "target": "kern_gsp",
+      "type": "ADOPTS",
+      "properties": {}
+    },
+    {
+      "source": "gsa_tejon_castac",
+      "target": "kern_gsp",
+      "type": "ADOPTS",
+      "properties": {}
+    },
+    {
+      "source": "gsa_west_kern",
+      "target": "kern_gsp",
+      "type": "ADOPTS",
+      "properties": {}
+    },
+    {
+      "source": "gsa_olcese",
+      "target": "kern_gsp",
+      "type": "ADOPTS",
+      "properties": {}
+    },
+    {
+      "source": "statute_10727",
+      "target": "kern_gsp",
+      "type": "MANDATES",
+      "properties": {
+        "scope": "GSP content requirements"
+      }
+    },
+    {
+      "source": "statute_10727_2",
+      "target": "kern_gsp",
+      "type": "REQUIRES_CRITERIA",
+      "properties": {
+        "scope": "sustainability criteria for 6 indicators"
+      }
+    },
+    {
+      "source": "gsa_rosedale",
+      "target": "alloc_rosedale",
+      "type": "GOVERNS",
+      "properties": {}
+    },
+    {
+      "source": "kern_gsp",
+      "target": "alloc_rosedale",
+      "type": "ESTABLISHES",
+      "properties": {}
+    },
+    {
+      "source": "statute_10726_4",
+      "target": "alloc_rosedale",
+      "type": "AUTHORIZES",
+      "properties": {}
+    },
+    {
+      "source": "gsa_semitropic",
+      "target": "alloc_semitropic",
+      "type": "GOVERNS",
+      "properties": {}
+    },
+    {
+      "source": "kern_gsp",
+      "target": "alloc_semitropic",
+      "type": "ESTABLISHES",
+      "properties": {}
+    },
+    {
+      "source": "statute_10726_4",
+      "target": "alloc_semitropic",
+      "type": "AUTHORIZES",
+      "properties": {}
+    },
+    {
+      "source": "gsa_shafter_wasco",
+      "target": "alloc_shafter_wasco",
+      "type": "GOVERNS",
+      "properties": {}
+    },
+    {
+      "source": "kern_gsp",
+      "target": "alloc_shafter_wasco",
+      "type": "ESTABLISHES",
+      "properties": {}
+    },
+    {
+      "source": "statute_10726_4",
+      "target": "alloc_shafter_wasco",
+      "type": "AUTHORIZES",
+      "properties": {}
+    },
+    {
+      "source": "gsa_north_kern",
+      "target": "alloc_north_kern",
+      "type": "GOVERNS",
+      "properties": {}
+    },
+    {
+      "source": "kern_gsp",
+      "target": "alloc_north_kern",
+      "type": "ESTABLISHES",
+      "properties": {}
+    },
+    {
+      "source": "statute_10726_4",
+      "target": "alloc_north_kern",
+      "type": "AUTHORIZES",
+      "properties": {}
+    },
+    {
+      "source": "gsa_kern_delta",
+      "target": "alloc_kern_delta",
+      "type": "GOVERNS",
+      "properties": {}
+    },
+    {
+      "source": "kern_gsp",
+      "target": "alloc_kern_delta",
+      "type": "ESTABLISHES",
+      "properties": {}
+    },
+    {
+      "source": "statute_10726_4",
+      "target": "alloc_kern_delta",
+      "type": "AUTHORIZES",
+      "properties": {}
+    },
+    {
+      "source": "statute_10725_2",
+      "target": "req_metering",
+      "type": "MANDATES",
+      "properties": {}
+    },
+    {
+      "source": "statute_10728_2",
+      "target": "req_reporting",
+      "type": "MANDATES",
+      "properties": {}
+    },
+    {
+      "source": "statute_10726_4",
+      "target": "req_notification",
+      "type": "MANDATES",
+      "properties": {}
+    },
+    {
+      "source": "statute_10732",
+      "target": "enforce_gsa",
+      "type": "ENABLES",
+      "properties": {}
+    },
+    {
+      "source": "statute_10735",
+      "target": "enforce_state",
+      "type": "ENABLES",
+      "properties": {}
+    },
+    {
+      "source": "gsa_rosedale",
+      "target": "enforce_gsa",
+      "type": "MAY_INVOKE",
+      "properties": {}
+    },
+    {
+      "source": "gsa_semitropic",
+      "target": "enforce_gsa",
+      "type": "MAY_INVOKE",
+      "properties": {}
+    },
+    {
+      "source": "gsa_shafter_wasco",
+      "target": "enforce_gsa",
+      "type": "MAY_INVOKE",
+      "properties": {}
+    },
+    {
+      "source": "gsa_north_kern",
+      "target": "enforce_gsa",
+      "type": "MAY_INVOKE",
+      "properties": {}
+    },
+    {
+      "source": "gsa_kern_delta",
+      "target": "enforce_gsa",
+      "type": "MAY_INVOKE",
+      "properties": {}
+    },
+    {
+      "source": "gsa_wheeler_ridge",
+      "target": "enforce_gsa",
+      "type": "MAY_INVOKE",
+      "properties": {}
+    },
+    {
+      "source": "gsa_buena_vista",
+      "target": "enforce_gsa",
+      "type": "MAY_INVOKE",
+      "properties": {}
+    },
+    {
+      "source": "gsa_kern_water_bank",
+      "target": "enforce_gsa",
+      "type": "MAY_INVOKE",
+      "properties": {}
+    },
+    {
+      "source": "gsa_tejon_castac",
+      "target": "enforce_gsa",
+      "type": "MAY_INVOKE",
+      "properties": {}
+    },
+    {
+      "source": "gsa_west_kern",
+      "target": "enforce_gsa",
+      "type": "MAY_INVOKE",
+      "properties": {}
+    },
+    {
+      "source": "gsa_olcese",
+      "target": "enforce_gsa",
+      "type": "MAY_INVOKE",
+      "properties": {}
+    },
+    {
+      "source": "wb_extraction",
+      "target": "water_budget",
+      "type": "CONTRIBUTES_TO",
+      "properties": {}
+    },
+    {
+      "source": "wb_recharge_natural",
+      "target": "water_budget",
+      "type": "CONTRIBUTES_TO",
+      "properties": {}
+    },
+    {
+      "source": "wb_recharge_applied",
+      "target": "water_budget",
+      "type": "CONTRIBUTES_TO",
+      "properties": {}
+    },
+    {
+      "source": "wb_surface_inflow",
+      "target": "water_budget",
+      "type": "CONTRIBUTES_TO",
+      "properties": {}
+    },
+    {
+      "source": "wb_subsurface_inflow",
+      "target": "water_budget",
+      "type": "CONTRIBUTES_TO",
+      "properties": {}
+    },
+    {
+      "source": "wb_subsurface_outflow",
+      "target": "water_budget",
+      "type": "CONTRIBUTES_TO",
+      "properties": {}
+    },
+    {
+      "source": "wb_riparian_et",
+      "target": "water_budget",
+      "type": "CONTRIBUTES_TO",
+      "properties": {}
+    },
+    {
+      "source": "water_budget",
+      "target": "sustainable_yield",
+      "type": "DETERMINES",
+      "properties": {}
+    },
+    {
+      "source": "gsa_rosedale",
+      "target": "ma_rosedale",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "water_budget",
+      "target": "ma_rosedale",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "gsa_semitropic",
+      "target": "ma_semitropic",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "water_budget",
+      "target": "ma_semitropic",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "gsa_shafter_wasco",
+      "target": "ma_shafter_wasco",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "water_budget",
+      "target": "ma_shafter_wasco",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "gsa_north_kern",
+      "target": "ma_north_kern",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "water_budget",
+      "target": "ma_north_kern",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "gsa_kern_delta",
+      "target": "ma_kern_delta",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "water_budget",
+      "target": "ma_kern_delta",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "gsa_buena_vista",
+      "target": "ma_kern_fan",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "water_budget",
+      "target": "ma_kern_fan",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "gsa_wheeler_ridge",
+      "target": "ma_white_wolf",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "water_budget",
+      "target": "ma_white_wolf",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "gsa_west_kern",
+      "target": "ma_west_kern",
+      "type": "MANAGES",
+      "properties": {}
+    },
+    {
+      "source": "water_budget",
+      "target": "ma_west_kern",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_gw_levels",
+      "target": "ma_rosedale",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_gw_levels",
+      "target": "ma_semitropic",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_gw_levels",
+      "target": "ma_shafter_wasco",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_gw_levels",
+      "target": "ma_north_kern",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_gw_levels",
+      "target": "ma_kern_delta",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_gw_levels",
+      "target": "ma_kern_fan",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_gw_levels",
+      "target": "ma_white_wolf",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_gw_levels",
+      "target": "ma_west_kern",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_storage",
+      "target": "ma_rosedale",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_storage",
+      "target": "ma_semitropic",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_storage",
+      "target": "ma_shafter_wasco",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_storage",
+      "target": "ma_north_kern",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_storage",
+      "target": "ma_kern_delta",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_storage",
+      "target": "ma_kern_fan",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_storage",
+      "target": "ma_white_wolf",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_storage",
+      "target": "ma_west_kern",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_subsidence",
+      "target": "ma_rosedale",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_subsidence",
+      "target": "ma_semitropic",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_subsidence",
+      "target": "ma_shafter_wasco",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_subsidence",
+      "target": "ma_north_kern",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_subsidence",
+      "target": "ma_kern_delta",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_subsidence",
+      "target": "ma_kern_fan",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_subsidence",
+      "target": "ma_white_wolf",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_subsidence",
+      "target": "ma_west_kern",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_water_quality",
+      "target": "ma_rosedale",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_water_quality",
+      "target": "ma_semitropic",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_water_quality",
+      "target": "ma_shafter_wasco",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_water_quality",
+      "target": "ma_north_kern",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_water_quality",
+      "target": "ma_kern_delta",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_water_quality",
+      "target": "ma_kern_fan",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_water_quality",
+      "target": "ma_white_wolf",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_water_quality",
+      "target": "ma_west_kern",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_isw",
+      "target": "ma_rosedale",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_isw",
+      "target": "ma_semitropic",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_isw",
+      "target": "ma_shafter_wasco",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_isw",
+      "target": "ma_north_kern",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_isw",
+      "target": "ma_kern_delta",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_isw",
+      "target": "ma_kern_fan",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_isw",
+      "target": "ma_white_wolf",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_isw",
+      "target": "ma_west_kern",
+      "type": "OPERATES_IN",
+      "properties": {}
+    },
+    {
+      "source": "mon_gw_levels",
+      "target": "ind_gw_levels",
+      "type": "MEASURES",
+      "properties": {}
+    },
+    {
+      "source": "kern_gsp",
+      "target": "ind_gw_levels",
+      "type": "ESTABLISHES_CRITERIA_FOR",
+      "properties": {}
+    },
+    {
+      "source": "statute_10727_2",
+      "target": "ind_gw_levels",
+      "type": "REQUIRES_TRACKING",
+      "properties": {}
+    },
+    {
+      "source": "mon_storage",
+      "target": "ind_storage",
+      "type": "MEASURES",
+      "properties": {}
+    },
+    {
+      "source": "kern_gsp",
+      "target": "ind_storage",
+      "type": "ESTABLISHES_CRITERIA_FOR",
+      "properties": {}
+    },
+    {
+      "source": "statute_10727_2",
+      "target": "ind_storage",
+      "type": "REQUIRES_TRACKING",
+      "properties": {}
+    },
+    {
+      "source": "mon_subsidence",
+      "target": "ind_subsidence",
+      "type": "MEASURES",
+      "properties": {}
+    },
+    {
+      "source": "kern_gsp",
+      "target": "ind_subsidence",
+      "type": "ESTABLISHES_CRITERIA_FOR",
+      "properties": {}
+    },
+    {
+      "source": "statute_10727_2",
+      "target": "ind_subsidence",
+      "type": "REQUIRES_TRACKING",
+      "properties": {}
+    },
+    {
+      "source": "mon_water_quality",
+      "target": "ind_water_quality",
+      "type": "MEASURES",
+      "properties": {}
+    },
+    {
+      "source": "kern_gsp",
+      "target": "ind_water_quality",
+      "type": "ESTABLISHES_CRITERIA_FOR",
+      "properties": {}
+    },
+    {
+      "source": "statute_10727_2",
+      "target": "ind_water_quality",
+      "type": "REQUIRES_TRACKING",
+      "properties": {}
+    },
+    {
+      "source": "mon_isw",
+      "target": "ind_isw",
+      "type": "MEASURES",
+      "properties": {}
+    },
+    {
+      "source": "kern_gsp",
+      "target": "ind_isw",
+      "type": "ESTABLISHES_CRITERIA_FOR",
+      "properties": {}
+    },
+    {
+      "source": "statute_10727_2",
+      "target": "ind_isw",
+      "type": "REQUIRES_TRACKING",
+      "properties": {}
+    },
+    {
+      "source": "ind_gw_levels",
+      "target": "ma_rosedale",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_gw_levels",
+      "target": "ma_semitropic",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_gw_levels",
+      "target": "ma_shafter_wasco",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_gw_levels",
+      "target": "ma_north_kern",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_gw_levels",
+      "target": "ma_kern_delta",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_gw_levels",
+      "target": "ma_kern_fan",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_gw_levels",
+      "target": "ma_white_wolf",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_gw_levels",
+      "target": "ma_west_kern",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_storage",
+      "target": "ma_rosedale",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_storage",
+      "target": "ma_semitropic",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_storage",
+      "target": "ma_shafter_wasco",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_storage",
+      "target": "ma_north_kern",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_storage",
+      "target": "ma_kern_delta",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_storage",
+      "target": "ma_kern_fan",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_storage",
+      "target": "ma_white_wolf",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_storage",
+      "target": "ma_west_kern",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_subsidence",
+      "target": "ma_rosedale",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_subsidence",
+      "target": "ma_semitropic",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_subsidence",
+      "target": "ma_shafter_wasco",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_subsidence",
+      "target": "ma_north_kern",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_subsidence",
+      "target": "ma_kern_delta",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_subsidence",
+      "target": "ma_kern_fan",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_subsidence",
+      "target": "ma_white_wolf",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_subsidence",
+      "target": "ma_west_kern",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_water_quality",
+      "target": "ma_rosedale",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_water_quality",
+      "target": "ma_semitropic",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_water_quality",
+      "target": "ma_shafter_wasco",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_water_quality",
+      "target": "ma_north_kern",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_water_quality",
+      "target": "ma_kern_delta",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_water_quality",
+      "target": "ma_kern_fan",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_water_quality",
+      "target": "ma_white_wolf",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_water_quality",
+      "target": "ma_west_kern",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_isw",
+      "target": "ma_rosedale",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_isw",
+      "target": "ma_semitropic",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_isw",
+      "target": "ma_shafter_wasco",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_isw",
+      "target": "ma_north_kern",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_isw",
+      "target": "ma_kern_delta",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_isw",
+      "target": "ma_kern_fan",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_isw",
+      "target": "ma_white_wolf",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_isw",
+      "target": "ma_west_kern",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "wb_extraction",
+      "target": "ind_gw_levels",
+      "type": "DIRECTLY_IMPACTS",
+      "properties": {}
+    },
+    {
+      "source": "wb_extraction",
+      "target": "ind_storage",
+      "type": "DIRECTLY_IMPACTS",
+      "properties": {}
+    },
+    {
+      "source": "wb_extraction",
+      "target": "ind_subsidence",
+      "type": "CONTRIBUTES_TO",
+      "properties": {}
+    },
+    {
+      "source": "wb_extraction",
+      "target": "ind_water_quality",
+      "type": "MAY_AFFECT",
+      "properties": {}
+    },
+    {
+      "source": "gsa_rosedale",
+      "target": "mt_gw_rosedale",
+      "type": "DEFINES",
+      "properties": {}
+    },
+    {
+      "source": "mt_gw_rosedale",
+      "target": "ind_gw_levels",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "mt_gw_rosedale",
+      "target": "ma_rosedale",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "kern_gsp",
+      "target": "mt_gw_rosedale",
+      "type": "ESTABLISHES",
+      "properties": {}
+    },
+    {
+      "source": "gsa_semitropic",
+      "target": "mt_gw_semitropic",
+      "type": "DEFINES",
+      "properties": {}
+    },
+    {
+      "source": "mt_gw_semitropic",
+      "target": "ind_gw_levels",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "mt_gw_semitropic",
+      "target": "ma_semitropic",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "kern_gsp",
+      "target": "mt_gw_semitropic",
+      "type": "ESTABLISHES",
+      "properties": {}
+    },
+    {
+      "source": "gsa_semitropic",
+      "target": "mt_sub_semitropic",
+      "type": "DEFINES",
+      "properties": {}
+    },
+    {
+      "source": "mt_sub_semitropic",
+      "target": "ind_subsidence",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "mt_sub_semitropic",
+      "target": "ma_semitropic",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "kern_gsp",
+      "target": "mt_sub_semitropic",
+      "type": "ESTABLISHES",
+      "properties": {}
+    },
+    {
+      "source": "gsa_buena_vista",
+      "target": "mt_sub_kern_fan",
+      "type": "DEFINES",
+      "properties": {}
+    },
+    {
+      "source": "mt_sub_kern_fan",
+      "target": "ind_subsidence",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "mt_sub_kern_fan",
+      "target": "ma_kern_fan",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "kern_gsp",
+      "target": "mt_sub_kern_fan",
+      "type": "ESTABLISHES",
+      "properties": {}
+    },
+    {
+      "source": "gsa_semitropic",
+      "target": "mt_wq_nitrate",
+      "type": "DEFINES",
+      "properties": {}
+    },
+    {
+      "source": "mt_wq_nitrate",
+      "target": "ind_water_quality",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "mt_wq_nitrate",
+      "target": "ma_semitropic",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "kern_gsp",
+      "target": "mt_wq_nitrate",
+      "type": "ESTABLISHES",
+      "properties": {}
+    },
+    {
+      "source": "gsa_kern_delta",
+      "target": "mt_wq_arsenic",
+      "type": "DEFINES",
+      "properties": {}
+    },
+    {
+      "source": "mt_wq_arsenic",
+      "target": "ind_water_quality",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "mt_wq_arsenic",
+      "target": "ma_kern_delta",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "kern_gsp",
+      "target": "mt_wq_arsenic",
+      "type": "ESTABLISHES",
+      "properties": {}
+    },
+    {
+      "source": "gsa_rosedale",
+      "target": "mt_storage",
+      "type": "DEFINES",
+      "properties": {}
+    },
+    {
+      "source": "mt_storage",
+      "target": "ind_storage",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "mt_storage",
+      "target": "ma_rosedale",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "kern_gsp",
+      "target": "mt_storage",
+      "type": "ESTABLISHES",
+      "properties": {}
+    },
+    {
+      "source": "gsa_rosedale",
+      "target": "mo_gw_rosedale",
+      "type": "DEFINES",
+      "properties": {}
+    },
+    {
+      "source": "mo_gw_rosedale",
+      "target": "ind_gw_levels",
+      "type": "OBJECTIVE_FOR",
+      "properties": {}
+    },
+    {
+      "source": "mo_gw_rosedale",
+      "target": "ma_rosedale",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "gsa_semitropic",
+      "target": "mo_gw_semitropic",
+      "type": "DEFINES",
+      "properties": {}
+    },
+    {
+      "source": "mo_gw_semitropic",
+      "target": "ind_gw_levels",
+      "type": "OBJECTIVE_FOR",
+      "properties": {}
+    },
+    {
+      "source": "mo_gw_semitropic",
+      "target": "ma_semitropic",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "gsa_semitropic",
+      "target": "mo_sub_semitropic",
+      "type": "DEFINES",
+      "properties": {}
+    },
+    {
+      "source": "mo_sub_semitropic",
+      "target": "ind_subsidence",
+      "type": "OBJECTIVE_FOR",
+      "properties": {}
+    },
+    {
+      "source": "mo_sub_semitropic",
+      "target": "ma_semitropic",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "ind_gw_levels",
+      "target": "ur_gw_levels",
+      "type": "TRIGGERS_WHEN_BREACHED",
+      "properties": {}
+    },
+    {
+      "source": "ur_gw_levels",
+      "target": "enforce_gsa",
+      "type": "MAY_TRIGGER",
+      "properties": {}
+    },
+    {
+      "source": "ind_subsidence",
+      "target": "ur_subsidence",
+      "type": "TRIGGERS_WHEN_BREACHED",
+      "properties": {}
+    },
+    {
+      "source": "ur_subsidence",
+      "target": "enforce_gsa",
+      "type": "MAY_TRIGGER",
+      "properties": {}
+    },
+    {
+      "source": "ind_water_quality",
+      "target": "ur_water_quality",
+      "type": "TRIGGERS_WHEN_BREACHED",
+      "properties": {}
+    },
+    {
+      "source": "ur_water_quality",
+      "target": "enforce_gsa",
+      "type": "MAY_TRIGGER",
+      "properties": {}
+    },
+    {
+      "source": "alloc_rosedale",
+      "target": "water_budget",
+      "type": "DERIVED_FROM",
+      "properties": {}
+    },
+    {
+      "source": "alloc_rosedale",
+      "target": "sustainable_yield",
+      "type": "CONSTRAINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "alloc_semitropic",
+      "target": "water_budget",
+      "type": "DERIVED_FROM",
+      "properties": {}
+    },
+    {
+      "source": "alloc_semitropic",
+      "target": "sustainable_yield",
+      "type": "CONSTRAINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "alloc_shafter_wasco",
+      "target": "water_budget",
+      "type": "DERIVED_FROM",
+      "properties": {}
+    },
+    {
+      "source": "alloc_shafter_wasco",
+      "target": "sustainable_yield",
+      "type": "CONSTRAINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "alloc_north_kern",
+      "target": "water_budget",
+      "type": "DERIVED_FROM",
+      "properties": {}
+    },
+    {
+      "source": "alloc_north_kern",
+      "target": "sustainable_yield",
+      "type": "CONSTRAINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "alloc_kern_delta",
+      "target": "water_budget",
+      "type": "DERIVED_FROM",
+      "properties": {}
+    },
+    {
+      "source": "alloc_kern_delta",
+      "target": "sustainable_yield",
+      "type": "CONSTRAINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "tt_intra_gsa",
+      "target": "alloc_rosedale",
+      "type": "CONSTRAINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "alloc_rosedale",
+      "type": "CONSTRAINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "tt_intra_gsa",
+      "target": "alloc_semitropic",
+      "type": "CONSTRAINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "alloc_semitropic",
+      "type": "CONSTRAINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "tt_intra_gsa",
+      "target": "alloc_shafter_wasco",
+      "type": "CONSTRAINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "alloc_shafter_wasco",
+      "type": "CONSTRAINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "tt_intra_gsa",
+      "target": "alloc_north_kern",
+      "type": "CONSTRAINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "alloc_north_kern",
+      "type": "CONSTRAINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "tt_intra_gsa",
+      "target": "alloc_kern_delta",
+      "type": "CONSTRAINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "alloc_kern_delta",
+      "type": "CONSTRAINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "tt_intra_gsa",
+      "target": "mt_gw_rosedale",
+      "type": "MUST_NOT_VIOLATE",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "mt_gw_rosedale",
+      "type": "MUST_NOT_VIOLATE",
+      "properties": {}
+    },
+    {
+      "source": "tt_intra_gsa",
+      "target": "mt_gw_semitropic",
+      "type": "MUST_NOT_VIOLATE",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "mt_gw_semitropic",
+      "type": "MUST_NOT_VIOLATE",
+      "properties": {}
+    },
+    {
+      "source": "tt_intra_gsa",
+      "target": "mt_sub_semitropic",
+      "type": "MUST_NOT_VIOLATE",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "mt_sub_semitropic",
+      "type": "MUST_NOT_VIOLATE",
+      "properties": {}
+    },
+    {
+      "source": "tt_intra_gsa",
+      "target": "mt_sub_kern_fan",
+      "type": "MUST_NOT_VIOLATE",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "mt_sub_kern_fan",
+      "type": "MUST_NOT_VIOLATE",
+      "properties": {}
+    },
+    {
+      "source": "tt_intra_gsa",
+      "target": "mt_wq_nitrate",
+      "type": "MUST_NOT_VIOLATE",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "mt_wq_nitrate",
+      "type": "MUST_NOT_VIOLATE",
+      "properties": {}
+    },
+    {
+      "source": "tt_intra_gsa",
+      "target": "mt_wq_arsenic",
+      "type": "MUST_NOT_VIOLATE",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "mt_wq_arsenic",
+      "type": "MUST_NOT_VIOLATE",
+      "properties": {}
+    },
+    {
+      "source": "tt_intra_gsa",
+      "target": "mt_storage",
+      "type": "MUST_NOT_VIOLATE",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "mt_storage",
+      "type": "MUST_NOT_VIOLATE",
+      "properties": {}
+    },
+    {
+      "source": "tt_intra_gsa",
+      "target": "req_metering",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "req_metering",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "tt_intra_gsa",
+      "target": "req_reporting",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "req_reporting",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "tt_intra_gsa",
+      "target": "req_notification",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "req_notification",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "tt_intra_gsa",
+      "target": "req_accounting",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "req_accounting",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "tt_intra_gsa",
+      "target": "req_monitoring_compliance",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "req_monitoring_compliance",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "req_notification",
+      "type": "ADDITIONALLY_REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "gsa_rosedale",
+      "type": "REPORTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "gsa_semitropic",
+      "type": "REPORTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "gsa_shafter_wasco",
+      "type": "REPORTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "gsa_north_kern",
+      "type": "REPORTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "gsa_kern_delta",
+      "type": "REPORTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "gsa_wheeler_ridge",
+      "type": "REPORTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "gsa_buena_vista",
+      "type": "REPORTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "gsa_kern_water_bank",
+      "type": "REPORTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "gsa_tejon_castac",
+      "type": "REPORTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "gsa_west_kern",
+      "type": "REPORTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "gsa_olcese",
+      "type": "REPORTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "tt_intra_gsa",
+      "target": "mon_gw_levels",
+      "type": "EVALUATED_USING",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "mon_gw_levels",
+      "type": "EVALUATED_USING",
+      "properties": {}
+    },
+    {
+      "source": "tt_intra_gsa",
+      "target": "mon_storage",
+      "type": "EVALUATED_USING",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "mon_storage",
+      "type": "EVALUATED_USING",
+      "properties": {}
+    },
+    {
+      "source": "tt_intra_gsa",
+      "target": "mon_subsidence",
+      "type": "EVALUATED_USING",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "mon_subsidence",
+      "type": "EVALUATED_USING",
+      "properties": {}
+    },
+    {
+      "source": "tt_intra_gsa",
+      "target": "mon_water_quality",
+      "type": "EVALUATED_USING",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "mon_water_quality",
+      "type": "EVALUATED_USING",
+      "properties": {}
+    },
+    {
+      "source": "tt_intra_gsa",
+      "target": "mon_isw",
+      "type": "EVALUATED_USING",
+      "properties": {}
+    },
+    {
+      "source": "tt_inter_gsa",
+      "target": "mon_isw",
+      "type": "EVALUATED_USING",
+      "properties": {}
+    }
+  ]
+}

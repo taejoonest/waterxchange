@@ -1,0 +1,1170 @@
+{
+  "entities": [
+    {
+      "id": "kern_subbasin",
+      "type": "Basin",
+      "name": "Kern Subbasin",
+      "properties": {}
+    },
+    {
+      "id": "shafter_wasco_id_gsa",
+      "type": "GSA",
+      "name": "Shafter-Wasco Irrigation District GSA",
+      "properties": {}
+    },
+    {
+      "id": "north_kern_wsd_gsa",
+      "type": "GSA",
+      "name": "North Kern Water Storage District GSA",
+      "properties": {}
+    },
+    {
+      "id": "arvin_gsa",
+      "type": "GSA",
+      "name": "Arvin GSA",
+      "properties": {}
+    },
+    {
+      "id": "southern_san_joaquin_mud_gsa",
+      "type": "GSA",
+      "name": "Southern San Joaquin Municipal Utility District GSA",
+      "properties": {}
+    },
+    {
+      "id": "kern_water_bank_gsa",
+      "type": "GSA",
+      "name": "Kern Water Bank GSA",
+      "properties": {}
+    },
+    {
+      "id": "pioneer_gsa",
+      "type": "GSA",
+      "name": "Pioneer GSA",
+      "properties": {}
+    },
+    {
+      "id": "west_kern_wd_gsa",
+      "type": "GSA",
+      "name": "West Kern Water District GSA",
+      "properties": {}
+    },
+    {
+      "id": "kern_non_districted_land_authority_gsa",
+      "type": "GSA",
+      "name": "Kern Non-Districted Land Authority GSA",
+      "properties": {}
+    },
+    {
+      "id": "kcwa_pioneer_gsa",
+      "type": "GSA",
+      "name": "Kern County Water Agency-Pioneer GSA",
+      "properties": {}
+    },
+    {
+      "id": "kcwa_id4",
+      "type": "GSA",
+      "name": "Kern County Water Agency-Improvement District No. 4",
+      "properties": {}
+    },
+    {
+      "id": "westside_district_wa_gsa",
+      "type": "GSA",
+      "name": "Westside District Water Authority GSA",
+      "properties": {}
+    },
+    {
+      "id": "north_basin_hcm_area",
+      "type": "ManagementArea",
+      "name": "North Basin HCM Area",
+      "properties": {}
+    },
+    {
+      "id": "western_fold_belt_hcm_area",
+      "type": "ManagementArea",
+      "name": "Western Fold Belt HCM Area",
+      "properties": {}
+    },
+    {
+      "id": "kern_river_fan_hcm_area",
+      "type": "ManagementArea",
+      "name": "Kern River Fan HCM Area",
+      "properties": {}
+    },
+    {
+      "id": "south_basin_hcm_area",
+      "type": "ManagementArea",
+      "name": "South Basin HCM Area",
+      "properties": {}
+    },
+    {
+      "id": "east_margin_hcm_area",
+      "type": "ManagementArea",
+      "name": "East Margin HCM Area",
+      "properties": {}
+    },
+    {
+      "id": "poso_zone",
+      "type": "ManagementArea",
+      "name": "Poso zone",
+      "properties": {}
+    },
+    {
+      "id": "westside_south_zone",
+      "type": "ManagementArea",
+      "name": "Westside South zone",
+      "properties": {}
+    },
+    {
+      "id": "kern_river_zone",
+      "type": "ManagementArea",
+      "name": "Kern River zone",
+      "properties": {}
+    },
+    {
+      "id": "chronic_gw_levels_indicator",
+      "type": "SustainabilityIndicator",
+      "name": "Chronic Lowering of Groundwater Levels",
+      "properties": {}
+    },
+    {
+      "id": "reduction_gw_storage_indicator",
+      "type": "SustainabilityIndicator",
+      "name": "Reduction in Groundwater Storage",
+      "properties": {}
+    },
+    {
+      "id": "degraded_water_quality_indicator",
+      "type": "SustainabilityIndicator",
+      "name": "Degraded Water Quality",
+      "properties": {}
+    },
+    {
+      "id": "land_subsidence_indicator",
+      "type": "SustainabilityIndicator",
+      "name": "Land Subsidence",
+      "properties": {}
+    },
+    {
+      "id": "depletion_interconnected_sw_indicator",
+      "type": "SustainabilityIndicator",
+      "name": "Depletion of Interconnected Surface Water",
+      "properties": {}
+    },
+    {
+      "id": "chronic_gw_levels_undesirable_result",
+      "type": "UndesirableResult",
+      "name": "Chronic Lowering of Groundwater Levels Undesirable Result",
+      "properties": {}
+    },
+    {
+      "id": "land_subsidence_undesirable_result",
+      "type": "UndesirableResult",
+      "name": "Land Subsidence Undesirable Result",
+      "properties": {}
+    },
+    {
+      "id": "chronic_gw_levels_minimum_threshold",
+      "type": "MinimumThreshold",
+      "name": "Chronic Lowering of Groundwater Levels Minimum Threshold",
+      "properties": {}
+    },
+    {
+      "id": "chronic_gw_levels_measurable_objective",
+      "type": "MeasurableObjective",
+      "name": "Chronic Lowering of Groundwater Levels Measurable Objective",
+      "properties": {}
+    },
+    {
+      "id": "land_subsidence_minimum_threshold",
+      "type": "MinimumThreshold",
+      "name": "Land Subsidence Minimum Threshold",
+      "properties": {}
+    },
+    {
+      "id": "land_subsidence_measurable_objective",
+      "type": "MeasurableObjective",
+      "name": "Land Subsidence Measurable Objective",
+      "properties": {}
+    },
+    {
+      "id": "degraded_water_quality_measurable_objective",
+      "type": "MeasurableObjective",
+      "name": "Degraded Water Quality Measurable Objective",
+      "properties": {}
+    },
+    {
+      "id": "degraded_water_quality_interim_milestone",
+      "type": "InterimMilestone",
+      "name": "Degraded Water Quality Interim Milestone",
+      "properties": {}
+    },
+    {
+      "id": "groundwater_level_monitoring_network",
+      "type": "MonitoringNetwork",
+      "name": "groundwater level monitoring network",
+      "properties": {}
+    },
+    {
+      "id": "groundwater_quality_monitoring_network",
+      "type": "MonitoringNetwork",
+      "name": "groundwater quality monitoring network",
+      "properties": {}
+    },
+    {
+      "id": "land_subsidence_monitoring_network",
+      "type": "MonitoringNetwork",
+      "name": "subsidence monitoring network",
+      "properties": {}
+    },
+    {
+      "id": "additional_well",
+      "type": "MonitoringSite",
+      "name": "additional well",
+      "properties": {}
+    },
+    {
+      "id": "additional_wells",
+      "type": "MonitoringSite",
+      "name": "additional wells",
+      "properties": {}
+    },
+    {
+      "id": "representative_monitoring_sites",
+      "type": "MonitoringSite",
+      "name": "representative monitoring sites",
+      "properties": {}
+    },
+    {
+      "id": "monitoring_well_location",
+      "type": "MonitoringSite",
+      "name": "monitoring well location",
+      "properties": {}
+    },
+    {
+      "id": "statute_10720",
+      "type": "Statute",
+      "name": "Water Code Section 10720",
+      "properties": {}
+    },
+    {
+      "id": "statute_10720.7",
+      "type": "Statute",
+      "name": "Water Code Section 10720.7",
+      "properties": {}
+    },
+    {
+      "id": "statute_10727.2",
+      "type": "Statute",
+      "name": "Water Code Section 10727.2",
+      "properties": {}
+    },
+    {
+      "id": "statute_10735.8",
+      "type": "Statute",
+      "name": "Water Code Section 10735.8",
+      "properties": {}
+    },
+    {
+      "id": "statute_5200",
+      "type": "Statute",
+      "name": "Water Code Section 5200",
+      "properties": {}
+    },
+    {
+      "id": "requirement_groundwater_extraction_reporting",
+      "type": "Requirement",
+      "name": "Groundwater Extraction Reporting",
+      "properties": {}
+    },
+    {
+      "id": "transfer_type_groundwater",
+      "type": "TransferType",
+      "name": "Groundwater Transfer",
+      "properties": {}
+    },
+    {
+      "id": "statute_10724",
+      "type": "Statute",
+      "name": "Water Code Section 10724",
+      "properties": {}
+    },
+    {
+      "id": "statute_10723.8",
+      "type": "Statute",
+      "name": "Water Code Section 10723.8",
+      "properties": {}
+    },
+    {
+      "id": "statute_10726.4",
+      "type": "Statute",
+      "name": "Water Code Section 10726.4",
+      "properties": {}
+    },
+    {
+      "id": "statute_10733.6",
+      "type": "Statute",
+      "name": "Water Code Section 10733.6",
+      "properties": {}
+    },
+    {
+      "id": "statute_10733.4",
+      "type": "Statute",
+      "name": "Water Code Section 10733.4",
+      "properties": {}
+    },
+    {
+      "id": "statute_10733.8",
+      "type": "Statute",
+      "name": "Water Code Section 10733.8",
+      "properties": {}
+    },
+    {
+      "id": "statute_10920",
+      "type": "Statute",
+      "name": "Water Code Section 10920",
+      "properties": {}
+    },
+    {
+      "id": "statute_1433.1",
+      "type": "Statute",
+      "name": "Water Code Section 1433.1",
+      "properties": {}
+    },
+    {
+      "id": "statute_10720.8",
+      "type": "Statute",
+      "name": "Water Code Section 10720.8",
+      "properties": {}
+    },
+    {
+      "id": "kern_allocation_policy",
+      "type": "AllocationPolicy",
+      "name": "Kern Subbasin Groundwater Allocation Framework",
+      "properties": {}
+    },
+    {
+      "id": "intra_gsa_transfer",
+      "type": "TransferRule",
+      "name": "Intra-GSA Transfer Rule",
+      "properties": {}
+    },
+    {
+      "id": "inter_gsa_transfer",
+      "type": "TransferRule",
+      "name": "Inter-GSA Transfer Rule",
+      "properties": {}
+    },
+    {
+      "id": "kern_water_budget",
+      "type": "WaterBudget",
+      "name": "Kern Subbasin Water Budget",
+      "properties": {}
+    },
+    {
+      "id": "well_metering",
+      "type": "Requirement",
+      "name": "Well Metering Requirement",
+      "properties": {}
+    },
+    {
+      "id": "extraction_reporting",
+      "type": "Requirement",
+      "name": "Extraction Reporting Requirement",
+      "properties": {}
+    },
+    {
+      "id": "gsa_notification",
+      "type": "Requirement",
+      "name": "GSA Notification Requirement",
+      "properties": {}
+    },
+    {
+      "id": "annual_reporting",
+      "type": "Requirement",
+      "name": "Annual Reporting Requirement",
+      "properties": {}
+    },
+    {
+      "id": "transfer_accounting",
+      "type": "Requirement",
+      "name": "Transfer Accounting Requirement",
+      "properties": {}
+    }
+  ],
+  "relationships": [
+    {
+      "source": "chronic_gw_levels_indicator",
+      "target": "chronic_gw_levels_minimum_threshold",
+      "type": "HAS_THRESHOLD",
+      "properties": {}
+    },
+    {
+      "source": "north_basin_hcm_area",
+      "target": "kern_subbasin",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "land_subsidence_indicator",
+      "target": "land_subsidence_undesirable_result",
+      "type": "TRIGGERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "poso_zone",
+      "target": "kern_subbasin",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "kern_water_bank_gsa",
+      "target": "pioneer_gsa",
+      "type": "COORDINATES_WITH",
+      "properties": {}
+    },
+    {
+      "source": "requirement_groundwater_extraction_reporting",
+      "target": "transfer_type_groundwater",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "land_subsidence_indicator",
+      "target": "land_subsidence_minimum_threshold",
+      "type": "HAS_THRESHOLD",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "arvin_gsa",
+      "type": "HAS_GSA",
+      "properties": {}
+    },
+    {
+      "source": "kern_river_fan_hcm_area",
+      "target": "kern_subbasin",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "chronic_gw_levels_indicator",
+      "target": "chronic_gw_levels_measurable_objective",
+      "type": "HAS_OBJECTIVE",
+      "properties": {}
+    },
+    {
+      "source": "pioneer_gsa",
+      "target": "west_kern_wd_gsa",
+      "type": "COORDINATES_WITH",
+      "properties": {}
+    },
+    {
+      "source": "east_margin_hcm_area",
+      "target": "kern_subbasin",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "kern_water_bank_gsa",
+      "type": "HAS_GSA",
+      "properties": {}
+    },
+    {
+      "source": "kern_river_zone",
+      "target": "north_basin_hcm_area",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "kern_river_zone",
+      "target": "south_basin_hcm_area",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "north_kern_wsd_gsa",
+      "type": "HAS_GSA",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "kern_non_districted_land_authority_gsa",
+      "type": "HAS_GSA",
+      "properties": {}
+    },
+    {
+      "source": "shafter_wasco_id_gsa",
+      "target": "north_kern_wsd_gsa",
+      "type": "COORDINATES_WITH",
+      "properties": {}
+    },
+    {
+      "source": "kern_river_zone",
+      "target": "kern_river_fan_hcm_area",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "westside_south_zone",
+      "target": "north_basin_hcm_area",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "shafter_wasco_id_gsa",
+      "type": "HAS_GSA",
+      "properties": {}
+    },
+    {
+      "source": "south_basin_hcm_area",
+      "target": "kern_subbasin",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "groundwater_quality_monitoring_network",
+      "target": "additional_wells",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "westside_district_wa_gsa",
+      "type": "HAS_GSA",
+      "properties": {}
+    },
+    {
+      "source": "shafter_wasco_id_gsa",
+      "target": "north_basin_hcm_area",
+      "type": "MANAGES_AREA",
+      "properties": {}
+    },
+    {
+      "source": "western_fold_belt_hcm_area",
+      "target": "kern_subbasin",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "kern_water_bank_gsa",
+      "target": "west_kern_wd_gsa",
+      "type": "COORDINATES_WITH",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "west_kern_wd_gsa",
+      "type": "HAS_GSA",
+      "properties": {}
+    },
+    {
+      "source": "kern_river_zone",
+      "target": "kern_subbasin",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "poso_zone",
+      "target": "east_margin_hcm_area",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "arvin_gsa",
+      "target": "south_basin_hcm_area",
+      "type": "MANAGES_AREA",
+      "properties": {}
+    },
+    {
+      "source": "westside_south_zone",
+      "target": "western_fold_belt_hcm_area",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "westside_south_zone",
+      "target": "kern_subbasin",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "groundwater_level_monitoring_network",
+      "target": "additional_well",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "statute_10724",
+      "target": "requirement_groundwater_extraction_reporting",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "land_subsidence_monitoring_network",
+      "target": "representative_monitoring_sites",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "chronic_gw_levels_indicator",
+      "target": "chronic_gw_levels_undesirable_result",
+      "type": "TRIGGERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "monitoring_well_location",
+      "target": "east_margin_hcm_area",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "land_subsidence_indicator",
+      "target": "land_subsidence_measurable_objective",
+      "type": "HAS_OBJECTIVE",
+      "properties": {}
+    },
+    {
+      "source": "degraded_water_quality_indicator",
+      "target": "degraded_water_quality_measurable_objective",
+      "type": "HAS_OBJECTIVE",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "southern_san_joaquin_mud_gsa",
+      "type": "HAS_GSA",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "kcwa_pioneer_gsa",
+      "type": "HAS_GSA",
+      "properties": {}
+    },
+    {
+      "source": "southern_san_joaquin_mud_gsa",
+      "target": "north_basin_hcm_area",
+      "type": "MANAGES_AREA",
+      "properties": {}
+    },
+    {
+      "source": "poso_zone",
+      "target": "north_basin_hcm_area",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "degraded_water_quality_indicator",
+      "target": "degraded_water_quality_interim_milestone",
+      "type": "HAS_MILESTONE",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "kcwa_id4",
+      "type": "HAS_GSA",
+      "properties": {}
+    },
+    {
+      "source": "kern_subbasin",
+      "target": "pioneer_gsa",
+      "type": "HAS_GSA",
+      "properties": {}
+    },
+    {
+      "source": "shafter_wasco_id_gsa",
+      "target": "chronic_gw_levels_indicator",
+      "type": "RESPONSIBLE_FOR",
+      "properties": {}
+    },
+    {
+      "source": "north_kern_wsd_gsa",
+      "target": "chronic_gw_levels_indicator",
+      "type": "RESPONSIBLE_FOR",
+      "properties": {}
+    },
+    {
+      "source": "arvin_gsa",
+      "target": "land_subsidence_indicator",
+      "type": "RESPONSIBLE_FOR",
+      "properties": {}
+    },
+    {
+      "source": "southern_san_joaquin_mud_gsa",
+      "target": "degraded_water_quality_indicator",
+      "type": "RESPONSIBLE_FOR",
+      "properties": {}
+    },
+    {
+      "source": "kern_water_bank_gsa",
+      "target": "reduction_gw_storage_indicator",
+      "type": "RESPONSIBLE_FOR",
+      "properties": {}
+    },
+    {
+      "source": "pioneer_gsa",
+      "target": "chronic_gw_levels_indicator",
+      "type": "RESPONSIBLE_FOR",
+      "properties": {}
+    },
+    {
+      "source": "west_kern_wd_gsa",
+      "target": "land_subsidence_indicator",
+      "type": "RESPONSIBLE_FOR",
+      "properties": {}
+    },
+    {
+      "source": "kern_non_districted_land_authority_gsa",
+      "target": "chronic_gw_levels_indicator",
+      "type": "RESPONSIBLE_FOR",
+      "properties": {}
+    },
+    {
+      "source": "kcwa_pioneer_gsa",
+      "target": "depletion_interconnected_sw_indicator",
+      "type": "RESPONSIBLE_FOR",
+      "properties": {}
+    },
+    {
+      "source": "kcwa_id4",
+      "target": "degraded_water_quality_indicator",
+      "type": "RESPONSIBLE_FOR",
+      "properties": {}
+    },
+    {
+      "source": "westside_district_wa_gsa",
+      "target": "land_subsidence_indicator",
+      "type": "RESPONSIBLE_FOR",
+      "properties": {}
+    },
+    {
+      "source": "chronic_gw_levels_indicator",
+      "target": "north_basin_hcm_area",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "reduction_gw_storage_indicator",
+      "target": "kern_river_fan_hcm_area",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "degraded_water_quality_indicator",
+      "target": "south_basin_hcm_area",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "land_subsidence_indicator",
+      "target": "western_fold_belt_hcm_area",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "depletion_interconnected_sw_indicator",
+      "target": "east_margin_hcm_area",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "chronic_gw_levels_minimum_threshold",
+      "target": "chronic_gw_levels_indicator",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "land_subsidence_minimum_threshold",
+      "target": "land_subsidence_indicator",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "chronic_gw_levels_measurable_objective",
+      "target": "chronic_gw_levels_indicator",
+      "type": "OBJECTIVE_FOR",
+      "properties": {}
+    },
+    {
+      "source": "land_subsidence_measurable_objective",
+      "target": "land_subsidence_indicator",
+      "type": "OBJECTIVE_FOR",
+      "properties": {}
+    },
+    {
+      "source": "degraded_water_quality_measurable_objective",
+      "target": "degraded_water_quality_indicator",
+      "type": "OBJECTIVE_FOR",
+      "properties": {}
+    },
+    {
+      "source": "shafter_wasco_id_gsa",
+      "target": "chronic_gw_levels_minimum_threshold",
+      "type": "DEFINES",
+      "properties": {}
+    },
+    {
+      "source": "arvin_gsa",
+      "target": "land_subsidence_minimum_threshold",
+      "type": "DEFINES",
+      "properties": {}
+    },
+    {
+      "source": "groundwater_level_monitoring_network",
+      "target": "chronic_gw_levels_indicator",
+      "type": "EVALUATES",
+      "properties": {}
+    },
+    {
+      "source": "groundwater_quality_monitoring_network",
+      "target": "degraded_water_quality_indicator",
+      "type": "EVALUATES",
+      "properties": {}
+    },
+    {
+      "source": "land_subsidence_monitoring_network",
+      "target": "land_subsidence_indicator",
+      "type": "EVALUATES",
+      "properties": {}
+    },
+    {
+      "source": "groundwater_level_monitoring_network",
+      "target": "north_basin_hcm_area",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "groundwater_quality_monitoring_network",
+      "target": "south_basin_hcm_area",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "land_subsidence_monitoring_network",
+      "target": "western_fold_belt_hcm_area",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "additional_well",
+      "target": "groundwater_level_monitoring_network",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "additional_wells",
+      "target": "groundwater_quality_monitoring_network",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "representative_monitoring_sites",
+      "target": "land_subsidence_monitoring_network",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "monitoring_well_location",
+      "target": "groundwater_level_monitoring_network",
+      "type": "PART_OF",
+      "properties": {}
+    },
+    {
+      "source": "chronic_gw_levels_undesirable_result",
+      "target": "chronic_gw_levels_indicator",
+      "type": "TRIGGERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "land_subsidence_undesirable_result",
+      "target": "land_subsidence_indicator",
+      "type": "TRIGGERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "statute_10720",
+      "target": "shafter_wasco_id_gsa",
+      "type": "AUTHORIZES",
+      "properties": {}
+    },
+    {
+      "source": "statute_10720.7",
+      "target": "north_kern_wsd_gsa",
+      "type": "AUTHORIZES",
+      "properties": {}
+    },
+    {
+      "source": "statute_10727.2",
+      "target": "arvin_gsa",
+      "type": "AUTHORIZES",
+      "properties": {}
+    },
+    {
+      "source": "kern_allocation_policy",
+      "target": "shafter_wasco_id_gsa",
+      "type": "GOVERNED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_allocation_policy",
+      "target": "north_kern_wsd_gsa",
+      "type": "GOVERNED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_allocation_policy",
+      "target": "arvin_gsa",
+      "type": "GOVERNED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_allocation_policy",
+      "target": "southern_san_joaquin_mud_gsa",
+      "type": "GOVERNED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_allocation_policy",
+      "target": "kern_water_bank_gsa",
+      "type": "GOVERNED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_allocation_policy",
+      "target": "pioneer_gsa",
+      "type": "GOVERNED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_allocation_policy",
+      "target": "west_kern_wd_gsa",
+      "type": "GOVERNED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_allocation_policy",
+      "target": "kern_non_districted_land_authority_gsa",
+      "type": "GOVERNED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_allocation_policy",
+      "target": "kcwa_pioneer_gsa",
+      "type": "GOVERNED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_allocation_policy",
+      "target": "kcwa_id4",
+      "type": "GOVERNED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_allocation_policy",
+      "target": "westside_district_wa_gsa",
+      "type": "GOVERNED_BY",
+      "properties": {}
+    },
+    {
+      "source": "kern_allocation_policy",
+      "target": "kern_water_budget",
+      "type": "DERIVED_FROM",
+      "properties": {}
+    },
+    {
+      "source": "intra_gsa_transfer",
+      "target": "kern_allocation_policy",
+      "type": "CONSTRAINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "inter_gsa_transfer",
+      "target": "kern_allocation_policy",
+      "type": "CONSTRAINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "intra_gsa_transfer",
+      "target": "chronic_gw_levels_minimum_threshold",
+      "type": "CONSTRAINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "inter_gsa_transfer",
+      "target": "land_subsidence_minimum_threshold",
+      "type": "CONSTRAINED_BY",
+      "properties": {}
+    },
+    {
+      "source": "intra_gsa_transfer",
+      "target": "well_metering",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "inter_gsa_transfer",
+      "target": "extraction_reporting",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "intra_gsa_transfer",
+      "target": "gsa_notification",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "inter_gsa_transfer",
+      "target": "annual_reporting",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "intra_gsa_transfer",
+      "target": "transfer_accounting",
+      "type": "REQUIRES",
+      "properties": {}
+    },
+    {
+      "source": "well_metering",
+      "target": "transfer_type_groundwater",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "extraction_reporting",
+      "target": "transfer_type_groundwater",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "gsa_notification",
+      "target": "transfer_type_groundwater",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "annual_reporting",
+      "target": "transfer_type_groundwater",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "transfer_accounting",
+      "target": "transfer_type_groundwater",
+      "type": "APPLIES_TO",
+      "properties": {}
+    },
+    {
+      "source": "kern_water_budget",
+      "target": "north_basin_hcm_area",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "kern_water_budget",
+      "target": "western_fold_belt_hcm_area",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "kern_water_budget",
+      "target": "kern_river_fan_hcm_area",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "kern_water_budget",
+      "target": "south_basin_hcm_area",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "kern_water_budget",
+      "target": "east_margin_hcm_area",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "kern_water_budget",
+      "target": "poso_zone",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "kern_water_budget",
+      "target": "westside_south_zone",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "kern_water_budget",
+      "target": "kern_river_zone",
+      "type": "EVALUATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "statute_10735.8",
+      "target": "shafter_wasco_id_gsa",
+      "type": "AUTHORIZES",
+      "properties": {}
+    },
+    {
+      "source": "statute_5200",
+      "target": "shafter_wasco_id_gsa",
+      "type": "AUTHORIZES",
+      "properties": {}
+    },
+    {
+      "source": "statute_10723.8",
+      "target": "shafter_wasco_id_gsa",
+      "type": "AUTHORIZES",
+      "properties": {}
+    },
+    {
+      "source": "statute_10726.4",
+      "target": "shafter_wasco_id_gsa",
+      "type": "AUTHORIZES",
+      "properties": {}
+    },
+    {
+      "source": "statute_10733.6",
+      "target": "shafter_wasco_id_gsa",
+      "type": "AUTHORIZES",
+      "properties": {}
+    },
+    {
+      "source": "statute_10733.4",
+      "target": "shafter_wasco_id_gsa",
+      "type": "AUTHORIZES",
+      "properties": {}
+    },
+    {
+      "source": "statute_10733.8",
+      "target": "shafter_wasco_id_gsa",
+      "type": "AUTHORIZES",
+      "properties": {}
+    },
+    {
+      "source": "statute_10920",
+      "target": "shafter_wasco_id_gsa",
+      "type": "AUTHORIZES",
+      "properties": {}
+    },
+    {
+      "source": "statute_1433.1",
+      "target": "shafter_wasco_id_gsa",
+      "type": "AUTHORIZES",
+      "properties": {}
+    },
+    {
+      "source": "statute_10720.8",
+      "target": "shafter_wasco_id_gsa",
+      "type": "AUTHORIZES",
+      "properties": {}
+    }
+  ]
+}

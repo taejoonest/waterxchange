@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.env
+*.db
+.DS_Store
+*.xcuserstate
+xcuserdata/
+
+# Large binary files
+Kern County Subbasin Groundwater Sustainability Plan 2025 - Clean - Appendices.pdf
