@@ -10,7 +10,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from contextlib import asynccontextmanager
 
-from api import auth, orders, market, chat, balance
+from api import auth, orders, market, chat, balance, monitoring
 from core.config import settings
 from core.database import create_tables
 from services.knowledge_graph import SGMAKnowledgeGraph
@@ -50,12 +50,17 @@ app.include_router(orders.router, prefix="/orders", tags=["Orders"])
 app.include_router(market.router, prefix="/market", tags=["Market"])
 app.include_router(chat.router, prefix="/chat", tags=["SGMA Chat"])
 app.include_router(balance.router, prefix="/balance", tags=["Balance"])
+app.include_router(monitoring.router, prefix="/monitoring", tags=["Monitoring"])
 
 WEBSITE_DIR = Path(__file__).resolve().parent.parent / "website"
 
 @app.get("/", response_class=FileResponse)
 async def root():
     return FileResponse(WEBSITE_DIR / "index.html")
+
+@app.get("/monitor", response_class=FileResponse)
+async def monitoring_page():
+    return FileResponse(WEBSITE_DIR / "monitoring.html")
 
 @app.get("/api")
 async def api_info():

@@ -1,0 +1,90 @@
+[
+  {
+    "id": "kern_river_fan",
+    "name": "Kern River Fan",
+    "center": [35.38, -119.05],
+    "subsidence_rate_ft_yr": 0.022,
+    "subsidence_mt_ft": 0.27,
+    "gw_level_decline_ft_yr": -3.7,
+    "risk_level": "low",
+    "source": "GSP Table 13-3, p.681",
+    "boundary": [[35.45, -119.15], [35.45, -118.95], [35.31, -118.95], [35.31, -119.15]]
+  },
+  {
+    "id": "north_basin",
+    "name": "North Basin",
+    "center": [35.52, -119.50],
+    "subsidence_rate_ft_yr": 0.059,
+    "subsidence_mt_ft": 0.85,
+    "gw_level_decline_ft_yr": -5.2,
+    "risk_level": "high",
+    "source": "GSP Table 13-3, p.681",
+    "boundary": [[35.60, -119.65], [35.60, -119.35], [35.44, -119.35], [35.44, -119.65]]
+  },
+  {
+    "id": "south_basin",
+    "name": "South Basin",
+    "center": [35.20, -119.10],
+    "subsidence_rate_ft_yr": 0.037,
+    "subsidence_mt_ft": 0.48,
+    "gw_level_decline_ft_yr": -4.9,
+    "risk_level": "moderate",
+    "source": "GSP Table 13-3, p.681",
+    "boundary": [[35.28, -119.25], [35.28, -118.95], [35.12, -118.95], [35.12, -119.25]]
+  },
+  {
+    "id": "east_margin",
+    "name": "East Margin",
+    "center": [35.35, -118.75],
+    "subsidence_rate_ft_yr": 0.006,
+    "subsidence_mt_ft": 0.14,
+    "gw_level_decline_ft_yr": -6.5,
+    "risk_level": "low",
+    "source": "GSP Table 13-3, p.681",
+    "boundary": [[35.45, -118.85], [35.45, -118.65], [35.25, -118.65], [35.25, -118.85]]
+  },
+  {
+    "id": "western_fold_belt",
+    "name": "Western Fold Belt",
+    "center": [35.30, -119.55],
+    "subsidence_rate_ft_yr": 0.008,
+    "subsidence_mt_ft": 0.10,
+    "gw_level_decline_ft_yr": -4.1,
+    "risk_level": "low",
+    "source": "GSP Table 13-3, p.681",
+    "boundary": [[35.40, -119.70], [35.40, -119.40], [35.20, -119.40], [35.20, -119.70]]
+  },
+  {
+    "id": "buttonwillow",
+    "name": "Buttonwillow",
+    "center": [35.40, -119.45],
+    "subsidence_rate_ft_yr": 0.045,
+    "subsidence_mt_ft": 0.62,
+    "gw_level_decline_ft_yr": -5.8,
+    "risk_level": "high",
+    "source": "GSP Table 13-3, p.681",
+    "boundary": [[35.48, -119.55], [35.48, -119.35], [35.32, -119.35], [35.32, -119.55]]
+  },
+  {
+    "id": "lost_hills",
+    "name": "Lost Hills",
+    "center": [35.62, -119.70],
+    "subsidence_rate_ft_yr": 0.072,
+    "subsidence_mt_ft": 1.10,
+    "gw_level_decline_ft_yr": -7.1,
+    "risk_level": "critical",
+    "source": "GSP Table 13-3, p.681",
+    "boundary": [[35.70, -119.82], [35.70, -119.58], [35.54, -119.58], [35.54, -119.82]]
+  },
+  {
+    "id": "shafter_wasco",
+    "name": "Shafter-Wasco",
+    "center": [35.50, -119.25],
+    "subsidence_rate_ft_yr": 0.031,
+    "subsidence_mt_ft": 0.40,
+    "gw_level_decline_ft_yr": -4.5,
+    "risk_level": "moderate",
+    "source": "GSP Table 13-3, p.681",
+    "boundary": [[35.57, -119.35], [35.57, -119.15], [35.43, -119.15], [35.43, -119.35]]
+  }
+]

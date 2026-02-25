@@ -10,3 +10,7 @@ xcuserdata/
 
 # Large binary files
 Kern County Subbasin Groundwater Sustainability Plan 2025 - Clean - Appendices.pdf
+
+# Raw downloaded CSVs (processed into JSON)
+data/monitoring/enterprise_wells.csv
+data/monitoring/wcr_wells.csv

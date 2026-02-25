@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WaterXchange — Monitoring Dashboard</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #0b1d3a; --blue: #1a6fc4; --teal: #0e9aa7; --sky: #e8f4f8;
+      --white: #ffffff; --gray-50: #f8fafc; --gray-100: #f1f5f9; --gray-200: #e2e8f0;
+      --gray-400: #94a3b8; --gray-600: #475569; --gray-800: #1e293b;
+      --green: #22c55e; --amber: #f59e0b; --red: #ef4444; --orange: #f97316;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--gray-800); background: var(--gray-50);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0.75rem 2rem; display: flex; align-items: center; justify-content: space-between;
+      background: rgba(11, 29, 58, 0.95); backdrop-filter: blur(12px);
+    }
+    .nav-logo { font-size: 1.25rem; font-weight: 700; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--teal); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+    .nav-links a {
+      color: var(--gray-200); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--teal); }
+
+    /* HEADER */
+    .page-header {
+      padding: 5rem 2rem 1.5rem; background: linear-gradient(160deg, var(--navy), #134074);
+      color: var(--white);
+    }
+    .page-header h1 { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em; }
+    .page-header p { color: var(--gray-400); font-size: 0.95rem; margin-top: 0.3rem; }
+
+    /* STATS BAR */
+    .stats-bar {
+      display: flex; gap: 1rem; padding: 1rem 2rem; background: var(--white);
+      border-bottom: 1px solid var(--gray-200); flex-wrap: wrap;
+    }
+    .stat-pill {
+      display: flex; align-items: center; gap: 0.5rem;
+      background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 10px;
+      padding: 0.6rem 1rem; flex: 1; min-width: 160px;
+    }
+    .stat-pill .num { font-size: 1.25rem; font-weight: 800; color: var(--navy); }
+    .stat-pill .label { font-size: 0.75rem; color: var(--gray-600); }
+
+    /* LAYOUT */
+    .dashboard { display: flex; height: calc(100vh - 180px); }
+    .sidebar {
+      width: 380px; min-width: 380px; overflow-y: auto; background: var(--white);
+      border-right: 1px solid var(--gray-200); padding: 1rem;
+    }
+    .map-container { flex: 1; position: relative; }
+    #map { width: 100%; height: 100%; }
+
+    /* SIDEBAR PANELS */
+    .panel { margin-bottom: 1rem; }
+    .panel-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.6rem 0; border-bottom: 2px solid var(--gray-200); margin-bottom: 0.75rem; cursor: pointer;
+    }
+    .panel-header h3 { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--navy); }
+    .panel-header .badge {
+      font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 100px;
+    }
+
+    /* LAYER TOGGLES */
+    .layer-toggle {
+      display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.65rem;
+      border-radius: 8px; cursor: pointer; transition: background 0.15s;
+      font-size: 0.85rem; color: var(--gray-800);
+    }
+    .layer-toggle:hover { background: var(--gray-50); }
+    .layer-toggle input { accent-color: var(--teal); width: 16px; height: 16px; }
+    .layer-toggle .dot {
+      width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+    }
+
+    /* ZONE CARDS */
+    .zone-card {
+      background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 10px;
+      padding: 0.75rem; margin-bottom: 0.5rem; transition: all 0.2s; cursor: pointer;
+    }
+    .zone-card:hover { border-color: var(--teal); transform: translateX(2px); }
+    .zone-card .zone-name { font-size: 0.85rem; font-weight: 700; color: var(--navy); margin-bottom: 0.35rem; }
+    .zone-card .zone-row {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.78rem; color: var(--gray-600); padding: 0.15rem 0;
+    }
+    .zone-card .zone-value { font-weight: 700; }
+
+    /* RISK BADGES */
+    .risk-badge {
+      display: inline-block; font-size: 0.65rem; font-weight: 700; padding: 0.1rem 0.45rem;
+      border-radius: 4px; text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .risk-critical { background: rgba(239,68,68,0.15); color: var(--red); }
+    .risk-high { background: rgba(249,115,22,0.15); color: var(--orange); }
+    .risk-moderate { background: rgba(245,158,11,0.15); color: var(--amber); }
+    .risk-low { background: rgba(34,197,94,0.15); color: var(--green); }
+    .risk-good { background: rgba(34,197,94,0.15); color: var(--green); }
+    .risk-warning { background: rgba(245,158,11,0.15); color: var(--amber); }
+    .risk-poor { background: rgba(239,68,68,0.15); color: var(--red); }
+
+    /* PROGRESS BAR */
+    .bar-container {
+      width: 100%; height: 6px; background: var(--gray-200); border-radius: 3px; overflow: hidden; margin-top: 0.2rem;
+    }
+    .bar-fill { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
+
+    /* LEGEND */
+    .legend {
+      position: absolute; bottom: 1.5rem; right: 1rem; z-index: 800;
+      background: rgba(255,255,255,0.95); border-radius: 10px; padding: 0.75rem 1rem;
+      border: 1px solid var(--gray-200); font-size: 0.75rem; box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    }
+    .legend h4 { font-size: 0.7rem; font-weight: 700; color: var(--navy); margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .legend-item { display: flex; align-items: center; gap: 0.4rem; padding: 0.15rem 0; color: var(--gray-600); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .legend-rect { width: 16px; height: 10px; border-radius: 2px; flex-shrink: 0; opacity: 0.6; }
+
+    /* LOADING */
+    .loading-overlay {
+      position: absolute; inset: 0; background: rgba(248,250,252,0.9);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 900; font-size: 0.9rem; color: var(--gray-600);
+    }
+    .spinner {
+      width: 28px; height: 28px; border: 3px solid var(--gray-200);
+      border-top-color: var(--teal); border-radius: 50%;
+      animation: spin 0.8s linear infinite; margin-right: 0.75rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 900px) {
+      .dashboard { flex-direction: column; height: auto; }
+      .sidebar { width: 100%; min-width: auto; max-height: 50vh; border-right: none; border-bottom: 1px solid var(--gray-200); }
+      .map-container { height: 50vh; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Water<span>X</span>change</a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/monitor" class="active">Monitoring</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <h1>Kern County Groundwater Monitoring</h1>
+  <p>12,744 wells from DWR Well Completion Reports &middot; Subsidence &amp; water quality from Kern County GSP 2025</p>
+</div>
+
+<div class="stats-bar" id="statsBar">
+  <div class="stat-pill"><div><div class="num" id="statWells">—</div><div class="label">Total Wells</div></div></div>
+  <div class="stat-pill"><div><div class="num" id="statIrrigation">—</div><div class="label">Irrigation Wells</div></div></div>
+  <div class="stat-pill"><div><div class="num" id="statDomestic">—</div><div class="label">Domestic Wells</div></div></div>
+  <div class="stat-pill"><div><div class="num" id="statMonitoring">—</div><div class="label">Monitoring Wells</div></div></div>
+  <div class="stat-pill"><div><div class="num" id="statSubsidence">—</div><div class="label">Subsidence Zones at Risk</div></div></div>
+  <div class="stat-pill"><div><div class="num" id="statQuality">—</div><div class="label">Water Quality Alerts</div></div></div>
+</div>
+
+<div class="dashboard">
+  <div class="sidebar">
+
+    <!-- LAYER CONTROLS -->
+    <div class="panel">
+      <div class="panel-header"><h3>Map Layers</h3></div>
+      <label class="layer-toggle">
+        <input type="checkbox" id="toggleWells" checked>
+        <span class="dot" style="background: var(--blue);"></span> Wells (clustered)
+      </label>
+      <label class="layer-toggle">
+        <input type="checkbox" id="toggleSubsidence" checked>
+        <span class="dot" style="background: var(--red);"></span> Subsidence Zones
+      </label>
+      <label class="layer-toggle">
+        <input type="checkbox" id="toggleQuality" checked>
+        <span class="dot" style="background: var(--amber);"></span> Water Quality Zones
+      </label>
+    </div>
+
+    <!-- WELL TYPE FILTER -->
+    <div class="panel">
+      <div class="panel-header"><h3>Filter by Well Type</h3></div>
+      <label class="layer-toggle"><input type="checkbox" class="well-filter" value="all" checked> <span class="dot" style="background: var(--gray-400);"></span> All Types</label>
+      <label class="layer-toggle"><input type="checkbox" class="well-filter" value="Irrigation"> <span class="dot" style="background: #22c55e;"></span> Irrigation</label>
+      <label class="layer-toggle"><input type="checkbox" class="well-filter" value="Domestic"> <span class="dot" style="background: #3b82f6;"></span> Domestic</label>
+      <label class="layer-toggle"><input type="checkbox" class="well-filter" value="Monitoring"> <span class="dot" style="background: #a855f7;"></span> Monitoring</label>
+      <label class="layer-toggle"><input type="checkbox" class="well-filter" value="Public Supply"> <span class="dot" style="background: #06b6d4;"></span> Public Supply</label>
+      <label class="layer-toggle"><input type="checkbox" class="well-filter" value="Industrial"> <span class="dot" style="background: #f97316;"></span> Industrial</label>
+    </div>
+
+    <!-- SUBSIDENCE -->
+    <div class="panel" id="subsidencePanel">
+      <div class="panel-header">
+        <h3>Land Subsidence Risk</h3>
+        <span class="badge risk-high" id="subsidenceBadge">Loading</span>
+      </div>
+      <div id="subsidenceCards"></div>
+    </div>
+
+    <!-- WATER QUALITY -->
+    <div class="panel" id="qualityPanel">
+      <div class="panel-header">
+        <h3>Water Quality</h3>
+        <span class="badge risk-warning" id="qualityBadge">Loading</span>
+      </div>
+      <div id="qualityCards"></div>
+    </div>
+
+  </div>
+
+  <div class="map-container">
+    <div id="map"></div>
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="spinner"></div> Loading 12,744 wells...
+    </div>
+    <div class="legend">
+      <h4>Well Types</h4>
+      <div class="legend-item"><span class="legend-dot" style="background:#22c55e;"></span> Irrigation</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#3b82f6;"></span> Domestic</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#a855f7;"></span> Monitoring</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#06b6d4;"></span> Public Supply</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#f97316;"></span> Industrial</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#94a3b8;"></span> Other/Unknown</div>
+      <h4 style="margin-top:0.6rem;">Subsidence Risk</h4>
+      <div class="legend-item"><span class="legend-rect" style="background:#ef4444;"></span> Critical</div>
+      <div class="legend-item"><span class="legend-rect" style="background:#f97316;"></span> High</div>
+      <div class="legend-item"><span class="legend-rect" style="background:#f59e0b;"></span> Moderate</div>
+      <div class="legend-item"><span class="legend-rect" style="background:#22c55e;"></span> Low</div>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script>
+(function() {
+  const WELL_COLORS = {
+    'Irrigation': '#22c55e',
+    'Domestic': '#3b82f6',
+    'Monitoring': '#a855f7',
+    'Public Supply': '#06b6d4',
+    'Industrial': '#f97316',
+    'Other': '#94a3b8',
+    'Unknown': '#94a3b8',
+  };
+  const RISK_COLORS = { critical: '#ef4444', high: '#f97316', moderate: '#f59e0b', low: '#22c55e' };
+  const QUALITY_COLORS = { poor: '#ef4444', warning: '#f59e0b', good: '#22c55e' };
+
+  function getWellColor(use) {
+    for (const [key, color] of Object.entries(WELL_COLORS)) {
+      if ((use || '').toLowerCase().includes(key.toLowerCase())) return color;
+    }
+    return WELL_COLORS.Unknown;
+  }
+
+  // Init map centered on Kern County
+  const map = L.map('map', { zoomControl: true }).setView([35.35, -119.2], 10);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap &copy; CARTO',
+    maxZoom: 19,
+  }).addTo(map);
+
+  let wellCluster = L.markerClusterGroup({
+    maxClusterRadius: 50,
+    spiderfyOnMaxZoom: true,
+    showCoverageOnHover: false,
+    iconCreateFunction: function(cluster) {
+      const count = cluster.getChildCount();
+      let size = 'small', r = 30;
+      if (count > 100) { size = 'large'; r = 50; }
+      else if (count > 30) { size = 'medium'; r = 40; }
+      return L.divIcon({
+        html: '<div style="background:rgba(26,111,196,0.85);color:#fff;border-radius:50%;width:'+r+'px;height:'+r+'px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.3);">' + count + '</div>',
+        className: '',
+        iconSize: [r, r],
+      });
+    }
+  });
+  map.addLayer(wellCluster);
+
+  let subsidenceLayers = L.layerGroup().addTo(map);
+  let qualityLayers = L.layerGroup().addTo(map);
+  let allWells = [];
+  let allMarkers = [];
+
+  // FETCH DATA
+  async function loadData() {
+    const [wellsRes, subRes, qualRes] = await Promise.all([
+      fetch('/monitoring/wells').then(r => r.json()),
+      fetch('/monitoring/subsidence').then(r => r.json()),
+      fetch('/monitoring/water-quality').then(r => r.json()),
+    ]);
+
+    allWells = wellsRes.wells;
+    renderWells(allWells);
+    renderSubsidence(subRes.zones);
+    renderWaterQuality(qualRes.zones);
+    updateStats(wellsRes, subRes.zones, qualRes.zones);
+    document.getElementById('loadingOverlay').style.display = 'none';
+  }
+
+  function renderWells(wells) {
+    wellCluster.clearLayers();
+    allMarkers = [];
+    for (const w of wells) {
+      if (!w.lat || !w.lng) continue;
+      const color = getWellColor(w.use);
+      const marker = L.circleMarker([w.lat, w.lng], {
+        radius: 5, fillColor: color, color: '#fff', weight: 1, opacity: 0.8, fillOpacity: 0.8,
+      });
+      marker.wellData = w;
+      const depthStr = w.depth_ft ? `${w.depth_ft.toLocaleString()} ft` : 'N/A';
+      const wlStr = w.water_level_ft ? `${w.water_level_ft} ft` : 'N/A';
+      marker.bindPopup(`
+        <div style="font-family:-apple-system,sans-serif;min-width:200px;">
+          <div style="font-weight:700;font-size:13px;margin-bottom:4px;">${w.id || 'Well'}</div>
+          <div style="font-size:11px;color:#475569;margin-bottom:6px;">${w.city || ''} ${w.trs ? '· ' + w.trs : ''}</div>
+          <table style="font-size:12px;width:100%;border-collapse:collapse;">
+            <tr><td style="color:#64748b;padding:2px 8px 2px 0;">Type</td><td style="font-weight:600;">${w.use || 'Unknown'}</td></tr>
+            <tr><td style="color:#64748b;padding:2px 8px 2px 0;">Depth</td><td style="font-weight:600;">${depthStr}</td></tr>
+            <tr><td style="color:#64748b;padding:2px 8px 2px 0;">Water Level</td><td style="font-weight:600;">${wlStr}</td></tr>
+            <tr><td style="color:#64748b;padding:2px 8px 2px 0;">Coordinates</td><td style="font-weight:600;">${w.lat.toFixed(4)}, ${w.lng.toFixed(4)}</td></tr>
+          </table>
+        </div>
+      `);
+      allMarkers.push(marker);
+      wellCluster.addLayer(marker);
+    }
+  }
+
+  function renderSubsidence(zones) {
+    subsidenceLayers.clearLayers();
+    const html = zones.map(z => {
+      const color = RISK_COLORS[z.risk_level] || '#94a3b8';
+      if (z.boundary) {
+        const rect = L.polygon(z.boundary, {
+          color: color, fillColor: color, fillOpacity: 0.15, weight: 2, dashArray: '5,5',
+        });
+        rect.bindPopup(`
+          <div style="font-family:-apple-system,sans-serif;">
+            <div style="font-weight:700;font-size:13px;">${z.name}</div>
+            <div style="font-size:11px;color:#64748b;margin:4px 0;">Subsidence Zone · ${z.source}</div>
+            <table style="font-size:12px;">
+              <tr><td style="color:#64748b;padding:2px 6px 2px 0;">Rate</td><td style="font-weight:600;">${z.subsidence_rate_ft_yr} ft/yr</td></tr>
+              <tr><td style="color:#64748b;padding:2px 6px 2px 0;">GW Decline</td><td style="font-weight:600;">${z.gw_level_decline_ft_yr} ft/yr</td></tr>
+              <tr><td style="color:#64748b;padding:2px 6px 2px 0;">Risk Level</td><td><span style="font-weight:700;color:${color};text-transform:uppercase;">${z.risk_level}</span></td></tr>
+            </table>
+          </div>
+        `);
+        subsidenceLayers.addLayer(rect);
+      }
+      const pct = Math.min((z.subsidence_rate_ft_yr / 0.08) * 100, 100);
+      return `
+        <div class="zone-card" onclick="flyTo(${z.center[0]},${z.center[1]},12)">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div class="zone-name">${z.name}</div>
+            <span class="risk-badge risk-${z.risk_level}">${z.risk_level}</span>
+          </div>
+          <div class="zone-row"><span>Subsidence Rate</span><span class="zone-value">${z.subsidence_rate_ft_yr} ft/yr</span></div>
+          <div class="bar-container"><div class="bar-fill" style="width:${pct}%;background:${color};"></div></div>
+          <div class="zone-row"><span>GW Level Decline</span><span class="zone-value">${z.gw_level_decline_ft_yr} ft/yr</span></div>
+        </div>`;
+    }).join('');
+    document.getElementById('subsidenceCards').innerHTML = html;
+    const critical = zones.filter(z => z.risk_level === 'critical' || z.risk_level === 'high').length;
+    const badge = document.getElementById('subsidenceBadge');
+    badge.textContent = `${critical} at risk`;
+    badge.className = 'badge ' + (critical > 0 ? 'risk-high' : 'risk-low');
+  }
+
+  function renderWaterQuality(zones) {
+    qualityLayers.clearLayers();
+    const html = zones.map(z => {
+      const color = QUALITY_COLORS[z.status] || '#94a3b8';
+      const marker = L.circleMarker(z.center, {
+        radius: 18, fillColor: color, color: color, weight: 2, fillOpacity: 0.2,
+      });
+      marker.bindPopup(`
+        <div style="font-family:-apple-system,sans-serif;">
+          <div style="font-weight:700;font-size:13px;">${z.name}</div>
+          <div style="font-size:11px;color:#64748b;margin:4px 0;">Water Quality · ${z.source}</div>
+          <table style="font-size:12px;">
+            <tr><td style="color:#64748b;padding:2px 6px 2px 0;">TDS</td><td style="font-weight:600;">${z.tds_mg_l} mg/L <span style="color:#94a3b8;">/ ${z.tds_threshold}</span></td></tr>
+            <tr><td style="color:#64748b;padding:2px 6px 2px 0;">Nitrate</td><td style="font-weight:600;">${z.nitrate_mg_l} mg/L <span style="color:#94a3b8;">/ ${z.nitrate_threshold}</span></td></tr>
+            <tr><td style="color:#64748b;padding:2px 6px 2px 0;">Arsenic</td><td style="font-weight:600;">${z.arsenic_ug_l} µg/L <span style="color:#94a3b8;">/ ${z.arsenic_threshold}</span></td></tr>
+          </table>
+          ${z.constituents_of_concern.length ? '<div style="margin-top:6px;font-size:11px;color:#ef4444;font-weight:600;">⚠ Concerns: ' + z.constituents_of_concern.join(', ') + '</div>' : ''}
+        </div>
+      `);
+      qualityLayers.addLayer(marker);
+
+      const tdsPct = Math.min((z.tds_mg_l / z.tds_threshold) * 100, 100);
+      const nitPct = Math.min((z.nitrate_mg_l / z.nitrate_threshold) * 100, 100);
+      const concerns = z.constituents_of_concern.length
+        ? `<div style="font-size:0.72rem;color:var(--red);margin-top:0.2rem;">⚠ ${z.constituents_of_concern.join(', ')}</div>` : '';
+      return `
+        <div class="zone-card" onclick="flyTo(${z.center[0]},${z.center[1]},12)">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div class="zone-name">${z.name}</div>
+            <span class="risk-badge risk-${z.status}">${z.status}</span>
+          </div>
+          <div class="zone-row"><span>TDS</span><span class="zone-value">${z.tds_mg_l} / ${z.tds_threshold} mg/L</span></div>
+          <div class="bar-container"><div class="bar-fill" style="width:${tdsPct}%;background:${tdsPct > 90 ? '#ef4444' : tdsPct > 70 ? '#f59e0b' : '#22c55e'};"></div></div>
+          <div class="zone-row"><span>Nitrate</span><span class="zone-value">${z.nitrate_mg_l} / ${z.nitrate_threshold} mg/L</span></div>
+          <div class="bar-container"><div class="bar-fill" style="width:${nitPct}%;background:${nitPct > 90 ? '#ef4444' : nitPct > 70 ? '#f59e0b' : '#22c55e'};"></div></div>
+          ${concerns}
+        </div>`;
+    }).join('');
+    document.getElementById('qualityCards').innerHTML = html;
+    const alerts = zones.filter(z => z.status === 'poor' || z.status === 'warning').length;
+    const badge = document.getElementById('qualityBadge');
+    badge.textContent = `${alerts} alert${alerts !== 1 ? 's' : ''}`;
+    badge.className = 'badge ' + (alerts > 0 ? 'risk-warning' : 'risk-good');
+  }
+
+  function updateStats(wellsRes, subZones, qualZones) {
+    const wells = wellsRes.wells;
+    const count = (type) => wells.filter(w => (w.use || '').toLowerCase().includes(type)).length;
+    document.getElementById('statWells').textContent = wells.length.toLocaleString();
+    document.getElementById('statIrrigation').textContent = count('irrigation').toLocaleString();
+    document.getElementById('statDomestic').textContent = count('domestic').toLocaleString();
+    document.getElementById('statMonitoring').textContent = count('monitoring').toLocaleString();
+    document.getElementById('statSubsidence').textContent = subZones.filter(z => z.risk_level === 'critical' || z.risk_level === 'high').length;
+    document.getElementById('statQuality').textContent = qualZones.filter(z => z.status !== 'good').length;
+  }
+
+  // LAYER TOGGLES
+  document.getElementById('toggleWells').addEventListener('change', function() {
+    this.checked ? map.addLayer(wellCluster) : map.removeLayer(wellCluster);
+  });
+  document.getElementById('toggleSubsidence').addEventListener('change', function() {
+    this.checked ? map.addLayer(subsidenceLayers) : map.removeLayer(subsidenceLayers);
+  });
+  document.getElementById('toggleQuality').addEventListener('change', function() {
+    this.checked ? map.addLayer(qualityLayers) : map.removeLayer(qualityLayers);
+  });
+
+  // WELL TYPE FILTER
+  document.querySelectorAll('.well-filter').forEach(cb => {
+    cb.addEventListener('change', function() {
+      if (this.value === 'all' && this.checked) {
+        document.querySelectorAll('.well-filter').forEach(c => { c.checked = c.value === 'all'; });
+        renderWells(allWells);
+        return;
+      }
+      document.querySelector('.well-filter[value="all"]').checked = false;
+      const checked = Array.from(document.querySelectorAll('.well-filter:checked')).map(c => c.value).filter(v => v !== 'all');
+      if (checked.length === 0) {
+        document.querySelector('.well-filter[value="all"]').checked = true;
+        renderWells(allWells);
+      } else {
+        const filtered = allWells.filter(w => checked.some(t => (w.use || '').toLowerCase().includes(t.toLowerCase())));
+        renderWells(filtered);
+      }
+    });
+  });
+
+  // Fly to location
+  window.flyTo = function(lat, lng, zoom) {
+    map.flyTo([lat, lng], zoom || 12, { duration: 1 });
+  };
+
+  loadData();
+})();
+</script>
+</body>
+</html>
