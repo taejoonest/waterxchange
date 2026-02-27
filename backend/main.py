@@ -10,7 +10,7 @@ from fastapi.responses import FileResponse
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from api import auth, orders, market, chat, balance, monitoring
+from api import auth, orders, market, chat, balance, monitoring, hardware
 from api import transfers as transfers_api
 from core.config import settings
 from core.database import create_tables
@@ -52,6 +52,7 @@ app.include_router(chat.router, prefix="/chat", tags=["SGMA Chat"])
 app.include_router(balance.router, prefix="/balance", tags=["Balance"])
 app.include_router(monitoring.router, prefix="/monitoring", tags=["Monitoring"])
 app.include_router(transfers_api.router, prefix="/transfers", tags=["Transfers"])
+app.include_router(hardware.router, prefix="/hardware", tags=["Hardware"])
 
 
 @app.get("/")
@@ -71,11 +72,11 @@ async def monitor_page():
     return FileResponse(WEBSITE_DIR / "monitoring.html")
 
 
-@app.get("/pipeline")
-async def pipeline_page():
-    return FileResponse(WEBSITE_DIR / "pipeline.html")
+@app.get("/transfer")
+async def transfer_page():
+    return FileResponse(WEBSITE_DIR / "transfer.html")
 
 
-@app.get("/tracker")
-async def tracker_page():
-    return FileResponse(WEBSITE_DIR / "tracker.html")
+@app.get("/hardware")
+async def hardware_page():
+    return FileResponse(WEBSITE_DIR / "hardware.html")

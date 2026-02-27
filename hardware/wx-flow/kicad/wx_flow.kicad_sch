@@ -1,0 +1,190 @@
+(kicad_sch (version 20230121) (generator waterxchange)
+
+  (uuid f74f50a8-7b1c-4e2d-9a3e-2c5d8f0b1e44)
+
+  (paper "A3")
+
+  (title_block
+    (title "WX-Flow — Aquifer Flow + Quality Probe")
+    (date "2026-02-23")
+    (rev "1.0")
+    (company "WaterXchange")
+    (comment 1 "ESP32-S3 + 2×ADS1115 + SX1276 + SIM7000G + Heat Pulse")
+    (comment 2 "Groundwater flow velocity/direction + conductivity + level")
+  )
+
+  ;; ═══════════════════════════════════════════════════════════
+  ;; SURFACE CONTROLLER PCB
+  ;; (same as WX-Level with second ADS1115 + heater MOSFET)
+  ;; ═══════════════════════════════════════════════════════════
+
+  ;; COMPONENT: U1 — ESP32-S3-WROOM-1
+  (symbol (lib_id "RF_Module:ESP32-S3-WROOM-1") (at 100 80) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid b2000001-0001-0001-0001-000000000001)
+    (property "Reference" "U1" (at 100 60 0) (effects (font (size 1.27 1.27))))
+    (property "Value" "ESP32-S3-WROOM-1-N16R8" (at 100 62.5 0) (effects (font (size 1 1))))
+    ;; GPIO8  → SDA (I2C: ADS1115×2)
+    ;; GPIO9  → SCL
+    ;; GPIO10 → SX1276 CS
+    ;; GPIO11 → SX1276 RST
+    ;; GPIO12 → SX1276 DIO0
+    ;; GPIO35 → SX1276 MOSI
+    ;; GPIO36 → SX1276 SCK
+    ;; GPIO37 → SX1276 MISO
+    ;; GPIO17 → SIM7000G TX
+    ;; GPIO18 → SIM7000G RX
+    ;; GPIO21 → SIM7000G PWRKEY
+    ;; GPIO38 → HEATER MOSFET GATE
+    ;; GPIO4  → Battery ADC
+    ;; GPIO5  → Solar ADC
+  )
+
+  ;; COMPONENT: U2 — ADS1115 #1 (Sensors: pressure, EC, PT1000)
+  (symbol (lib_id "Analog_ADC:ADS1115IDGS") (at 160 75) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid b2000001-0002-0001-0001-000000000001)
+    (property "Reference" "U2" (at 160 65 0) (effects (font (size 1.27 1.27))))
+    (property "Value" "ADS1115 (0x48)" (at 160 67 0) (effects (font (size 1 1))))
+    ;; ADDR → GND (0x48)
+    ;; A0   → Pressure 4-20mA shunt (250Ω)
+    ;; A1   → Conductivity circuit analog output
+    ;; A2   → PT1000 Wheatstone bridge output
+  )
+
+  ;; COMPONENT: U3 — ADS1115 #2 (Thermistors N/E/S/W)
+  (symbol (lib_id "Analog_ADC:ADS1115IDGS") (at 160 110) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid b2000001-0003-0001-0001-000000000001)
+    (property "Reference" "U3" (at 160 100 0) (effects (font (size 1.27 1.27))))
+    (property "Value" "ADS1115 (0x49)" (at 160 102 0) (effects (font (size 1 1))))
+    ;; ADDR → VDD (0x49)
+    ;; A0   → Thermistor N voltage divider midpoint
+    ;; A1   → Thermistor E voltage divider midpoint
+    ;; A2   → Thermistor S voltage divider midpoint
+    ;; A3   → Thermistor W voltage divider midpoint
+  )
+
+  ;; COMPONENT: U4 — SX1276 / RFM95W LoRa
+  (symbol (lib_id "RF_Module:RFM95W-915S2") (at 50 75) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid b2000001-0004-0001-0001-000000000001)
+    (property "Reference" "U4" (at 50 63 0) (effects (font (size 1.27 1.27))))
+    (property "Value" "SX1276/RFM95W 915MHz" (at 50 65 0) (effects (font (size 1 1))))
+  )
+
+  ;; COMPONENT: U5 — SIM7000G
+  (symbol (lib_id "RF_Cellular:SIM7000G") (at 50 115) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid b2000001-0005-0001-0001-000000000001)
+    (property "Reference" "U5" (at 50 103 0) (effects (font (size 1.27 1.27))))
+    (property "Value" "SIM7000G" (at 50 105 0) (effects (font (size 1 1))))
+  )
+
+  ;; COMPONENT: U6 — CN3791 MPPT Solar Charger
+  (symbol (lib_id "Battery_Management:CN3791") (at 50 155) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid b2000001-0006-0001-0001-000000000001)
+    (property "Reference" "U6" (at 50 145 0) (effects (font (size 1.27 1.27))))
+    (property "Value" "CN3791" (at 50 147 0) (effects (font (size 1 1))))
+  )
+
+  ;; COMPONENT: U7 — AP2112K-3.3 LDO
+  (symbol (lib_id "Regulator_Linear:AP2112K-3.3") (at 100 155) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid b2000001-0007-0001-0001-000000000001)
+    (property "Reference" "U7" (at 100 148 0) (effects (font (size 1.27 1.27))))
+    (property "Value" "AP2112K-3.3" (at 100 150 0) (effects (font (size 1 1))))
+  )
+
+  ;; ═══════════════════════════════════════════════════════════
+  ;; HEATER DRIVER
+  ;; ═══════════════════════════════════════════════════════════
+  ;; Q1: IRLZ44N N-Channel MOSFET (logic-level gate)
+  ;; Gate   → ESP32 GPIO38 via 100Ω gate resistor + 10kΩ pull-down
+  ;; Drain  → Heater wire (negative terminal, via probe cable)
+  ;; Source → GND
+  ;; Heater positive → VBAT (direct from LiPo, ~3.7V)
+  ;; At 3.7V across ~6.8Ω nichrome → ~2W heat
+  (symbol (lib_id "Transistor_FET:IRLZ44N") (at 160 150) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid b2000001-0008-0001-0001-000000000001)
+    (property "Reference" "Q1" (at 162 148 0) (effects (font (size 1.27 1.27))))
+    (property "Value" "IRLZ44N" (at 162 150 0) (effects (font (size 1 1))))
+  )
+  ;; D1: 1N4001 flyback diode across heater (cathode to VBAT)
+  ;; R6: 100Ω gate resistor
+  ;; R7: 10kΩ gate pull-down (ensures heater OFF during ESP32 boot)
+
+  ;; ═══════════════════════════════════════════════════════════
+  ;; THERMISTOR VOLTAGE DIVIDERS (in probe, signals on cable)
+  ;; ═══════════════════════════════════════════════════════════
+  ;; Each thermistor: 3.3V → R_series (10kΩ) → midpoint → NTC (10kΩ@25°C) → GND
+  ;; Midpoint voltage measured by ADS1115 #2
+  ;; R8-R11: 10kΩ series resistors (0.1% tolerance for accuracy)
+
+  ;; ═══════════════════════════════════════════════════════════
+  ;; CONDUCTIVITY CIRCUIT
+  ;; ═══════════════════════════════════════════════════════════
+  ;; U8: Atlas EZO-EC (or DFRobot DFR0300)
+  ;; Probe input: 4-electrode Pt cell (BNC or bare wire from probe)
+  ;; Analog output: 0–3.0V → ADS1115 #1 A1
+  ;; VCC: 3.3V, GND
+  (symbol (lib_id "Sensor:EZO-EC") (at 200 85) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid b2000001-0009-0001-0001-000000000001)
+    (property "Reference" "U8" (at 200 77 0) (effects (font (size 1.27 1.27))))
+    (property "Value" "Atlas EZO-EC" (at 200 79 0) (effects (font (size 1 1))))
+  )
+
+  ;; ═══════════════════════════════════════════════════════════
+  ;; PT1000 RTD CIRCUIT
+  ;; ═══════════════════════════════════════════════════════════
+  ;; Wheatstone bridge: R12=R13=R14=1kΩ, R_pt1000 as fourth arm
+  ;; Bridge excitation: 3.3V
+  ;; Differential output → ADS1115 #1 A2 (single-ended, referenced to virtual ground)
+  ;; At 0°C: PT1000=1000Ω, bridge balanced, ΔV≈0
+  ;; At 25°C: PT1000≈1096.85Ω
+
+  ;; ═══════════════════════════════════════════════════════════
+  ;; PRESSURE TRANSDUCER (same as WX-Level)
+  ;; ═══════════════════════════════════════════════════════════
+  ;; R1: 250Ω 0.1% shunt, 4-20mA → 1.0–5.0V → ADS1115 #1 A0
+
+  ;; ═══════════════════════════════════════════════════════════
+  ;; CONNECTORS
+  ;; ═══════════════════════════════════════════════════════════
+  ;; J1: SMA — LoRa antenna
+  ;; J2: SMA — LTE antenna
+  ;; J3: M12 12-pin — probe cable (carries all probe signals + heater power)
+  ;;     Pin 1:  VBAT (heater +)
+  ;;     Pin 2:  Heater - (from MOSFET drain)
+  ;;     Pin 3:  3.3V (for dividers in probe)
+  ;;     Pin 4:  Thermistor N midpoint
+  ;;     Pin 5:  Thermistor E midpoint
+  ;;     Pin 6:  Thermistor S midpoint
+  ;;     Pin 7:  Thermistor W midpoint
+  ;;     Pin 8:  Conductivity probe A
+  ;;     Pin 9:  Conductivity probe B
+  ;;     Pin 10: PT1000 wire A
+  ;;     Pin 11: PT1000 wire B
+  ;;     Pin 12: GND / Shield
+  ;; J4: Screw terminal — pressure transducer (4-20mA, separate cable)
+  ;; J5: JST-PH 2-pin — LiPo battery
+  ;; J6: Barrel jack — solar panel
+
+  ;; ═══════════════════════════════════════════════════════════
+  ;; I2C BUS
+  ;; ═══════════════════════════════════════════════════════════
+  ;; SDA: ESP32 GPIO8 → ADS1115#1 SDA → ADS1115#2 SDA  (R_pullup 4.7kΩ to 3.3V)
+  ;; SCL: ESP32 GPIO9 → ADS1115#1 SCL → ADS1115#2 SCL  (R_pullup 4.7kΩ to 3.3V)
+
+  ;; ═══════════════════════════════════════════════════════════
+  ;; POWER NETS
+  ;; ═══════════════════════════════════════════════════════════
+  ;; +3V3:    AP2112K → ESP32, ADS×2, SX1276, EZO-EC, bridge excitation
+  ;; +VBAT:   LiPo → SIM7000G, heater via MOSFET, AP2112K VIN
+  ;; +VSOLAR: Panel → CN3791 VIN
+  ;; GND:     Common
+
+)

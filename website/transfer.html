@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WaterXchange — Transfer</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #0b1d3a; --blue: #1a6fc4; --teal: #0e9aa7;
+      --sky: #e8f4f8; --white: #fff;
+      --gray-50: #f8fafc; --gray-100: #f1f5f9; --gray-200: #e2e8f0;
+      --gray-400: #94a3b8; --gray-600: #475569; --gray-800: #1e293b;
+      --green: #22c55e; --amber: #f59e0b; --red: #ef4444;
+      --purple: #a855f7; --cyan: #06b6d4; --orange: #f97316;
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--gray-800); background: var(--gray-50); line-height: 1.6; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; background: rgba(11,29,58,0.95); backdrop-filter: blur(12px); }
+    .nav-logo { font-size: 1.25rem; font-weight: 700; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--teal); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--gray-200); text-decoration: none; font-size: .9rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--teal); }
+    .nav-links a.active { color: var(--teal); }
+
+    .page-header { padding: 5rem 2rem 2rem; background: linear-gradient(160deg, var(--navy), #134074); color: var(--white); }
+    .page-header .container { max-width: 1200px; margin: 0 auto; }
+    .page-header h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; }
+    .page-header p { color: var(--gray-400); font-size: .95rem; margin-top: .3rem; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .section { padding: 2.5rem 0; }
+    .section-title { font-size: 1.35rem; font-weight: 800; color: var(--navy); margin-bottom: .25rem; letter-spacing: -0.02em; }
+    .section-subtitle { font-size: .9rem; color: var(--gray-600); margin-bottom: 1.5rem; }
+    .divider { border: none; border-top: 1px solid var(--gray-200); margin: 0; }
+
+    /* ── Pipeline Visualization ─────────────────────────── */
+    .pathway-tabs { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .pathway-tab {
+      padding: .45rem 1rem; border: 2px solid var(--gray-200); border-radius: 8px;
+      background: var(--white); font-size: .8rem; font-weight: 600; cursor: pointer;
+      color: var(--gray-600); transition: all .2s; white-space: nowrap;
+    }
+    .pathway-tab:hover { border-color: var(--teal); color: var(--teal); }
+    .pathway-tab.active { border-color: var(--teal); background: var(--sky); color: var(--teal); }
+    .pathway-tab .tag { font-size: .6rem; font-weight: 700; padding: .1rem .35rem; border-radius: 3px; margin-left: .35rem; vertical-align: middle; }
+    .tag-gw { background: #dbeafe; color: #1e40af; }
+    .tag-sw { background: #e0e7ff; color: #3730a3; }
+
+    .pipeline-vis { display: flex; flex-direction: column; gap: 0; }
+    .pipeline-detail { background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; padding: 1.5rem; }
+    .pipeline-detail .pw-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap; gap: .5rem; }
+    .pipeline-detail .pw-name { font-size: 1.1rem; font-weight: 700; color: var(--navy); }
+    .pipeline-detail .pw-desc { font-size: .85rem; color: var(--gray-600); margin-bottom: 1rem; line-height: 1.6; }
+    .legal-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .legal-tag { font-size: .7rem; font-weight: 600; padding: .2rem .5rem; border-radius: 4px; background: rgba(14,154,167,.1); color: var(--teal); }
+
+    .flow-diagram { display: flex; align-items: center; gap: 0; overflow-x: auto; padding: .5rem 0; }
+    .flow-stage {
+      display: flex; flex-direction: column; align-items: center; gap: .3rem;
+      min-width: 110px; flex-shrink: 0;
+    }
+    .flow-stage .stage-box {
+      padding: .6rem .75rem; border-radius: 10px; font-size: .75rem; font-weight: 600;
+      text-align: center; line-height: 1.3; width: 110px;
+      border: 2px solid var(--gray-200); background: var(--white); color: var(--gray-800);
+      transition: all .3s;
+    }
+    .flow-stage .stage-box.gw { border-color: #93c5fd; background: #eff6ff; }
+    .flow-stage .stage-box.sw { border-color: #a5b4fc; background: #eef2ff; }
+    .flow-stage .stage-box.special { border-color: #fdba74; background: #fff7ed; }
+    .flow-stage .stage-box.decision { border-color: var(--teal); background: var(--sky); color: var(--teal); font-weight: 700; }
+    .flow-stage .stage-num { font-size: .6rem; font-weight: 700; color: var(--gray-400); }
+    .flow-arrow { font-size: 1.2rem; color: var(--gray-400); flex-shrink: 0; padding: 0 .15rem; margin-top: -.3rem; }
+    .flow-stage .stage-weight { font-size: .6rem; color: var(--gray-400); }
+
+    /* ── Transfer Form ─────────────────────────────────── */
+    .scenarios { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: .75rem; margin-bottom: 1.5rem; }
+    .scenario-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all .2s; }
+    .scenario-card:hover { border-color: var(--teal); box-shadow: 0 4px 16px rgba(14,154,167,.1); }
+    .scenario-card.active { border-color: var(--teal); background: var(--sky); }
+    .scenario-card h3 { font-size: .85rem; margin-bottom: .25rem; }
+    .scenario-card p { font-size: .75rem; color: var(--gray-600); }
+    .scenario-card .pathway-label { font-size: .65rem; font-weight: 700; color: var(--teal); margin-top: .35rem; }
+
+    .form-section { background: var(--white); border-radius: 12px; padding: 1.25rem; border: 1px solid var(--gray-200); margin-bottom: 1rem; }
+    .form-section h2 { font-size: 1rem; margin-bottom: .75rem; color: var(--navy); }
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: .6rem; }
+    .field label { display: block; font-size: .7rem; font-weight: 600; color: var(--gray-600); margin-bottom: .2rem; text-transform: uppercase; letter-spacing: .04em; }
+    .field input, .field select { width: 100%; padding: .45rem .6rem; border: 1px solid var(--gray-200); border-radius: 8px; font-size: .85rem; background: var(--gray-50); }
+    .field input:focus, .field select:focus { outline: none; border-color: var(--teal); }
+    .check-field { display: flex; align-items: center; gap: .5rem; padding: .25rem 0; }
+    .check-field input[type=checkbox] { width: 15px; height: 15px; accent-color: var(--teal); }
+    .check-field label { font-size: .8rem; text-transform: none; letter-spacing: 0; margin: 0; }
+
+    .form-toggle { display: flex; gap: .5rem; margin-bottom: 1rem; }
+    .form-toggle .toggle-btn { padding: .45rem 1.25rem; border: 2px solid var(--gray-200); border-radius: 8px; background: var(--white); font-size: .85rem; font-weight: 600; cursor: pointer; color: var(--gray-600); transition: all .2s; }
+    .form-toggle .toggle-btn.active { border-color: var(--teal); background: var(--sky); color: var(--teal); }
+    .form-toggle .toggle-btn:hover { border-color: var(--teal); }
+
+    .run-btn { display: inline-flex; align-items: center; gap: .5rem; padding: .7rem 2rem; background: var(--teal); color: var(--white); border: none; border-radius: 10px; font-size: .95rem; font-weight: 600; cursor: pointer; transition: background .2s; margin-top: .5rem; }
+    .run-btn:hover { background: #0c8690; }
+    .run-btn:disabled { opacity: .5; cursor: wait; }
+    .run-btn .spinner { display: none; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff; border-radius: 50%; animation: spin .6s linear infinite; }
+    .run-btn.loading .spinner { display: block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .hidden { display: none !important; }
+
+    /* ── Results ────────────────────────────────────────── */
+    .results { display: none; }
+    .results.visible { display: block; }
+    .decision-banner { padding: 1.25rem; border-radius: 12px; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .decision-banner.approved { background: #dcfce7; border: 1px solid #86efac; }
+    .decision-banner.conditional { background: #fef9c3; border: 1px solid #fde047; }
+    .decision-banner.denied { background: #fee2e2; border: 1px solid #fca5a5; }
+    .decision-banner .badge { padding: .3rem .65rem; border-radius: 6px; font-weight: 700; font-size: .8rem; text-transform: uppercase; }
+    .approved .badge { background: var(--green); color: white; }
+    .conditional .badge { background: var(--amber); color: white; }
+    .denied .badge { background: var(--red); color: white; }
+    .decision-banner .score { font-size: 1.3rem; font-weight: 700; }
+    .decision-banner .pathway-info { font-size: .8rem; color: var(--gray-600); }
+    .decision-banner .pathway-name { font-weight: 700; color: var(--teal); }
+
+    .stages-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: .75rem; margin-bottom: 1.25rem; }
+    .stage-card { background: var(--white); border-radius: 10px; padding: .85rem; border: 1px solid var(--gray-200); }
+    .stage-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: .4rem; }
+    .stage-card .name { font-weight: 600; font-size: .85rem; }
+    .stage-card .finding { padding: .12rem .4rem; border-radius: 4px; font-size: .7rem; font-weight: 600; }
+    .finding-PASS { background: #dcfce7; color: #166534; }
+    .finding-CONDITIONAL { background: #fef9c3; color: #854d0e; }
+    .finding-FAIL { background: #fee2e2; color: #991b1b; }
+    .stage-card .reasoning { font-size: .75rem; color: var(--gray-600); margin-bottom: .4rem; }
+    .stage-card .score-bar { height: 4px; background: var(--gray-200); border-radius: 2px; overflow: hidden; }
+    .stage-card .score-fill { height: 100%; border-radius: 2px; transition: width .5s ease; }
+
+    .detail-section { background: var(--white); border-radius: 12px; padding: 1rem; border: 1px solid var(--gray-200); margin-bottom: .75rem; }
+    .detail-section h3 { font-size: .9rem; margin-bottom: .6rem; color: var(--navy); }
+    .detail-section ul { padding-left: 1.25rem; }
+    .detail-section li { font-size: .8rem; margin-bottom: .3rem; color: var(--gray-600); }
+    .report-box { background: var(--navy); color: #e2e8f0; border-radius: 12px; padding: 1.25rem; font-family: 'SF Mono', 'Fira Code', monospace; font-size: .75rem; line-height: 1.7; white-space: pre-wrap; max-height: 500px; overflow-y: auto; }
+
+    @media (max-width: 768px) {
+      .nav-links { gap: 1.25rem; }
+      .flow-diagram { gap: 0; }
+      .form-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Water<span>X</span>change</a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/monitor">Monitoring</a></li>
+    <li><a href="/transfer" class="active">Transfer</a></li>
+    <li><a href="/hardware">Hardware</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="container">
+    <h1>Water Transfer Pipeline</h1>
+    <p>10 regulatory pathways &middot; Auto-routed compliance analysis for California groundwater and surface water transfers</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!--  SECTION 1: Pipeline Visualization                      -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <div class="section" id="vizSection">
+    <div class="section-title">Regulatory Pathways</div>
+    <div class="section-subtitle">Each transfer type follows a different compliance pipeline based on California water law</div>
+
+    <div class="pathway-tabs" id="pathwayTabs"></div>
+    <div class="pipeline-detail" id="pipelineDetail"></div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!--  SECTION 2: Transfer Form                               -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <div class="section" id="formSection">
+    <div class="section-title">Run a Transfer</div>
+    <div class="section-subtitle">Select a demo scenario or fill in the form — the auto-router detects the correct pathway</div>
+
+    <div class="form-toggle">
+      <button class="toggle-btn active" id="gwToggle" onclick="setPipeline('gw')">Groundwater</button>
+      <button class="toggle-btn" id="swToggle" onclick="setPipeline('sw')">Surface Water</button>
+      <button class="toggle-btn" id="allToggle" onclick="setPipeline('all')">All Pathways</button>
+    </div>
+
+    <div class="scenarios" id="scenarios"></div>
+
+    <!-- GW FORM -->
+    <div id="gwForm">
+      <div class="form-section">
+        <h2>Seller</h2>
+        <div class="form-grid">
+          <div class="field"><label>Entity Type</label><select id="gs_type"><option value="farmer">Farmer</option><option value="water_district">Water District</option><option value="municipality">Municipality</option><option value="water_bank">Water Bank</option><option value="industrial">Industrial</option><option value="gsa">GSA</option></select></div>
+          <div class="field"><label>Name</label><input id="gs_name"></div>
+          <div class="field"><label>GSA</label><input id="gs_gsa"></div>
+          <div class="field"><label>Basin</label><input id="gs_basin" value="Kern County"></div>
+          <div class="field"><label>Allocation (AF)</label><input id="gs_alloc" type="number"></div>
+          <div class="field"><label>Used (AF)</label><input id="gs_used" type="number"></div>
+          <div class="field"><label>Banked Balance (AF)</label><input id="gs_banked" type="number" value="0"></div>
+          <div class="field"><label>Extraction</label><select id="gs_method"><option value="metered">Metered</option><option value="self_reported">Self-Reported</option></select></div>
+          <div class="field"><label>Well Lat</label><input id="gs_lat" type="number" step="0.001"></div>
+          <div class="field"><label>Well Lng</label><input id="gs_lng" type="number" step="0.001"></div>
+          <div class="field"><label>Well Depth (ft)</label><input id="gs_depth" type="number"></div>
+          <div class="field"><label>Water Level (ft)</label><input id="gs_wl" type="number"></div>
+          <div class="field"><label>Nitrate (mg/L)</label><input id="gs_nit" type="number" step="0.1"></div>
+        </div>
+      </div>
+      <div class="form-section">
+        <h2>Buyer</h2>
+        <div class="form-grid">
+          <div class="field"><label>Entity Type</label><select id="gb_type"><option value="farmer">Farmer</option><option value="water_district">Water District</option><option value="municipality">Municipality</option><option value="water_bank">Water Bank</option><option value="industrial">Industrial</option><option value="developer">Developer</option><option value="environmental">Environmental</option></select></div>
+          <div class="field"><label>Name</label><input id="gb_name"></div>
+          <div class="field"><label>GSA</label><input id="gb_gsa"></div>
+          <div class="field"><label>Basin</label><input id="gb_basin" value="Kern County"></div>
+          <div class="field"><label>Well Lat</label><input id="gb_lat" type="number" step="0.001"></div>
+          <div class="field"><label>Well Lng</label><input id="gb_lng" type="number" step="0.001"></div>
+          <div class="field"><label>Well Depth (ft)</label><input id="gb_depth" type="number"></div>
+          <div class="field"><label>Domestic Wells 1mi</label><input id="gb_dom" type="number"></div>
+        </div>
+      </div>
+      <div class="form-section">
+        <h2>Transfer</h2>
+        <div class="form-grid">
+          <div class="field"><label>Type</label><select id="gt_type"><option value="direct">Direct</option><option value="in_lieu">In-Lieu</option><option value="banked">Banked</option></select></div>
+          <div class="field"><label>Quantity (AF)</label><input id="gt_qty" type="number"></div>
+          <div class="field"><label>Price ($/AF)</label><input id="gt_price" type="number"></div>
+          <div class="field"><label>Duration (days)</label><input id="gt_dur" type="number" value="365"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SW FORM -->
+    <div id="swForm" class="hidden">
+      <div class="form-section">
+        <h2>Seller</h2>
+        <div class="form-grid">
+          <div class="field"><label>Entity Type</label><select id="ss_type"><option value="farmer">Farmer</option><option value="water_district">Water District</option><option value="municipality">Municipality</option><option value="industrial">Industrial</option></select></div>
+          <div class="field"><label>Name</label><input id="ss_name"></div>
+          <div class="field"><label>Water Right Type</label><select id="ss_right"><option value="appropriative_post1914">Post-1914 Appropriative</option><option value="appropriative_pre1914">Pre-1914 Appropriative</option><option value="cvp_contract">CVP Contract</option><option value="swp_contract">SWP Contract</option><option value="imported">Imported Water</option></select></div>
+          <div class="field"><label>eWRIMS Permit ID</label><input id="ss_ewrims"></div>
+          <div class="field"><label>Face Value (AF)</label><input id="ss_face" type="number"></div>
+          <div class="field"><label>Priority Date</label><input id="ss_priority" type="date"></div>
+          <div class="field"><label>Beneficial Use (AF)</label><input id="ss_benuse" type="number"></div>
+          <div class="field"><label>Historical Diversion (AF)</label><input id="ss_histdiv" type="number"></div>
+          <div class="field"><label>Consumptive Use (AF)</label><input id="ss_consuse" type="number"></div>
+          <div class="field"><label>Contract Allocation (AF)</label><input id="ss_calloc" type="number"></div>
+          <div class="field"><label>Contract Used (AF)</label><input id="ss_cused" type="number"></div>
+        </div>
+      </div>
+      <div class="form-section">
+        <h2>Buyer</h2>
+        <div class="form-grid">
+          <div class="field"><label>Entity Type</label><select id="sb_type"><option value="farmer">Farmer</option><option value="water_district">Water District</option><option value="municipality">Municipality</option><option value="industrial">Industrial</option></select></div>
+          <div class="field"><label>Name</label><input id="sb_name"></div>
+          <div class="field"><label>Basin / Region</label><input id="sb_basin"></div>
+        </div>
+      </div>
+      <div class="form-section">
+        <h2>Transfer</h2>
+        <div class="form-grid">
+          <div class="field"><label>Quantity (AF)</label><input id="st_qty" type="number"></div>
+          <div class="field"><label>Price ($/AF)</label><input id="st_price" type="number"></div>
+          <div class="field"><label>Duration (days)</label><input id="st_dur" type="number" value="365"></div>
+          <div class="field"><label>Source Stream</label><input id="st_stream"></div>
+          <div class="field"><label>Point of Diversion</label><input id="st_pod"></div>
+          <div class="field"><label>Place of Use</label><input id="st_pou"></div>
+          <div class="field"><label>Conveyance</label><select id="st_convey"><option value="canal_lined">Canal (Lined)</option><option value="canal_unlined">Canal (Unlined)</option><option value="pipeline">Pipeline</option><option value="natural_channel">Natural Channel</option></select></div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:.75rem;margin-top:.6rem">
+          <div class="check-field"><input type="checkbox" id="st_envflow"><label for="st_envflow">Environmental flow</label></div>
+          <div class="check-field"><input type="checkbox" id="st_fish"><label for="st_fish">Anadromous fish</label></div>
+          <div class="check-field"><input type="checkbox" id="st_origin"><label for="st_origin">Area-of-origin export</label></div>
+          <div class="check-field"><input type="checkbox" id="st_delta"><label for="st_delta">Through Delta</label></div>
+          <div class="check-field"><input type="checkbox" id="st_gwsub"><label for="st_gwsub">GW substitution</label></div>
+          <div class="check-field"><input type="checkbox" id="st_wheelreq"><label for="st_wheelreq">Requires wheeling</label></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="run-btn" id="runBtn" onclick="runPipeline()">
+      <div class="spinner"></div>
+      Run Auto-Routed Pipeline
+    </button>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!--  SECTION 3: Results                                     -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <div class="section results" id="results">
+    <div class="section-title">Pipeline Results</div>
+    <div id="decisionBanner" class="decision-banner" style="margin-top:.75rem"></div>
+    <h3 style="font-size:.95rem;margin:1rem 0 .6rem;color:var(--navy)">Stage Results</h3>
+    <div class="stages-grid" id="stagesGrid"></div>
+    <div class="detail-section" id="conditionsSection" style="display:none"><h3>Conditions for Approval</h3><ul id="conditionsList"></ul></div>
+    <div class="detail-section" id="flagsSection" style="display:none"><h3>Risk Flags</h3><ul id="flagsList"></ul></div>
+    <div class="detail-section" id="monitoringSection" style="display:none"><h3>Monitoring Requirements</h3><ul id="monitoringList"></ul></div>
+    <h3 style="font-size:.95rem;margin:1rem 0 .6rem;color:var(--navy)">Full Compliance Report</h3>
+    <div class="report-box" id="reportBox"></div>
+    <div style="height:3rem"></div>
+  </div>
+
+</div>
+
+<script>
+const API = window.location.origin;
+
+/* ════════════════════════════════════════════════════════════
+   PATHWAY DEFINITIONS (mirrors backend pipeline_router.py)
+   ════════════════════════════════════════════════════════════ */
+const PATHWAYS = [
+  {
+    id: 'gw_sgma', name: 'SGMA Standard', type: 'gw',
+    desc: 'Groundwater transfer under SGMA jurisdiction. GSA approval and GSP consistency required per CWC §10726.4.',
+    legal: ['CWC §10726.4', 'SGMA §10720-10737.8'],
+    stages: [
+      { name: 'Intake Validation', cls: 'gw', weight: .10 },
+      { name: 'Allocation Check', cls: 'gw', weight: .15 },
+      { name: 'GSP Compliance', cls: 'gw', weight: .25 },
+      { name: 'Well Impact\n(Theis)', cls: 'gw', weight: .20 },
+      { name: 'Basin Health', cls: 'gw', weight: .15 },
+      { name: 'Cross-GSA\nCheck', cls: 'gw', weight: .15 },
+    ],
+  },
+  {
+    id: 'gw_adjudicated', name: 'Adjudicated Basin', type: 'gw',
+    desc: 'Transfer within a court-adjudicated basin. Watermaster approval replaces GSA/GSP oversight.',
+    legal: ['Court decree', 'CWC §10726.4'],
+    stages: [
+      { name: 'Intake Validation', cls: 'gw', weight: .10 },
+      { name: 'Allocation Check', cls: 'gw', weight: .20 },
+      { name: 'Watermaster\nReview', cls: 'special', weight: .30 },
+      { name: 'Well Impact\n(Theis)', cls: 'gw', weight: .25 },
+      { name: 'Basin Health', cls: 'gw', weight: .15 },
+    ],
+  },
+  {
+    id: 'gw_banked', name: 'Banked Water', type: 'gw',
+    desc: 'Withdrawal of previously banked/stored groundwater. Banking agreement governs withdrawal rights.',
+    legal: ['Banking agreement', 'CWC §10726.4'],
+    stages: [
+      { name: 'Intake Validation', cls: 'gw', weight: .15 },
+      { name: 'Allocation Check\n(Bank Ledger)', cls: 'gw', weight: .35 },
+      { name: 'Well Impact\n(Theis)', cls: 'gw', weight: .15 },
+      { name: 'Basin Health', cls: 'gw', weight: .20 },
+    ],
+  },
+  {
+    id: 'gw_in_lieu', name: 'In-Lieu Transfer', type: 'gw',
+    desc: 'Seller reduces pumping and makes surface water available to buyer. Metering verification required.',
+    legal: ['CWC §10726.4', 'SGMA §10720-10737.8'],
+    stages: [
+      { name: 'Intake Validation', cls: 'gw', weight: .10 },
+      { name: 'Allocation Check\n(Metering)', cls: 'gw', weight: .25 },
+      { name: 'GSP Compliance', cls: 'gw', weight: .20 },
+      { name: 'Well Impact\n(Theis)', cls: 'gw', weight: .20 },
+      { name: 'Basin Health', cls: 'gw', weight: .15 },
+      { name: 'Cross-GSA\nCheck', cls: 'gw', weight: .10 },
+    ],
+  },
+  {
+    id: 'gw_protected_export', name: 'Protected Export', type: 'gw',
+    desc: 'Groundwater export from critically overdrafted basin. Subject to CWC §1215-1220 restrictions.',
+    legal: ['CWC §1215-1220', 'CWC §10726.4(a)(2)'],
+    stages: [
+      { name: 'Intake Validation', cls: 'gw', weight: .10 },
+      { name: 'Allocation Check', cls: 'gw', weight: .15 },
+      { name: 'GSP Compliance', cls: 'gw', weight: .20 },
+      { name: 'Well Impact\n(Theis)', cls: 'gw', weight: .15 },
+      { name: 'Basin Health', cls: 'gw', weight: .25 },
+      { name: 'Cross-GSA\nCheck', cls: 'gw', weight: .15 },
+      { name: 'Export Review\n(CWC §1220)', cls: 'special', weight: .30 },
+    ],
+  },
+  {
+    id: 'pre1914_private', name: 'Pre-1914 Right', type: 'sw',
+    desc: 'Pre-1914 appropriative right transfer. No SWRCB approval needed but no-injury rule still applies in court.',
+    legal: ['Pre-1914 common law', 'CWC §1702'],
+    stages: [
+      { name: 'Intake Validation', cls: 'sw', weight: .15 },
+      { name: 'Pre-1914\nVerification', cls: 'special', weight: .10 },
+      { name: 'No-Injury\nAnalysis', cls: 'sw', weight: .35 },
+      { name: 'Environmental\nCompliance', cls: 'sw', weight: .25 },
+      { name: 'Conveyance\n& Losses', cls: 'sw', weight: .25 },
+    ],
+  },
+  {
+    id: 'contract_cvp_swp', name: 'CVP / SWP Contract', type: 'sw',
+    desc: 'Federal/state contract water transfer. Bureau of Reclamation or DWR approval required.',
+    legal: ['Reclamation Act', 'Burns-Porter Act', 'CWC §1810'],
+    stages: [
+      { name: 'Intake Validation', cls: 'sw', weight: .15 },
+      { name: 'Rights\nVerification', cls: 'sw', weight: .20 },
+      { name: 'Environmental\n(NEPA)', cls: 'sw', weight: .30 },
+      { name: 'Conveyance\n& Losses', cls: 'sw', weight: .20 },
+    ],
+  },
+  {
+    id: 'post1914_short', name: 'Post-1914 Temporary', type: 'sw',
+    desc: 'Post-1914 temporary transfer (≤1 year). SWRCB temporary change petition with 30-day public notice.',
+    legal: ['CWC §1725-1732', 'CWC §1702'],
+    stages: [
+      { name: 'Intake Validation', cls: 'sw', weight: .10 },
+      { name: 'eWRIMS Rights\nVerification', cls: 'sw', weight: .20 },
+      { name: 'No-Injury\nAnalysis', cls: 'sw', weight: .25 },
+      { name: 'Environmental\nCompliance', cls: 'sw', weight: .20 },
+      { name: 'Conveyance\n& Losses', cls: 'sw', weight: .15 },
+    ],
+  },
+  {
+    id: 'post1914_long', name: 'Post-1914 Long-Term', type: 'sw',
+    desc: 'Post-1914 long-term transfer (>1 year). Full SWRCB long-term change petition. EIR likely required.',
+    legal: ['CWC §1700-1707', 'CWC §1702'],
+    stages: [
+      { name: 'Intake Validation', cls: 'sw', weight: .10 },
+      { name: 'eWRIMS Rights\nVerification', cls: 'sw', weight: .20 },
+      { name: 'No-Injury\nAnalysis', cls: 'sw', weight: .25 },
+      { name: 'Environmental\n(Full EIR)', cls: 'sw', weight: .25 },
+      { name: 'Conveyance\n& Losses', cls: 'sw', weight: .15 },
+    ],
+  },
+  {
+    id: 'imported_water', name: 'Imported Water', type: 'sw',
+    desc: 'Imported/developed water transfer. Fewest restrictions — the importer can transfer freely per CWC §1011.',
+    legal: ['CWC §1011'],
+    stages: [
+      { name: 'Intake Validation', cls: 'sw', weight: .15 },
+      { name: 'Imported Water\nReview', cls: 'special', weight: .20 },
+      { name: 'Environmental\nCompliance', cls: 'sw', weight: .35 },
+      { name: 'Conveyance\n& Losses', cls: 'sw', weight: .30 },
+    ],
+  },
+];
+
+let activePathway = PATHWAYS[0].id;
+
+function renderPathwayTabs() {
+  const c = document.getElementById('pathwayTabs');
+  c.innerHTML = PATHWAYS.map(pw => {
+    const tagCls = pw.type === 'gw' ? 'tag-gw' : 'tag-sw';
+    const tagLabel = pw.type === 'gw' ? 'GW' : 'SW';
+    return `<div class="pathway-tab${pw.id === activePathway ? ' active' : ''}" onclick="selectPathway('${pw.id}')">${pw.name}<span class="tag ${tagCls}">${tagLabel}</span></div>`;
+  }).join('');
+}
+
+function selectPathway(id) {
+  activePathway = id;
+  renderPathwayTabs();
+  renderPipelineDetail();
+}
+
+function renderPipelineDetail() {
+  const pw = PATHWAYS.find(p => p.id === activePathway);
+  if (!pw) return;
+  const d = document.getElementById('pipelineDetail');
+
+  const legalHtml = pw.legal.map(l => `<span class="legal-tag">${l}</span>`).join('');
+
+  const flowHtml = pw.stages.map((s, i) => {
+    const arrow = i < pw.stages.length - 1 ? '<div class="flow-arrow">→</div>' : '<div class="flow-arrow">→</div>';
+    const lines = s.name.split('\n');
+    const label = lines.map(l => `<div>${l}</div>`).join('');
+    return `<div class="flow-stage"><div class="stage-num">STAGE ${i+1}</div><div class="stage-box ${s.cls}">${label}</div><div class="stage-weight">${(s.weight*100).toFixed(0)}% weight</div></div>${i < pw.stages.length - 1 ? arrow : ''}`;
+  }).join('');
+
+  const decisionStage = `<div class="flow-arrow">→</div><div class="flow-stage"><div class="stage-num">DECISION</div><div class="stage-box decision">Weighted<br>Decision</div><div class="stage-weight">Aggregate</div></div>`;
+
+  d.innerHTML = `
+    <div class="pw-header">
+      <div class="pw-name">${pw.name}</div>
+      <div class="legal-tags">${legalHtml}</div>
+    </div>
+    <div class="pw-desc">${pw.desc}</div>
+    <div class="flow-diagram">${flowHtml}${decisionStage}</div>
+  `;
+}
+
+/* ════════════════════════════════════════════════════════════
+   FORM / SCENARIOS
+   ════════════════════════════════════════════════════════════ */
+let currentPipeline = 'gw';
+
+function setPipeline(type) {
+  currentPipeline = type;
+  document.getElementById('gwToggle').classList.toggle('active', type === 'gw');
+  document.getElementById('swToggle').classList.toggle('active', type === 'sw');
+  document.getElementById('allToggle').classList.toggle('active', type === 'all');
+  document.getElementById('gwForm').classList.toggle('hidden', type === 'sw');
+  document.getElementById('swForm').classList.toggle('hidden', type !== 'sw');
+  document.getElementById('results').classList.remove('visible');
+  loadScenarios();
+}
+
+async function loadScenarios() {
+  let ep;
+  if (currentPipeline === 'all') ep = '/transfers/demo/all-scenarios';
+  else if (currentPipeline === 'sw') ep = '/transfers/demo/sw-scenarios';
+  else ep = '/transfers/demo/scenarios';
+
+  try {
+    const r = await fetch(API + ep);
+    const d = await r.json();
+    const c = document.getElementById('scenarios');
+    c.innerHTML = '';
+    d.scenarios.forEach(sc => {
+      const card = document.createElement('div');
+      card.className = 'scenario-card';
+      const pathLabel = sc.pathway ? `<div class="pathway-label">${sc.pathway.replace(/_/g,' ').toUpperCase()}</div>` : '';
+      card.innerHTML = `<h3>${sc.name}</h3><p>${sc.description}</p>${pathLabel}`;
+      card.onclick = () => {
+        document.querySelectorAll('.scenario-card').forEach(x => x.classList.remove('active'));
+        card.classList.add('active');
+        fillScenario(sc);
+      };
+      c.appendChild(card);
+    });
+  } catch(e) { console.error(e); }
+}
+
+function v(id, val) { const el = document.getElementById(id); if (el) el.value = val ?? ''; }
+function ck(id, val) { const el = document.getElementById(id); if (el) el.checked = !!val; }
+
+function fillScenario(sc) {
+  const s = sc.seller, b = sc.buyer, t = sc.transfer;
+  const isGw = !s.water_right_type;
+  if (isGw) {
+    if (currentPipeline === 'sw') setPipeline('gw');
+    v('gs_type',s.entity_type);v('gs_name',s.name);v('gs_gsa',s.gsa);v('gs_basin',s.basin||'Kern County');
+    v('gs_alloc',s.allocation_af);v('gs_used',s.used_af);v('gs_banked',s.banked_balance_af||0);
+    v('gs_method',s.extraction_method||'metered');
+    v('gs_lat',s.well_lat);v('gs_lng',s.well_lng);v('gs_depth',s.well_depth_ft);v('gs_wl',s.water_level_ft);v('gs_nit',s.nitrate_mg_l);
+    v('gb_type',b.entity_type);v('gb_name',b.name);v('gb_gsa',b.gsa);v('gb_basin',b.basin||'Kern County');
+    v('gb_lat',b.well_lat);v('gb_lng',b.well_lng);v('gb_depth',b.well_depth_ft);v('gb_dom',b.domestic_wells_1mi);
+    v('gt_type',t.transfer_type);v('gt_qty',t.quantity_af);v('gt_price',t.price_per_af);v('gt_dur',t.duration_days||365);
+  } else {
+    if (currentPipeline === 'gw') setPipeline('sw');
+    v('ss_type',s.entity_type);v('ss_name',s.name);
+    v('ss_right',s.water_right_type);v('ss_ewrims',s.water_right_id);
+    v('ss_face',s.face_value_af);v('ss_priority',s.priority_date);
+    v('ss_benuse',s.beneficial_use_af);v('ss_histdiv',s.historical_diversion_af);
+    v('ss_consuse',s.consumptive_use_af);v('ss_calloc',s.contract_allocation_af);v('ss_cused',s.contract_used_af);
+    v('sb_type',b.entity_type);v('sb_name',b.name);v('sb_basin',b.basin);
+    v('st_qty',t.quantity_af);v('st_price',t.price_per_af);v('st_dur',t.duration_days||365);
+    v('st_stream',t.source_stream);v('st_pod',t.point_of_diversion);v('st_pou',t.place_of_use);
+    v('st_convey',t.conveyance_method||'canal_lined');
+    ck('st_envflow',t.has_environmental_flow_requirement);
+    ck('st_fish',t.anadromous_fish_present);
+    ck('st_origin',t.is_area_of_origin_export);
+    ck('st_delta',t.through_delta);
+    ck('st_gwsub',t.groundwater_substitution);
+    ck('st_wheelreq',t.requires_wheeling);
+  }
+}
+
+function n(id) { const el = document.getElementById(id); return el && el.value ? parseFloat(el.value) : undefined; }
+function s(id) { const el = document.getElementById(id); return el && el.value ? el.value : undefined; }
+function c(id) { const el = document.getElementById(id); return el ? el.checked : false; }
+
+function buildGWPayload() {
+  return {
+    seller: { entity_type:s('gs_type'),name:s('gs_name'),basin:s('gs_basin'),gsa:s('gs_gsa'),allocation_af:n('gs_alloc')||0,used_af:n('gs_used')||0,banked_balance_af:n('gs_banked')||0,extraction_method:s('gs_method'),well_lat:n('gs_lat'),well_lng:n('gs_lng'),well_depth_ft:n('gs_depth'),water_level_ft:n('gs_wl'),nitrate_mg_l:n('gs_nit') },
+    buyer: { entity_type:s('gb_type'),name:s('gb_name'),basin:s('gb_basin'),gsa:s('gb_gsa'),well_lat:n('gb_lat'),well_lng:n('gb_lng'),well_depth_ft:n('gb_depth'),domestic_wells_1mi:n('gb_dom')||0 },
+    transfer: { transfer_type:s('gt_type'),quantity_af:n('gt_qty')||0,price_per_af:n('gt_price'),source_basin:s('gs_basin'),destination_basin:s('gb_basin'),source_gsa:s('gs_gsa'),destination_gsa:s('gb_gsa'),duration_days:n('gt_dur')||365 }
+  };
+}
+
+function buildSWPayload() {
+  return {
+    seller: { entity_type:s('ss_type'),name:s('ss_name'),water_right_type:s('ss_right'),water_right_id:s('ss_ewrims'),ewrims_status:'active',face_value_af:n('ss_face')||0,priority_date:s('ss_priority'),beneficial_use_af:n('ss_benuse'),historical_diversion_af:n('ss_histdiv'),consumptive_use_af:n('ss_consuse'),contract_allocation_af:n('ss_calloc'),contract_used_af:n('ss_cused') },
+    buyer: { entity_type:s('sb_type'),name:s('sb_name'),basin:s('sb_basin') },
+    transfer: { quantity_af:n('st_qty')||0,price_per_af:n('st_price'),duration_days:n('st_dur')||365,source_stream:s('st_stream'),point_of_diversion:s('st_pod'),place_of_use:s('st_pou'),has_environmental_flow_requirement:c('st_envflow'),anadromous_fish_present:c('st_fish'),is_area_of_origin_export:c('st_origin'),through_delta:c('st_delta'),groundwater_substitution:c('st_gwsub'),conveyance_method:s('st_convey'),requires_wheeling:c('st_wheelreq') }
+  };
+}
+
+async function runPipeline() {
+  const btn = document.getElementById('runBtn');
+  btn.disabled = true; btn.classList.add('loading');
+  const isGw = currentPipeline !== 'sw';
+  const payload = isGw ? buildGWPayload() : buildSWPayload();
+
+  try {
+    const resp = await fetch(API + '/transfers/run/auto', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+    if (!resp.ok) { const err = await resp.json().catch(()=>({})); throw new Error(err.detail || resp.statusText); }
+    renderResults(await resp.json());
+  } catch(e) { alert('Pipeline error: ' + e.message); }
+  finally { btn.disabled = false; btn.classList.remove('loading'); }
+}
+
+/* ════════════════════════════════════════════════════════════
+   RESULTS
+   ════════════════════════════════════════════════════════════ */
+function renderResults(data) {
+  const results = document.getElementById('results');
+  results.classList.add('visible');
+
+  const dec = data.decision || 'UNKNOWN';
+  const cls = dec === 'APPROVED' ? 'approved' : dec.includes('CONDITIONAL') ? 'conditional' : 'denied';
+  const banner = document.getElementById('decisionBanner');
+  banner.className = `decision-banner ${cls}`;
+
+  const pw = data.pathway || '';
+  const pwInfo = data.pathway_info || {};
+  const pwDesc = pwInfo.description || '';
+  banner.innerHTML = `<span class="badge">${dec.replace(/_/g,' ')}</span><span class="score">${(data.composite_score*100).toFixed(1)}%</span><div class="pathway-info">Pathway: <span class="pathway-name">${pw.replace(/_/g,' ')}</span> — ${esc(pwDesc)}</div>`;
+
+  if (pw) {
+    const match = PATHWAYS.find(p => p.id === pw);
+    if (match) { activePathway = pw; renderPathwayTabs(); renderPipelineDetail(); }
+  }
+
+  const grid = document.getElementById('stagesGrid');
+  grid.innerHTML = '';
+  (data.stage_results||[]).forEach(sr => {
+    const pct = (sr.score*100).toFixed(0);
+    const color = sr.finding==='PASS'?'var(--green)':sr.finding==='CONDITIONAL'?'var(--amber)':'var(--red)';
+    grid.innerHTML += `<div class="stage-card"><div class="header"><span class="name">${sr.stage.replace(/_/g,' ')}</span><span class="finding finding-${sr.finding}">${sr.finding}</span></div><div class="reasoning">${esc(sr.reasoning)}</div><div class="score-bar"><div class="score-fill" style="width:${pct}%;background:${color}"></div></div><div style="font-size:.65rem;color:var(--gray-400);margin-top:.2rem">${pct}%</div></div>`;
+  });
+
+  renderList('conditionsSection','conditionsList',data.conditions);
+  renderList('flagsSection','flagsList',data.risk_flags);
+  renderList('monitoringSection','monitoringList',data.monitoring_requirements);
+  document.getElementById('reportBox').textContent = data.llm_report || 'No report generated';
+
+  results.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function renderList(sid,lid,items) {
+  const se = document.getElementById(sid), l = document.getElementById(lid);
+  if (items && items.length) { se.style.display='block'; l.innerHTML=items.map(i=>`<li>${esc(i)}</li>`).join(''); }
+  else { se.style.display='none'; }
+}
+
+function esc(x) { return (x||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* ═══ Init ═══ */
+renderPathwayTabs();
+renderPipelineDetail();
+loadScenarios();
+</script>
+</body>
+</html>

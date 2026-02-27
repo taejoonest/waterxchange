@@ -1,0 +1,185 @@
+(kicad_sch (version 20230121) (generator waterxchange)
+
+  (uuid e63e39d7-6ac0-4ffd-8aa3-1841a4541b55)
+
+  (paper "A4")
+
+  (title_block
+    (title "WX-Level — Smart Well Level Meter")
+    (date "2026-02-23")
+    (rev "1.0")
+    (company "WaterXchange")
+    (comment 1 "ESP32-S3 + ADS1115 + BME280 + SX1276 + SIM7000G")
+    (comment 2 "Solar-powered groundwater level monitor")
+  )
+
+  ;; ═══════════════════════════════════════════════════════════
+  ;; COMPONENT: U1 — ESP32-S3-WROOM-1
+  ;; ═══════════════════════════════════════════════════════════
+  (symbol (lib_id "RF_Module:ESP32-S3-WROOM-1") (at 100 80) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid a1000001-0001-0001-0001-000000000001)
+    (property "Reference" "U1" (at 100 60 0) (effects (font (size 1.27 1.27))))
+    (property "Value" "ESP32-S3-WROOM-1-N16R8" (at 100 62.5 0) (effects (font (size 1 1))))
+    ;; Pin connections documented (physical wiring):
+    ;; GPIO8  → SDA (I2C bus: ADS1115, BME280)
+    ;; GPIO9  → SCL (I2C bus: ADS1115, BME280)
+    ;; GPIO10 → SX1276 CS (SPI)
+    ;; GPIO11 → SX1276 RST
+    ;; GPIO12 → SX1276 DIO0
+    ;; GPIO35 → SX1276 MOSI (SPI)
+    ;; GPIO36 → SX1276 SCK  (SPI)
+    ;; GPIO37 → SX1276 MISO (SPI)
+    ;; GPIO17 → SIM7000G TX (UART1)
+    ;; GPIO18 → SIM7000G RX (UART1)
+    ;; GPIO21 → SIM7000G PWRKEY
+    ;; GPIO4  → Battery voltage divider (ADC)
+    ;; GPIO5  → Solar voltage divider (ADC)
+    ;; 3V3    → Power rail
+    ;; GND    → Ground rail
+  )
+
+  ;; ═══════════════════════════════════════════════════════════
+  ;; COMPONENT: U2 — ADS1115 (16-bit ADC)
+  ;; ═══════════════════════════════════════════════════════════
+  (symbol (lib_id "Analog_ADC:ADS1115IDGS") (at 155 80) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid a1000001-0002-0001-0001-000000000001)
+    (property "Reference" "U2" (at 155 70 0) (effects (font (size 1.27 1.27))))
+    (property "Value" "ADS1115" (at 155 72 0) (effects (font (size 1 1))))
+    ;; ADDR → GND (address 0x48)
+    ;; SDA  → ESP32 GPIO8
+    ;; SCL  → ESP32 GPIO9
+    ;; A0   → Pressure transducer (250Ω shunt)
+    ;; VDD  → 3.3V
+    ;; GND  → GND
+  )
+
+  ;; ═══════════════════════════════════════════════════════════
+  ;; COMPONENT: U3 — BME280 (Barometric Pressure/Temp/Humidity)
+  ;; ═══════════════════════════════════════════════════════════
+  (symbol (lib_id "Sensor_Pressure:BME280") (at 155 110) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid a1000001-0003-0001-0001-000000000001)
+    (property "Reference" "U3" (at 155 100 0) (effects (font (size 1.27 1.27))))
+    (property "Value" "BME280" (at 155 102 0) (effects (font (size 1 1))))
+    ;; SDI → ESP32 GPIO8 (SDA)
+    ;; SCK → ESP32 GPIO9 (SCL)
+    ;; CSB → 3.3V (I2C mode)
+    ;; SDO → GND (address 0x76)
+    ;; VDD → 3.3V
+    ;; GND → GND
+  )
+
+  ;; ═══════════════════════════════════════════════════════════
+  ;; COMPONENT: U4 — SX1276 LoRa Module (RFM95W)
+  ;; ═══════════════════════════════════════════════════════════
+  (symbol (lib_id "RF_Module:RFM95W-915S2") (at 55 80) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid a1000001-0004-0001-0001-000000000001)
+    (property "Reference" "U4" (at 55 68 0) (effects (font (size 1.27 1.27))))
+    (property "Value" "SX1276/RFM95W 915MHz" (at 55 70.5 0) (effects (font (size 1 1))))
+    ;; NSS   → ESP32 GPIO10
+    ;; RESET → ESP32 GPIO11
+    ;; DIO0  → ESP32 GPIO12
+    ;; MOSI  → ESP32 GPIO35
+    ;; MISO  → ESP32 GPIO37
+    ;; SCK   → ESP32 GPIO36
+    ;; ANT   → SMA connector J1
+    ;; VCC   → 3.3V
+    ;; GND   → GND
+  )
+
+  ;; ═══════════════════════════════════════════════════════════
+  ;; COMPONENT: U5 — SIM7000G (LTE Cat-M1 / NB-IoT)
+  ;; ═══════════════════════════════════════════════════════════
+  (symbol (lib_id "RF_Cellular:SIM7000G") (at 55 120) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid a1000001-0005-0001-0001-000000000001)
+    (property "Reference" "U5" (at 55 108 0) (effects (font (size 1.27 1.27))))
+    (property "Value" "SIM7000G" (at 55 110.5 0) (effects (font (size 1 1))))
+    ;; TXD    → ESP32 GPIO18 (RX)
+    ;; RXD    → ESP32 GPIO17 (TX)
+    ;; PWRKEY → ESP32 GPIO21
+    ;; ANT    → SMA connector J2
+    ;; VBAT   → LiPo via diode (needs 3.4-4.4V)
+    ;; GND    → GND
+  )
+
+  ;; ═══════════════════════════════════════════════════════════
+  ;; COMPONENT: U6 — CN3791 Solar MPPT Charge Controller
+  ;; ═══════════════════════════════════════════════════════════
+  (symbol (lib_id "Battery_Management:CN3791") (at 55 155) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid a1000001-0006-0001-0001-000000000001)
+    (property "Reference" "U6" (at 55 145 0) (effects (font (size 1.27 1.27))))
+    (property "Value" "CN3791" (at 55 147 0) (effects (font (size 1 1))))
+    ;; VIN  → Solar panel 6V via Schottky diode
+    ;; BAT  → LiPo battery
+    ;; ISET → 10kΩ to GND (charge current ~400mA)
+    ;; DONE → status LED (optional)
+    ;; GND  → GND
+  )
+
+  ;; ═══════════════════════════════════════════════════════════
+  ;; COMPONENT: U7 — AP2112K-3.3 LDO Voltage Regulator
+  ;; ═══════════════════════════════════════════════════════════
+  (symbol (lib_id "Regulator_Linear:AP2112K-3.3") (at 100 155) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid a1000001-0007-0001-0001-000000000001)
+    (property "Reference" "U7" (at 100 148 0) (effects (font (size 1.27 1.27))))
+    (property "Value" "AP2112K-3.3" (at 100 150 0) (effects (font (size 1 1))))
+    ;; VIN  → LiPo battery (3.0-6.0V)
+    ;; VOUT → 3.3V rail (all ICs)
+    ;; EN   → VIN (always on)
+    ;; GND  → GND
+    ;; C_IN  → 10µF ceramic
+    ;; C_OUT → 10µF ceramic
+  )
+
+  ;; ═══════════════════════════════════════════════════════════
+  ;; PASSIVE: R1 — 250Ω Precision (4-20mA shunt)
+  ;; ═══════════════════════════════════════════════════════════
+  (symbol (lib_id "Device:R") (at 175 85) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid a1000001-0010-0001-0001-000000000001)
+    (property "Reference" "R1" (at 177 85 0) (effects (font (size 1.27 1.27))))
+    (property "Value" "250Ω 0.1%" (at 177 87 0) (effects (font (size 0.8 0.8))))
+    ;; 4-20mA from transducer flows through → 1.0V to 5.0V across R1
+    ;; Connect to ADS1115 A0
+  )
+
+  ;; ═══════════════════════════════════════════════════════════
+  ;; PASSIVE: Voltage Dividers for Battery & Solar monitoring
+  ;; ═══════════════════════════════════════════════════════════
+  ;; R2, R3: 100kΩ + 100kΩ divider for battery → GPIO4
+  ;; R4, R5: 100kΩ + 100kΩ divider for solar → GPIO5
+
+  ;; ═══════════════════════════════════════════════════════════
+  ;; CONNECTORS
+  ;; ═══════════════════════════════════════════════════════════
+  ;; J1: SMA connector — LoRa antenna (915 MHz)
+  ;; J2: SMA connector — LTE antenna
+  ;; J3: M12 cable gland — submersible pressure transducer cable
+  ;;     Wire 1: +24V (from buck converter or not used if transducer is loop-powered)
+  ;;     Wire 2: Signal (4-20mA current loop, through R1 to ADS1115 A0)
+  ;;     Wire 3: GND
+  ;;     Wire 4: Shield/drain
+  ;; J4: JST-PH 2-pin — LiPo battery
+  ;; J5: Barrel jack or screw terminal — solar panel input
+
+  ;; ═══════════════════════════════════════════════════════════
+  ;; NET CONNECTIONS (I2C Bus)
+  ;; ═══════════════════════════════════════════════════════════
+  ;; SDA net: ESP32 GPIO8 → ADS1115 SDA → BME280 SDI (with 4.7kΩ pull-up to 3.3V)
+  ;; SCL net: ESP32 GPIO9 → ADS1115 SCL → BME280 SCK (with 4.7kΩ pull-up to 3.3V)
+
+  ;; ═══════════════════════════════════════════════════════════
+  ;; POWER NETS
+  ;; ═══════════════════════════════════════════════════════════
+  ;; +3V3: AP2112K output → ESP32, ADS1115, BME280, SX1276
+  ;; +VBAT: LiPo → SIM7000G VBAT, AP2112K VIN
+  ;; +VSOLAR: Solar panel → CN3791 VIN (via Schottky)
+  ;; GND: Common ground
+
+)

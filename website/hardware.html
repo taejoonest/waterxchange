@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WaterXchange — Hardware</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #0b1d3a; --blue: #1a6fc4; --teal: #0e9aa7;
+      --sky: #e8f4f8; --white: #fff;
+      --gray-50: #f8fafc; --gray-100: #f1f5f9; --gray-200: #e2e8f0;
+      --gray-400: #94a3b8; --gray-600: #475569; --gray-800: #1e293b;
+      --green: #22c55e; --amber: #f59e0b; --red: #ef4444;
+      --orange: #f97316; --purple: #a855f7;
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--gray-800); background: var(--gray-50); line-height: 1.6; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; background: rgba(11,29,58,0.95); backdrop-filter: blur(12px); }
+    .nav-logo { font-size: 1.25rem; font-weight: 700; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--teal); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--gray-200); text-decoration: none; font-size: .9rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--teal); }
+    .nav-links a.active { color: var(--teal); }
+
+    .page-header { padding: 5rem 2rem 2rem; background: linear-gradient(160deg, var(--navy), #134074); color: var(--white); }
+    .page-header .container { max-width: 1100px; margin: 0 auto; }
+    .page-header h1 { font-size: 2rem; font-weight: 800; }
+    .page-header p { color: var(--gray-400); font-size: .95rem; margin-top: .3rem; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    .section { padding: 2.5rem 0; }
+    .divider { border: none; border-top: 1px solid var(--gray-200); margin: 0; }
+
+    .product-tabs { display: flex; gap: .5rem; margin-bottom: 2rem; }
+    .product-tab { padding: .6rem 1.5rem; border: 2px solid var(--gray-200); border-radius: 10px; background: var(--white); font-size: .9rem; font-weight: 700; cursor: pointer; color: var(--gray-600); transition: all .2s; }
+    .product-tab:hover { border-color: var(--teal); }
+    .product-tab.active { border-color: var(--teal); background: var(--sky); color: var(--teal); }
+
+    .product-panel { display: none; }
+    .product-panel.active { display: block; }
+
+    h2 { font-size: 1.4rem; font-weight: 800; color: var(--navy); margin-bottom: .5rem; }
+    h3 { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin: 1.5rem 0 .5rem; }
+    h4 { font-size: .95rem; font-weight: 700; color: var(--gray-800); margin: 1rem 0 .4rem; }
+    .desc { font-size: .9rem; color: var(--gray-600); margin-bottom: 1.5rem; line-height: 1.7; }
+
+    .spec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: .75rem; margin-bottom: 1.5rem; }
+    .spec-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 10px; padding: 1rem; }
+    .spec-card .label { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--gray-400); margin-bottom: .2rem; }
+    .spec-card .value { font-size: 1rem; font-weight: 700; color: var(--navy); }
+    .spec-card .note { font-size: .75rem; color: var(--gray-600); margin-top: .15rem; }
+
+    table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; font-size: .85rem; }
+    th { background: var(--navy); color: var(--white); padding: .6rem .75rem; text-align: left; font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; }
+    td { padding: .5rem .75rem; border-bottom: 1px solid var(--gray-200); }
+    tr:nth-child(even) { background: var(--gray-50); }
+    .price { font-weight: 700; color: var(--teal); }
+
+    .enclosure-box { background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .enclosure-box h4 { margin-top: 0; }
+    .dim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin: .75rem 0; }
+    .dim-item { font-size: .85rem; }
+    .dim-item .dim-label { color: var(--gray-400); font-size: .7rem; font-weight: 600; text-transform: uppercase; }
+    .dim-item .dim-val { font-weight: 700; color: var(--navy); }
+
+    .drawing { background: var(--navy); border-radius: 10px; padding: 1.5rem; margin: 1rem 0; font-family: 'SF Mono', 'Fira Code', monospace; font-size: .7rem; line-height: 1.5; color: #94a3b8; white-space: pre; overflow-x: auto; }
+    .drawing .highlight { color: var(--teal); }
+    .drawing .dim { color: var(--amber); }
+    .drawing .label { color: #e2e8f0; }
+
+    .callout { background: rgba(14,154,167,.08); border-left: 3px solid var(--teal); border-radius: 0 8px 8px 0; padding: .75rem 1rem; margin: 1rem 0; font-size: .85rem; color: var(--gray-600); }
+    .callout strong { color: var(--teal); }
+
+    .status-badge { display: inline-block; padding: .2rem .6rem; border-radius: 4px; font-size: .7rem; font-weight: 700; }
+    .status-ready { background: #dcfce7; color: #166534; }
+    .status-wip { background: #fef9c3; color: #854d0e; }
+    .status-you { background: #dbeafe; color: #1e40af; }
+
+    .file-tree { font-family: 'SF Mono', monospace; font-size: .8rem; background: var(--white); border: 1px solid var(--gray-200); border-radius: 10px; padding: 1rem; margin: 1rem 0; }
+    .file-tree .dir { color: var(--blue); font-weight: 600; }
+    .file-tree .file { color: var(--gray-600); }
+    .file-tree .you { color: var(--amber); font-weight: 600; }
+
+    @media (max-width: 768px) {
+      .spec-grid { grid-template-columns: 1fr; }
+      .dim-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Water<span>X</span>change</a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/monitor">Monitoring</a></li>
+    <li><a href="/transfer">Transfer</a></li>
+    <li><a href="/hardware" class="active">Hardware</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="container">
+    <h1>Hardware Products</h1>
+    <p>Open-source IoT sensors for groundwater monitoring &middot; ESP32 &middot; LoRa/Cellular &middot; Solar powered</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="section">
+
+    <div class="product-tabs">
+      <div class="product-tab active" onclick="showProduct('level')">WX-Level</div>
+      <div class="product-tab" onclick="showProduct('flow')">WX-Flow</div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <!--  PRODUCT 1: WX-Level — Smart Well Level Meter                  -->
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <div class="product-panel active" id="panel-level">
+
+      <h2>WX-Level — Smart Well Level Meter</h2>
+      <p class="desc">Submersible pressure transducer + solar-powered ESP32 controller for continuous groundwater level monitoring. Mounts on any monitoring or irrigation well. Transmits water level, temperature, and battery status every 15 minutes via LoRa or cellular to the WaterXchange cloud.</p>
+
+      <h3>Specifications</h3>
+      <div class="spec-grid">
+        <div class="spec-card"><div class="label">Measurement</div><div class="value">Water Level</div><div class="note">Pressure-based, 0–100 ft (30 m) range</div></div>
+        <div class="spec-card"><div class="label">Accuracy</div><div class="value">±0.1 ft</div><div class="note">0.1% FS, temperature compensated</div></div>
+        <div class="spec-card"><div class="label">Temperature</div><div class="value">-5 to 50°C</div><div class="note">Built into pressure transducer</div></div>
+        <div class="spec-card"><div class="label">Barometric Comp</div><div class="value">Onboard BME280</div><div class="note">Atmospheric pressure + humidity</div></div>
+        <div class="spec-card"><div class="label">Connectivity</div><div class="value">LoRa + Cellular</div><div class="note">SX1276 (915 MHz) + SIM7000G fallback</div></div>
+        <div class="spec-card"><div class="label">Power</div><div class="value">Solar + LiPo</div><div class="note">6W panel, 3.7V 6000mAh battery</div></div>
+        <div class="spec-card"><div class="label">Battery Life</div><div class="value">Indefinite (solar)</div><div class="note">30+ days battery-only (no sun)</div></div>
+        <div class="spec-card"><div class="label">TX Interval</div><div class="value">15 min default</div><div class="note">Configurable 1 min – 24 hr</div></div>
+        <div class="spec-card"><div class="label">Enclosure</div><div class="value">IP67 Wellhead Box</div><div class="note">3D-printed PETG + gasket</div></div>
+        <div class="spec-card"><div class="label">MCU</div><div class="value">ESP32-S3</div><div class="note">Deep sleep: 10 µA</div></div>
+        <div class="spec-card"><div class="label">Probe Cable</div><div class="value">Up to 100 ft</div><div class="note">Vented 4-20mA shielded cable</div></div>
+        <div class="spec-card"><div class="label">Target BOM</div><div class="value">~$85</div><div class="note">At qty 100</div></div>
+      </div>
+
+      <h3>Bill of Materials</h3>
+      <table>
+        <tr><th>Component</th><th>Part / Spec</th><th>Source</th><th>Unit Price</th></tr>
+        <tr><td>Microcontroller</td><td>ESP32-S3-WROOM-1 (N16R8)</td><td>Espressif / LCSC</td><td class="price">$3.50</td></tr>
+        <tr><td>Pressure Transducer</td><td>Submersible 4-20mA, 0-10 PSI, 316SS, vented cable</td><td>Alibaba / HVAC Quick (CFSensor)</td><td class="price">$18.00</td></tr>
+        <tr><td>Barometric Sensor</td><td>BME280 (pressure + temp + humidity)</td><td>Bosch / LCSC</td><td class="price">$2.50</td></tr>
+        <tr><td>LoRa Module</td><td>SX1276 915MHz (RFM95W or equivalent)</td><td>HopeRF / Adafruit</td><td class="price">$5.00</td></tr>
+        <tr><td>Cellular Module</td><td>SIM7000G (LTE Cat-M1 / NB-IoT)</td><td>SIMCom / Amazon</td><td class="price">$12.00</td></tr>
+        <tr><td>Solar Panel</td><td>6W 6V monocrystalline, 170×200mm</td><td>Amazon / Alibaba</td><td class="price">$8.00</td></tr>
+        <tr><td>Battery</td><td>3.7V 6000mAh LiPo (18650 × 2 or pouch)</td><td>Amazon / LCSC</td><td class="price">$6.00</td></tr>
+        <tr><td>Charge Controller</td><td>CN3791 solar MPPT charge IC</td><td>LCSC</td><td class="price">$0.80</td></tr>
+        <tr><td>Voltage Regulator</td><td>AP2112K-3.3 (LDO 3.3V 600mA)</td><td>LCSC</td><td class="price">$0.30</td></tr>
+        <tr><td>4-20mA Receiver</td><td>250Ω precision resistor + ADS1115 16-bit ADC</td><td>TI / LCSC</td><td class="price">$2.00</td></tr>
+        <tr><td>Antenna (LoRa)</td><td>915MHz SMA whip, 3dBi</td><td>Amazon</td><td class="price">$2.00</td></tr>
+        <tr><td>Antenna (Cell)</td><td>LTE/GSM SMA whip</td><td>Amazon</td><td class="price">$3.00</td></tr>
+        <tr><td>Connectors</td><td>M12 cable gland (IP68) × 2, SMA bulkhead × 2</td><td>Amazon</td><td class="price">$4.00</td></tr>
+        <tr><td>PCB</td><td>Custom 2-layer, 80×50mm</td><td>JLCPCB</td><td class="price">$2.00</td></tr>
+        <tr><td>Enclosure</td><td>3D-printed PETG + silicone gasket</td><td>Bambu Lab (you print)</td><td class="price">$3.00</td></tr>
+        <tr><td>Misc</td><td>Screws, standoffs, desiccant pack, wire, heatshrink</td><td>—</td><td class="price">$3.00</td></tr>
+        <tr style="font-weight:700;background:var(--sky)"><td colspan="3">Total BOM (qty 1)</td><td class="price">~$75</td></tr>
+      </table>
+
+      <h3>Enclosure Design — For Fusion 360</h3>
+      <div class="callout"><strong>This is your part.</strong> Model these two pieces in Fusion 360, export as 3MF, and slice in Bambu Studio. Print in PETG for UV and moisture resistance.</div>
+
+      <div class="enclosure-box">
+        <h4>Part A: Wellhead Controller Box</h4>
+        <p style="font-size:.85rem;color:var(--gray-600);margin-bottom:.75rem">Mounts on the wellhead casing or a nearby post. Houses the PCB, battery, and charge controller. Solar panel mounts on lid exterior.</p>
+
+        <div class="dim-grid">
+          <div class="dim-item"><div class="dim-label">Outer Dimensions</div><div class="dim-val">160 × 110 × 55 mm</div></div>
+          <div class="dim-item"><div class="dim-label">Wall Thickness</div><div class="dim-val">3 mm</div></div>
+          <div class="dim-item"><div class="dim-label">Lid Style</div><div class="dim-val">Clamshell with 4× M3 screws</div></div>
+          <div class="dim-item"><div class="dim-label">Gasket</div><div class="dim-val">2mm silicone O-ring groove in lid perimeter</div></div>
+          <div class="dim-item"><div class="dim-label">Cable Glands</div><div class="dim-val">2× M12 holes on bottom face (probe cable + solar)</div></div>
+          <div class="dim-item"><div class="dim-label">Antenna Holes</div><div class="dim-val">2× SMA bulkhead (6.5mm) on side wall</div></div>
+          <div class="dim-item"><div class="dim-label">PCB Standoffs</div><div class="dim-val">4× M3 posts, 5mm tall, at 70×40mm spacing</div></div>
+          <div class="dim-item"><div class="dim-label">Battery Bay</div><div class="dim-val">70 × 40 × 20 mm recess next to PCB</div></div>
+          <div class="dim-item"><div class="dim-label">Mounting</div><div class="dim-val">2× slots on back for pipe clamp / zip tie</div></div>
+          <div class="dim-item"><div class="dim-label">Solar Recess</div><div class="dim-val">Lid top: 170×100mm flat area with 4× screw holes for panel</div></div>
+          <div class="dim-item"><div class="dim-label">Material</div><div class="dim-val">PETG (UV resistant)</div></div>
+          <div class="dim-item"><div class="dim-label">Color</div><div class="dim-val">White or light gray (heat rejection)</div></div>
+        </div>
+
+        <div class="drawing"><span class="label">WELLHEAD CONTROLLER BOX — TOP VIEW</span>
+
+  ┌──────────────────────────────────┐
+  │         <span class="highlight">SOLAR PANEL (170×100)</span>        │
+  │      mounted on lid exterior     │
+  │                                  │
+  ├──────────────────────────────────┤  <span class="dim">← 160mm →</span>
+  │                                  │
+  │  ┌─────────┐   ┌──────────┐     │
+  │  │  <span class="highlight">PCB</span>     │   │ <span class="highlight">BATTERY</span>  │     │  <span class="dim">↕ 110mm</span>
+  │  │ 80×50mm │   │ 70×40mm  │     │
+  │  └─────────┘   └──────────┘     │
+  │                                  │
+  │  (SMA)  (SMA)                    │  <span class="label">← antenna bulkheads on side</span>
+  └────(M12)────(M12)────────────────┘
+        <span class="label">↑ probe    ↑ solar</span>
+        <span class="label">  cable      cable</span>
+
+
+<span class="label">SIDE VIEW (cross-section)</span>
+
+        <span class="highlight">solar panel</span>
+  ══════════════════════
+  ┌──────────────────┐  <span class="dim">← lid (3mm wall)</span>
+  │  <span class="dim">O-ring groove</span>    │
+  ├──────────────────┤
+  │                  │  <span class="dim">55mm total height</span>
+  │  PCB   BATTERY   │
+  │  ▓▓▓▓  ████████  │
+  │  ┊┊┊┊            │  <span class="dim">← M3 standoffs (5mm)</span>
+  └──────────────────┘  <span class="dim">← base (3mm wall)</span>
+     ◯        ◯         <span class="label">cable glands (M12)</span></div>
+      </div>
+
+      <div class="enclosure-box">
+        <h4>Part B: Vent Tube Cap (for barometric compensation)</h4>
+        <p style="font-size:.85rem;color:var(--gray-600);margin-bottom:.75rem">Small cap that goes on the top of the vented transducer cable to prevent moisture ingress while allowing atmospheric pressure equalization.</p>
+
+        <div class="dim-grid">
+          <div class="dim-item"><div class="dim-label">Outer Diameter</div><div class="dim-val">25 mm</div></div>
+          <div class="dim-item"><div class="dim-label">Height</div><div class="dim-val">30 mm</div></div>
+          <div class="dim-item"><div class="dim-label">Inner Diameter</div><div class="dim-val">Cable OD + 1mm clearance</div></div>
+          <div class="dim-item"><div class="dim-label">Vent</div><div class="dim-val">Gore-Tex patch or 3× 1mm holes with desiccant chamber</div></div>
+        </div>
+      </div>
+
+      <h3>System Diagram</h3>
+      <div class="drawing"><span class="label">WX-LEVEL SYSTEM ARCHITECTURE</span>
+
+  ┌─────────────────────────────────────────────────┐
+  │                  <span class="highlight">WELLHEAD BOX</span>                     │
+  │                                                 │
+  │  ┌─────────┐  ┌─────────┐  ┌──────────┐       │
+  │  │ <span class="highlight">ESP32-S3</span> │──│ <span class="highlight">ADS1115</span>  │──│ 250Ω     │──┐    │
+  │  │         │  │ 16-bit  │  │ receiver │  │    │
+  │  │  GPIO   │  │ ADC     │  └──────────┘  │    │
+  │  │   │     │  └─────────┘                │    │
+  │  │   │ SPI │                             │    │
+  │  │   │  │  │  ┌─────────┐               │    │
+  │  │   │  └──│──│ <span class="highlight">SX1276</span>  │──→ <span class="dim">LoRa 915MHz</span> │    │
+  │  │   │     │  │ LoRa    │    antenna    │    │
+  │  │   │     │  └─────────┘               │    │
+  │  │   │ I2C │                             │    │
+  │  │   │  │  │  ┌─────────┐               │    │
+  │  │   │  └──│──│ <span class="highlight">BME280</span>  │ baro+temp    │    │
+  │  │   │     │  └─────────┘               │    │
+  │  │   │UART │                             │    │
+  │  │   └──│──│──│ <span class="highlight">SIM7000G</span> │──→ <span class="dim">LTE Cat-M1</span> │    │
+  │  │         │  └─────────┘    antenna    │    │
+  │  └─────────┘                             │    │
+  │                                          │    │
+  │  ┌─────────┐  ┌─────────┐              │    │
+  │  │ <span class="highlight">CN3791</span>  │──│ <span class="highlight">LiPo</span>    │              │    │
+  │  │ MPPT    │  │ 6000mAh │              │    │
+  │  │ charger │  └─────────┘              │    │
+  │  └────┬────┘                            │    │
+  │       │                                 │    │
+  └───────│─────────────────────────────────│────┘
+          │                                 │
+     ┌────┴────┐                    ┌───────┴──────┐
+     │ <span class="highlight">SOLAR</span>   │                    │ <span class="highlight">SUBMERSIBLE</span>  │
+     │ <span class="highlight">PANEL</span>   │                    │ <span class="highlight">PRESSURE</span>    │
+     │ 6W 6V   │                    │ <span class="highlight">TRANSDUCER</span>  │
+     └─────────┘                    │ 4-20mA      │
+                                    │ 0-10 PSI    │
+                                    │ vented cable │
+                                    └──────────────┘
+                                          │
+                                    <span class="dim">lowered into well</span>
+                                    <span class="dim">on vented cable</span></div>
+
+      <h3>File Structure</h3>
+      <div class="file-tree">
+<span class="dir">hardware/wx-level/</span>
+├── <span class="dir">firmware/</span>
+│   ├── <span class="file">wx_level.ino</span>           <span class="status-badge status-ready">FIRMWARE</span>
+│   ├── <span class="file">config.h</span>              <span class="status-badge status-ready">FIRMWARE</span>
+│   └── <span class="file">platformio.ini</span>        <span class="status-badge status-ready">FIRMWARE</span>
+├── <span class="dir">kicad/</span>
+│   ├── <span class="file">wx_level.kicad_sch</span>    <span class="status-badge status-ready">SCHEMATIC</span>
+│   └── <span class="file">wx_level.kicad_pro</span>    <span class="status-badge status-ready">SCHEMATIC</span>
+├── <span class="dir">enclosure/</span>
+│   ├── <span class="you">controller_box.f3d</span>    <span class="status-badge status-you">YOU — FUSION 360</span>
+│   ├── <span class="you">controller_box.3mf</span>    <span class="status-badge status-you">YOU — BAMBU</span>
+│   └── <span class="you">vent_cap.f3d</span>          <span class="status-badge status-you">YOU — FUSION 360</span>
+└── <span class="file">README.md</span>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <!--  PRODUCT 2: WX-Flow — Aquifer Flow + Quality Probe             -->
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <div class="product-panel" id="panel-flow">
+
+      <h2>WX-Flow — Aquifer Flow + Quality Probe</h2>
+      <p class="desc">Combined groundwater flow velocity/direction + water quality probe. Uses heat pulse technology (like AquaVector/iFLUX) with a 4-thermistor array to measure Darcy velocity and flow direction, plus conductivity/TDS and temperature sensors. Designed to fit inside a standard 2" or 4" monitoring well.</p>
+
+      <div class="callout"><strong>Reference designs:</strong> iFLUX (Belgium) — microfluid flow chip, 0.5–500 cm/day, ±7° direction. AquaVector (Netherlands) — heat pulse + thermistor array, up to 50m wells. Our approach uses the heat pulse method (simpler to manufacture than iFLUX's microfluidic chip) with off-the-shelf thermistors.</div>
+
+      <h3>Specifications</h3>
+      <div class="spec-grid">
+        <div class="spec-card"><div class="label">Flow Velocity</div><div class="value">0.5–200 cm/day</div><div class="note">Heat pulse + 4-thermistor array</div></div>
+        <div class="spec-card"><div class="label">Flow Direction</div><div class="value">360° ± 10°</div><div class="note">4 thermistors at 90° spacing</div></div>
+        <div class="spec-card"><div class="label">Conductivity</div><div class="value">0–100,000 µS/cm</div><div class="note">4-electrode cell, ±2%</div></div>
+        <div class="spec-card"><div class="label">TDS</div><div class="value">Derived from conductivity</div><div class="note">Factor 0.5–0.7 configurable</div></div>
+        <div class="spec-card"><div class="label">Temperature</div><div class="value">0–50°C ± 0.1°C</div><div class="note">PT1000 RTD</div></div>
+        <div class="spec-card"><div class="label">Water Level</div><div class="value">0–100 ft</div><div class="note">Integrated pressure sensor</div></div>
+        <div class="spec-card"><div class="label">Probe Diameter</div><div class="value">45 mm (1.77")</div><div class="note">Fits 2" well casing</div></div>
+        <div class="spec-card"><div class="label">Probe Length</div><div class="value">300 mm (12")</div><div class="note">Sensor section only</div></div>
+        <div class="spec-card"><div class="label">Well Depth</div><div class="value">Up to 100 ft (30 m)</div><div class="note">Limited by cable length</div></div>
+        <div class="spec-card"><div class="label">MCU</div><div class="value">ESP32-S3</div><div class="note">Same as WX-Level for shared firmware</div></div>
+        <div class="spec-card"><div class="label">Connectivity</div><div class="value">LoRa + Cellular</div><div class="note">Surface controller box (shared design with WX-Level)</div></div>
+        <div class="spec-card"><div class="label">Target BOM</div><div class="value">~$140</div><div class="note">At qty 100</div></div>
+      </div>
+
+      <h3>How the Heat Pulse Flow Sensor Works</h3>
+      <div class="enclosure-box">
+        <p style="font-size:.85rem;color:var(--gray-600);line-height:1.8">
+          1. A small heater element (nichrome wire, 2W) at the center of the probe heats the surrounding groundwater for 3–5 seconds.<br>
+          2. Four thermistors (NTC 10kΩ) are arranged at 90° intervals around the heater, 15mm away from center.<br>
+          3. As groundwater flows past, it carries the heat plume preferentially toward the downstream thermistor.<br>
+          4. The thermistor that sees the fastest temperature rise indicates flow direction.<br>
+          5. The time delay between the heat pulse and the peak temperature at the downstream thermistor gives flow velocity (shorter delay = faster flow).<br>
+          6. Calibration curve maps delay time → Darcy velocity in cm/day.<br>
+          7. Measurement cycle takes ~60 seconds. Repeated every 15 minutes.
+        </p>
+      </div>
+
+      <h3>Bill of Materials</h3>
+      <table>
+        <tr><th>Component</th><th>Part / Spec</th><th>Source</th><th>Unit Price</th></tr>
+        <tr><td colspan="4" style="background:var(--sky);font-weight:700;color:var(--navy)">Surface Controller (shared with WX-Level)</td></tr>
+        <tr><td>Microcontroller</td><td>ESP32-S3-WROOM-1 (N16R8)</td><td>LCSC</td><td class="price">$3.50</td></tr>
+        <tr><td>LoRa Module</td><td>SX1276 915MHz</td><td>HopeRF</td><td class="price">$5.00</td></tr>
+        <tr><td>Cellular Module</td><td>SIM7000G</td><td>SIMCom</td><td class="price">$12.00</td></tr>
+        <tr><td>Solar + Battery</td><td>6W panel + 6000mAh LiPo</td><td>Amazon</td><td class="price">$14.00</td></tr>
+        <tr><td>Charge Controller</td><td>CN3791 MPPT</td><td>LCSC</td><td class="price">$0.80</td></tr>
+        <tr><td>ADC</td><td>ADS1115 16-bit, 4-channel</td><td>TI / LCSC</td><td class="price">$2.00</td></tr>
+        <tr><td>ADC #2</td><td>ADS1115 (second unit for thermistors)</td><td>TI / LCSC</td><td class="price">$2.00</td></tr>
+        <tr><td colspan="4" style="background:var(--sky);font-weight:700;color:var(--navy)">Submersible Probe</td></tr>
+        <tr><td>Thermistors × 4</td><td>NTC 10kΩ glass-bead, waterproof</td><td>Adafruit / LCSC</td><td class="price">$6.00</td></tr>
+        <tr><td>Heater Element</td><td>Nichrome wire coil, 2W, potted in epoxy</td><td>Custom wind</td><td class="price">$2.00</td></tr>
+        <tr><td>Heater Driver</td><td>IRLZ44N N-MOSFET + flyback diode</td><td>LCSC</td><td class="price">$1.00</td></tr>
+        <tr><td>Conductivity Cell</td><td>4-electrode platinum, K=1.0</td><td>Atlas Scientific / DFRobot</td><td class="price">$15.00</td></tr>
+        <tr><td>Conductivity Circuit</td><td>Atlas EZO-EC or DFRobot DFR0300</td><td>Atlas Scientific</td><td class="price">$18.00</td></tr>
+        <tr><td>Temperature (RTD)</td><td>PT1000 waterproof, 3-wire</td><td>Adafruit / LCSC</td><td class="price">$5.00</td></tr>
+        <tr><td>Pressure Transducer</td><td>Submersible 4-20mA, 0-10 PSI</td><td>CFSensor</td><td class="price">$18.00</td></tr>
+        <tr><td>Probe Body</td><td>3D-printed PETG tube, epoxy-potted ends</td><td>Bambu Lab (you print)</td><td class="price">$5.00</td></tr>
+        <tr><td>Cable</td><td>12-conductor shielded, polyurethane jacket, 30m</td><td>Alibaba</td><td class="price">$15.00</td></tr>
+        <tr><td>Connectors</td><td>M12 8-pin waterproof × 2, cable glands</td><td>Amazon</td><td class="price">$8.00</td></tr>
+        <tr><td>Misc</td><td>Epoxy potting compound, O-rings, desiccant, hardware</td><td>—</td><td class="price">$5.00</td></tr>
+        <tr style="font-weight:700;background:var(--sky)"><td colspan="3">Total BOM (qty 1)</td><td class="price">~$138</td></tr>
+      </table>
+
+      <h3>Enclosure Design — For Fusion 360</h3>
+      <div class="callout"><strong>This is your part.</strong> Two pieces to model: the submersible probe body (cylindrical) and the surface controller box (identical to WX-Level box — just add one more cable gland).</div>
+
+      <div class="enclosure-box">
+        <h4>Part A: Submersible Probe Body</h4>
+        <p style="font-size:.85rem;color:var(--gray-600);margin-bottom:.75rem">Cylindrical tube that goes down the well. Houses the heater, thermistors, conductivity cell, pressure sensor, and PT1000. Both ends are epoxy-potted after assembly.</p>
+
+        <div class="dim-grid">
+          <div class="dim-item"><div class="dim-label">Outer Diameter</div><div class="dim-val">45 mm (fits 2" well casing)</div></div>
+          <div class="dim-item"><div class="dim-label">Total Length</div><div class="dim-val">300 mm</div></div>
+          <div class="dim-item"><div class="dim-label">Wall Thickness</div><div class="dim-val">2.5 mm</div></div>
+          <div class="dim-item"><div class="dim-label">Top Cap</div><div class="dim-val">Cable entry with M12 connector or epoxy pot</div></div>
+          <div class="dim-item"><div class="dim-label">Bottom Cap</div><div class="dim-val">Pressure sensor face (open to water)</div></div>
+          <div class="dim-item"><div class="dim-label">Flow Slots</div><div class="dim-val">8× vertical slots, 60mm long × 5mm wide, evenly spaced around mid-section</div></div>
+          <div class="dim-item"><div class="dim-label">Slot Purpose</div><div class="dim-val">Allow groundwater to flow through probe for heat pulse measurement</div></div>
+          <div class="dim-item"><div class="dim-label">Heater Mount</div><div class="dim-val">Central post, 10mm dia × 40mm tall, centered in flow chamber</div></div>
+          <div class="dim-item"><div class="dim-label">Thermistor Mounts</div><div class="dim-val">4× radial posts at 90°, 15mm from center, 3mm dia holes</div></div>
+          <div class="dim-item"><div class="dim-label">Conductivity Cell</div><div class="dim-val">Recess at bottom of flow chamber, 20mm dia × 30mm deep</div></div>
+          <div class="dim-item"><div class="dim-label">Material</div><div class="dim-val">PETG (or POM/Delrin if available)</div></div>
+          <div class="dim-item"><div class="dim-label">Sealing</div><div class="dim-val">Epoxy potting compound on both ends after wiring</div></div>
+        </div>
+
+        <div class="drawing"><span class="label">WX-FLOW SUBMERSIBLE PROBE — CROSS SECTION (side view)</span>
+
+     cable to surface
+          │
+     ┌────┴────┐
+     │ <span class="highlight">EPOXY</span>   │  ← top cap, epoxy-potted with cable pass-through
+     │ <span class="highlight">POTTING</span> │
+     ├─────────┤
+     │         │
+     │  ┌───┐  │  ← <span class="label">internal electronics chamber</span>
+     │  │PCB│  │     (signal conditioning, MOSFET driver)
+     │  └───┘  │
+     ├─────────┤
+     │ ┃     ┃ │
+     │ ┃  <span class="highlight">H</span>  ┃ │  ← <span class="dim">FLOW CHAMBER (open slots in wall)</span>
+     │ ┃ <span class="highlight">T</span>·<span class="highlight">H</span>·<span class="highlight">T</span> ┃ │     H = heater (center)
+     │ ┃  <span class="highlight">H</span>  ┃ │     T = thermistors (4× at 90°, 15mm from center)
+     │ ┃     ┃ │
+     │ ┃ <span class="highlight">T</span>   ┃ │
+     ├─┃─────┃─┤
+     │ <span class="highlight">COND</span>    │  ← conductivity cell recess
+     │ <span class="highlight">CELL</span>    │
+     ├─────────┤
+     │ <span class="highlight">PT1000</span>  │  ← temperature RTD
+     ├─────────┤
+     │ <span class="highlight">PRESS</span>   │  ← pressure transducer (face exposed to water)
+     └─────────┘
+     <span class="dim">   45mm    </span>
+
+
+<span class="label">TOP-DOWN CROSS SECTION (through flow chamber)</span>
+
+          slot          slot
+           ┃              ┃
+      ─────╂──────────────╂─────
+     ┃     ┃              ┃     ┃
+     ┃         <span class="highlight">T</span>                  ┃   T = thermistor
+  ───╂    <span class="highlight">T</span>    <span class="highlight">●</span>    <span class="highlight">T</span>          ╂── slot
+     ┃         <span class="highlight">T</span>                  ┃   ● = heater (center)
+     ┃     ┃              ┃     ┃
+      ─────╂──────────────╂─────   <span class="dim">⌀ 45mm outer wall</span>
+           ┃              ┃
+          slot          slot
+
+     <span class="dim">thermistors at 15mm radius from center</span>
+     <span class="dim">8 slots allow water to flow through</span></div>
+      </div>
+
+      <div class="enclosure-box">
+        <h4>Part B: Surface Controller Box</h4>
+        <p style="font-size:.85rem;color:var(--gray-600);margin-bottom:.75rem">Identical to the WX-Level controller box but with one additional cable gland for the 12-conductor probe cable. Same PCB layout with an added second ADS1115 for thermistor channels.</p>
+
+        <div class="dim-grid">
+          <div class="dim-item"><div class="dim-label">Outer Dimensions</div><div class="dim-val">160 × 110 × 55 mm (same as WX-Level)</div></div>
+          <div class="dim-item"><div class="dim-label">Cable Glands</div><div class="dim-val">3× M12 on bottom (probe + solar + aux)</div></div>
+          <div class="dim-item"><div class="dim-label">Everything Else</div><div class="dim-val">Same as WX-Level controller box</div></div>
+        </div>
+      </div>
+
+      <h3>System Diagram</h3>
+      <div class="drawing"><span class="label">WX-FLOW SYSTEM ARCHITECTURE</span>
+
+  ┌──────────────────────────────────────────────┐
+  │            <span class="highlight">SURFACE CONTROLLER BOX</span>              │
+  │                                              │
+  │  ┌─────────┐  ┌─────────────────────┐       │
+  │  │ <span class="highlight">ESP32-S3</span> │──│ <span class="highlight">ADS1115 #1</span>           │       │
+  │  │         │  │ Ch0: pressure 4-20mA│       │
+  │  │         │  │ Ch1: conductivity   │       │
+  │  │         │  │ Ch2: PT1000 RTD     │       │
+  │  │         │  └─────────────────────┘       │
+  │  │         │                                │
+  │  │         │──│ <span class="highlight">ADS1115 #2</span>           │       │
+  │  │         │  │ Ch0: thermistor N   │       │
+  │  │         │  │ Ch1: thermistor E   │       │
+  │  │         │  │ Ch2: thermistor S   │       │
+  │  │         │  │ Ch3: thermistor W   │       │
+  │  │         │  └─────────────────────┘       │
+  │  │         │                                │
+  │  │  GPIO ──│──│ <span class="highlight">MOSFET</span> │──→ heater power     │
+  │  │         │  └────────┘                    │
+  │  │         │                                │
+  │  │   SPI ──│──│ <span class="highlight">SX1276 LoRa</span> │──→ antenna     │
+  │  │  UART ──│──│ <span class="highlight">SIM7000G</span>   │──→ antenna     │
+  │  └─────────┘  └────────────┘                │
+  │                                              │
+  │  <span class="highlight">CN3791</span> ←── solar    <span class="highlight">LiPo 6000mAh</span>           │
+  └──────────────────────────────────────────────┘
+          │
+     12-conductor cable (30m)
+          │
+  ┌───────┴──────────────────┐
+  │    <span class="highlight">SUBMERSIBLE PROBE</span>       │
+  │                          │
+  │   ┌──────────────────┐   │
+  │   │ <span class="highlight">FLOW CHAMBER</span>     │   │  ← 8 open slots in wall
+  │   │                  │   │
+  │   │   T    T    T    │   │  4× thermistors (NTC 10kΩ)
+  │   │      <span class="highlight">HEATER</span>      │   │  nichrome coil (2W)
+  │   │   T              │   │
+  │   └──────────────────┘   │
+  │   ┌──────────────────┐   │
+  │   │ <span class="highlight">CONDUCTIVITY</span>     │   │  4-electrode Pt cell
+  │   │ <span class="highlight">PT1000</span>           │   │  RTD temperature
+  │   │ <span class="highlight">PRESSURE</span>         │   │  4-20mA submersible
+  │   └──────────────────┘   │
+  └──────────────────────────┘</div>
+
+      <h3>File Structure</h3>
+      <div class="file-tree">
+<span class="dir">hardware/wx-flow/</span>
+├── <span class="dir">firmware/</span>
+│   ├── <span class="file">wx_flow.ino</span>            <span class="status-badge status-ready">FIRMWARE</span>
+│   ├── <span class="file">config.h</span>               <span class="status-badge status-ready">FIRMWARE</span>
+│   ├── <span class="file">heat_pulse.h</span>           <span class="status-badge status-ready">FIRMWARE</span>
+│   └── <span class="file">platformio.ini</span>         <span class="status-badge status-ready">FIRMWARE</span>
+├── <span class="dir">kicad/</span>
+│   ├── <span class="file">wx_flow.kicad_sch</span>      <span class="status-badge status-ready">SCHEMATIC</span>
+│   └── <span class="file">wx_flow.kicad_pro</span>      <span class="status-badge status-ready">SCHEMATIC</span>
+├── <span class="dir">enclosure/</span>
+│   ├── <span class="you">probe_body.f3d</span>         <span class="status-badge status-you">YOU — FUSION 360</span>
+│   ├── <span class="you">probe_body.3mf</span>         <span class="status-badge status-you">YOU — BAMBU</span>
+│   ├── <span class="you">controller_box.f3d</span>     <span class="status-badge status-you">YOU — FUSION 360</span>
+│   └── <span class="you">controller_box.3mf</span>     <span class="status-badge status-you">YOU — BAMBU</span>
+├── <span class="dir">calibration/</span>
+│   └── <span class="file">flow_calibration.py</span>    <span class="status-badge status-ready">SCRIPT</span>
+└── <span class="file">README.md</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function showProduct(id) {
+  document.querySelectorAll('.product-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.product-panel').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('panel-' + id).classList.add('active');
+}
+</script>
+</body>
+</html>

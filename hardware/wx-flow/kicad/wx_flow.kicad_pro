@@ -1,0 +1,12 @@
+{
+  "board": { "3dviewports": [], "design_settings": {}, "ipc2581": { "dist": "", "fabric": "", "pcb": "" }, "layer_presets": [], "layers": {} },
+  "boards": [],
+  "cvpcb": { "equivalence_files": [] },
+  "libraries": { "pinned_footprint_libs": [], "pinned_symbol_libs": [] },
+  "meta": { "filename": "wx_flow.kicad_pro", "version": 1 },
+  "net_settings": { "classes": [] },
+  "pcbnew": { "last_paths": {} },
+  "schematic": { "drawing": {}, "legacy_lib_dir": "", "legacy_lib_list": [] },
+  "sheets": [ [ "f74f50a8-7b1c-4e2d-9a3e-2c5d8f0b1e44", "" ] ],
+  "text_variables": {}
+}
