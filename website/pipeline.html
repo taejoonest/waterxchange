@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WaterXchange — Transfer Approval Pipeline</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #0b1d3a; --blue: #1a6fc4; --teal: #0e9aa7;
+      --sky: #e8f4f8; --white: #fff;
+      --gray-50: #f8fafc; --gray-100: #f1f5f9; --gray-200: #e2e8f0;
+      --gray-400: #94a3b8; --gray-600: #475569; --gray-800: #1e293b;
+      --green: #22c55e; --amber: #f59e0b; --red: #ef4444;
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--gray-800); background: var(--gray-50); line-height: 1.6; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; background: rgba(11,29,58,0.95); backdrop-filter: blur(12px); }
+    .nav-logo { font-size: 1.25rem; font-weight: 700; color: var(--white); }
+    .nav-logo span { color: var(--teal); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--gray-200); text-decoration: none; font-size: .9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--teal); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 5rem 2rem 3rem; }
+    h1 { font-size: 2rem; margin-bottom: .5rem; color: var(--navy); }
+    .subtitle { color: var(--gray-600); margin-bottom: 2rem; }
+    .scenarios { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .scenario-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; padding: 1.25rem; cursor: pointer; transition: all .2s; }
+    .scenario-card:hover { border-color: var(--teal); box-shadow: 0 4px 16px rgba(14,154,167,.12); }
+    .scenario-card.active { border-color: var(--teal); background: var(--sky); }
+    .scenario-card h3 { font-size: .95rem; margin-bottom: .35rem; }
+    .scenario-card p { font-size: .8rem; color: var(--gray-600); }
+    .form-section { background: var(--white); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--gray-200); margin-bottom: 1.5rem; }
+    .form-section h2 { font-size: 1.1rem; margin-bottom: 1rem; color: var(--navy); }
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: .75rem; }
+    .field label { display: block; font-size: .75rem; font-weight: 600; color: var(--gray-600); margin-bottom: .25rem; text-transform: uppercase; letter-spacing: .04em; }
+    .field input, .field select { width: 100%; padding: .5rem .75rem; border: 1px solid var(--gray-200); border-radius: 8px; font-size: .9rem; background: var(--gray-50); }
+    .field input:focus, .field select:focus { outline: none; border-color: var(--teal); }
+    .check-field { display: flex; align-items: center; gap: .5rem; padding: .35rem 0; }
+    .check-field input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--teal); }
+    .check-field label { font-size: .85rem; text-transform: none; letter-spacing: 0; margin: 0; }
+    .run-btn { display: inline-flex; align-items: center; gap: .5rem; padding: .75rem 2rem; background: var(--teal); color: var(--white); border: none; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background .2s; }
+    .run-btn:hover { background: #0c8690; }
+    .run-btn:disabled { opacity: .5; cursor: wait; }
+    .run-btn .spinner { display: none; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff; border-radius: 50%; animation: spin .6s linear infinite; }
+    .run-btn.loading .spinner { display: block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .toggle-btn { padding: .5rem 1.25rem; border: 2px solid var(--gray-200); border-radius: 8px; background: var(--white); font-size: .9rem; font-weight: 600; cursor: pointer; color: var(--gray-600); transition: all .2s; }
+    .toggle-btn.active { border-color: var(--teal); background: var(--sky); color: var(--teal); }
+    .toggle-btn:hover { border-color: var(--teal); }
+    .results { display: none; }
+    .results.visible { display: block; }
+    .decision-banner { padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+    .decision-banner.approved { background: #dcfce7; border: 1px solid #86efac; }
+    .decision-banner.conditional { background: #fef9c3; border: 1px solid #fde047; }
+    .decision-banner.denied { background: #fee2e2; border: 1px solid #fca5a5; }
+    .decision-banner .badge { padding: .35rem .75rem; border-radius: 6px; font-weight: 700; font-size: .85rem; text-transform: uppercase; }
+    .approved .badge { background: var(--green); color: white; }
+    .conditional .badge { background: var(--amber); color: white; }
+    .denied .badge { background: var(--red); color: white; }
+    .decision-banner .score { font-size: 1.4rem; font-weight: 700; }
+    .stages-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+    .stage-card { background: var(--white); border-radius: 10px; padding: 1rem; border: 1px solid var(--gray-200); }
+    .stage-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: .5rem; }
+    .stage-card .name { font-weight: 600; font-size: .9rem; }
+    .stage-card .finding { padding: .15rem .5rem; border-radius: 4px; font-size: .75rem; font-weight: 600; }
+    .finding-PASS { background: #dcfce7; color: #166534; }
+    .finding-CONDITIONAL { background: #fef9c3; color: #854d0e; }
+    .finding-FAIL { background: #fee2e2; color: #991b1b; }
+    .stage-card .reasoning { font-size: .8rem; color: var(--gray-600); margin-bottom: .5rem; }
+    .stage-card .score-bar { height: 4px; background: var(--gray-200); border-radius: 2px; overflow: hidden; }
+    .stage-card .score-fill { height: 100%; border-radius: 2px; transition: width .5s ease; }
+    .detail-section { background: var(--white); border-radius: 12px; padding: 1.25rem; border: 1px solid var(--gray-200); margin-bottom: 1rem; }
+    .detail-section h3 { font-size: .95rem; margin-bottom: .75rem; color: var(--navy); }
+    .detail-section ul { padding-left: 1.25rem; }
+    .detail-section li { font-size: .85rem; margin-bottom: .35rem; color: var(--gray-600); }
+    .report-box { background: var(--navy); color: #e2e8f0; border-radius: 12px; padding: 1.5rem; font-family: 'SF Mono', 'Fira Code', monospace; font-size: .8rem; line-height: 1.7; white-space: pre-wrap; max-height: 600px; overflow-y: auto; }
+    .rights-box { background: #1e293b; color: #e2e8f0; border-radius: 12px; padding: 1.5rem; font-size: .85rem; line-height: 1.7; white-space: pre-wrap; max-height: 400px; overflow-y: auto; }
+    .rights-box .tier { display: inline-block; padding: .15rem .5rem; border-radius: 4px; font-size: .7rem; font-weight: 600; margin-bottom: .5rem; }
+    .tier-large { background: var(--teal); color: white; }
+    .tier-fallback { background: var(--gray-400); color: white; }
+    .hidden { display: none !important; }
+    .pipeline-badge { display: inline-block; padding: .15rem .5rem; border-radius: 4px; font-size: .7rem; font-weight: 600; margin-left: .5rem; }
+    .pipeline-badge.gw { background: #dbeafe; color: #1e40af; }
+    .pipeline-badge.sw { background: #e0e7ff; color: #3730a3; }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-logo">Water<span>X</span>change</div>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/monitor">Monitoring</a></li>
+      <li><a href="/pipeline" style="color:var(--teal)">Pipeline</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h1>Transfer Approval Pipeline</h1>
+    <p class="subtitle">Automated compliance analysis for California water transfers</p>
+
+    <div style="display:flex;gap:.5rem;margin-bottom:1.5rem">
+      <button class="toggle-btn active" id="gwToggle" onclick="setPipeline('gw')">Groundwater</button>
+      <button class="toggle-btn" id="swToggle" onclick="setPipeline('sw')">Surface Water</button>
+    </div>
+
+    <h2 style="font-size:1rem;margin-bottom:.75rem">Demo Scenarios</h2>
+    <div class="scenarios" id="scenarios"></div>
+
+    <!-- ═══ GROUNDWATER FORM ═══ -->
+    <div id="gwForm">
+      <div class="form-section">
+        <h2>Seller <span class="pipeline-badge gw">Groundwater</span></h2>
+        <div class="form-grid">
+          <div class="field"><label>Entity Type</label><select id="gs_type"><option value="farmer">Farmer</option><option value="water_district">Water District</option><option value="municipality">Municipality</option><option value="water_bank">Water Bank</option><option value="industrial">Industrial</option><option value="gsa">GSA</option></select></div>
+          <div class="field"><label>Name</label><input id="gs_name"></div>
+          <div class="field"><label>GSA</label><input id="gs_gsa"></div>
+          <div class="field"><label>Basin</label><input id="gs_basin" value="Kern County"></div>
+          <div class="field"><label>Allocation (AF)</label><input id="gs_alloc" type="number"></div>
+          <div class="field"><label>Used (AF)</label><input id="gs_used" type="number"></div>
+          <div class="field"><label>Banked Balance (AF)</label><input id="gs_banked" type="number" value="0"></div>
+          <div class="field"><label>Extraction</label><select id="gs_method"><option value="metered">Metered</option><option value="self_reported">Self-Reported</option></select></div>
+          <div class="field"><label>Well Lat</label><input id="gs_lat" type="number" step="0.001"></div>
+          <div class="field"><label>Well Lng</label><input id="gs_lng" type="number" step="0.001"></div>
+          <div class="field"><label>Well Depth (ft)</label><input id="gs_depth" type="number"></div>
+          <div class="field"><label>Water Level (ft)</label><input id="gs_wl" type="number"></div>
+          <div class="field"><label>Nitrate (mg/L)</label><input id="gs_nit" type="number" step="0.1"></div>
+          <div class="field"><label>HCM Area</label><select id="gs_hcm"><option value="">--</option><option>Kern River Fan</option><option>North Basin</option><option>South Basin</option><option>East Margin</option><option>Western Fold Belt</option></select></div>
+        </div>
+      </div>
+      <div class="form-section">
+        <h2>Buyer</h2>
+        <div class="form-grid">
+          <div class="field"><label>Entity Type</label><select id="gb_type"><option value="farmer">Farmer</option><option value="water_district">Water District</option><option value="municipality">Municipality</option><option value="water_bank">Water Bank</option><option value="industrial">Industrial</option><option value="gsa">GSA</option><option value="developer">Developer</option><option value="environmental">Environmental</option></select></div>
+          <div class="field"><label>Name</label><input id="gb_name"></div>
+          <div class="field"><label>GSA</label><input id="gb_gsa"></div>
+          <div class="field"><label>Basin</label><input id="gb_basin" value="Kern County"></div>
+          <div class="field"><label>Allocation (AF)</label><input id="gb_alloc" type="number"></div>
+          <div class="field"><label>Used (AF)</label><input id="gb_used" type="number"></div>
+          <div class="field"><label>Service Pop</label><input id="gb_pop" type="number"></div>
+          <div class="field"><label>Extraction</label><select id="gb_method"><option value="metered">Metered</option><option value="self_reported">Self-Reported</option></select></div>
+          <div class="field"><label>Well Lat</label><input id="gb_lat" type="number" step="0.001"></div>
+          <div class="field"><label>Well Lng</label><input id="gb_lng" type="number" step="0.001"></div>
+          <div class="field"><label>Well Depth (ft)</label><input id="gb_depth" type="number"></div>
+          <div class="field"><label>Water Level (ft)</label><input id="gb_wl" type="number"></div>
+          <div class="field"><label>Nitrate (mg/L)</label><input id="gb_nit" type="number" step="0.1"></div>
+          <div class="field"><label>Domestic Wells 1mi</label><input id="gb_dom" type="number"></div>
+          <div class="field"><label>HCM Area</label><select id="gb_hcm"><option value="">--</option><option>Kern River Fan</option><option>North Basin</option><option>South Basin</option><option>East Margin</option><option>Western Fold Belt</option></select></div>
+        </div>
+      </div>
+      <div class="form-section">
+        <h2>Transfer</h2>
+        <div class="form-grid">
+          <div class="field"><label>Type</label><select id="gt_type"><option value="direct">Direct</option><option value="in_lieu">In-Lieu</option><option value="banked">Banked</option></select></div>
+          <div class="field"><label>Quantity (AF)</label><input id="gt_qty" type="number"></div>
+          <div class="field"><label>Price ($/AF)</label><input id="gt_price" type="number"></div>
+          <div class="field"><label>Duration (days)</label><input id="gt_dur" type="number" value="365"></div>
+          <div class="field"><label>Source GSA</label><input id="gt_sgsa"></div>
+          <div class="field"><label>Dest GSA</label><input id="gt_dgsa"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SURFACE WATER FORM ═══ -->
+    <div id="swForm" class="hidden">
+      <div class="form-section">
+        <h2>Seller <span class="pipeline-badge sw">Surface Water</span></h2>
+        <div class="form-grid">
+          <div class="field"><label>Entity Type</label><select id="ss_type"><option value="farmer">Farmer</option><option value="water_district">Water District</option><option value="municipality">Municipality</option><option value="industrial">Industrial</option></select></div>
+          <div class="field"><label>Name</label><input id="ss_name"></div>
+          <div class="field"><label>Water Right Type</label><select id="ss_right"><option value="appropriative_post1914">Post-1914 Appropriative</option><option value="appropriative_pre1914">Pre-1914 Appropriative</option><option value="cvp_contract">CVP Contract</option><option value="swp_contract">SWP Contract</option></select></div>
+          <div class="field"><label>eWRIMS Permit ID</label><input id="ss_ewrims"></div>
+          <div class="field"><label>Face Value (AF)</label><input id="ss_face" type="number"></div>
+          <div class="field"><label>Priority Date</label><input id="ss_priority" type="date"></div>
+          <div class="field"><label>Beneficial Use (AF)</label><input id="ss_benuse" type="number"></div>
+          <div class="field"><label>Historical Diversion (AF)</label><input id="ss_histdiv" type="number"></div>
+          <div class="field"><label>Consumptive Use (AF)</label><input id="ss_consuse" type="number"></div>
+          <div class="field"><label>Contract Allocation (AF)</label><input id="ss_calloc" type="number"></div>
+          <div class="field"><label>Contract Used (AF)</label><input id="ss_cused" type="number"></div>
+        </div>
+      </div>
+      <div class="form-section">
+        <h2>Buyer</h2>
+        <div class="form-grid">
+          <div class="field"><label>Entity Type</label><select id="sb_type"><option value="farmer">Farmer</option><option value="water_district">Water District</option><option value="municipality">Municipality</option><option value="industrial">Industrial</option></select></div>
+          <div class="field"><label>Name</label><input id="sb_name"></div>
+          <div class="field"><label>Basin / Region</label><input id="sb_basin"></div>
+          <div class="field"><label>Service Pop</label><input id="sb_pop" type="number"></div>
+        </div>
+      </div>
+      <div class="form-section">
+        <h2>Transfer</h2>
+        <div class="form-grid">
+          <div class="field"><label>Type</label><select id="st_type"><option value="temporary_change">Temporary Change</option><option value="long_term_change">Long-Term Change</option><option value="transfer">Permanent Transfer</option><option value="water_sale">Water Sale (Pre-1914)</option><option value="cvp_transfer">CVP Transfer</option><option value="swp_transfer">SWP Transfer</option></select></div>
+          <div class="field"><label>Quantity (AF)</label><input id="st_qty" type="number"></div>
+          <div class="field"><label>Price ($/AF)</label><input id="st_price" type="number"></div>
+          <div class="field"><label>Duration (days)</label><input id="st_dur" type="number" value="365"></div>
+          <div class="field"><label>Source Stream</label><input id="st_stream"></div>
+          <div class="field"><label>Point of Diversion</label><input id="st_pod"></div>
+          <div class="field"><label>Place of Use</label><input id="st_pou"></div>
+          <div class="field"><label>Downstream Rights #</label><input id="st_downstream" type="number" value="0"></div>
+          <div class="field"><label>Conveyance</label><select id="st_convey"><option value="canal_lined">Canal (Lined)</option><option value="canal_unlined">Canal (Unlined)</option><option value="pipeline">Pipeline</option><option value="natural_channel">Natural Channel</option></select></div>
+          <div class="field"><label>Wheeling Agency</label><input id="st_wheel"></div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-top:.75rem">
+          <div class="check-field"><input type="checkbox" id="st_envflow"><label for="st_envflow">Environmental flow requirements</label></div>
+          <div class="check-field"><input type="checkbox" id="st_fish"><label for="st_fish">Anadromous fish present</label></div>
+          <div class="check-field"><input type="checkbox" id="st_origin"><label for="st_origin">Area-of-origin export</label></div>
+          <div class="check-field"><input type="checkbox" id="st_delta"><label for="st_delta">Through Sacramento-San Joaquin Delta</label></div>
+          <div class="check-field"><input type="checkbox" id="st_gwsub"><label for="st_gwsub">Groundwater substitution</label></div>
+          <div class="check-field"><input type="checkbox" id="st_wheelreq"><label for="st_wheelreq">Requires wheeling agreement</label></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="run-btn" id="runBtn" onclick="runPipeline()">
+      <div class="spinner"></div>
+      Run Pipeline
+    </button>
+
+    <!-- Results -->
+    <div class="results" id="results">
+      <div id="decisionBanner" class="decision-banner" style="margin-top:1.5rem"></div>
+      <h2 style="font-size:1.1rem;margin:1.5rem 0 .75rem">Stage Results</h2>
+      <div class="stages-grid" id="stagesGrid"></div>
+      <div class="detail-section" id="conditionsSection" style="display:none"><h3>Conditions for Approval</h3><ul id="conditionsList"></ul></div>
+      <div class="detail-section" id="flagsSection" style="display:none"><h3>Risk Flags</h3><ul id="flagsList"></ul></div>
+      <div class="detail-section" id="monitoringSection" style="display:none"><h3>Monitoring Requirements</h3><ul id="monitoringList"></ul></div>
+      <div class="detail-section" id="rightsSection" style="display:none"><h3>Water Rights Risk Analysis</h3><div class="rights-box" id="rightsBox"></div></div>
+      <h2 style="font-size:1.1rem;margin:1.5rem 0 .75rem">Full Compliance Report</h2>
+      <div class="report-box" id="reportBox"></div>
+    </div>
+  </div>
+
+<script>
+const API = window.location.origin;
+let currentPipeline = 'gw';
+let activeScenarioData = null;
+
+function setPipeline(type) {
+  currentPipeline = type;
+  document.getElementById('gwToggle').classList.toggle('active', type === 'gw');
+  document.getElementById('swToggle').classList.toggle('active', type === 'sw');
+  document.getElementById('gwForm').classList.toggle('hidden', type !== 'gw');
+  document.getElementById('swForm').classList.toggle('hidden', type !== 'sw');
+  document.getElementById('results').classList.remove('visible');
+  activeScenarioData = null;
+  loadScenarios();
+}
+
+async function loadScenarios() {
+  const ep = currentPipeline === 'sw' ? '/transfers/demo/sw-scenarios' : '/transfers/demo/scenarios';
+  try {
+    const r = await fetch(API + ep);
+    const d = await r.json();
+    const c = document.getElementById('scenarios');
+    c.innerHTML = '';
+    d.scenarios.forEach(sc => {
+      const card = document.createElement('div');
+      card.className = 'scenario-card';
+      card.innerHTML = `<h3>${sc.name}</h3><p>${sc.description}</p>`;
+      card.onclick = () => { document.querySelectorAll('.scenario-card').forEach(x => x.classList.remove('active')); card.classList.add('active'); fillScenario(sc); };
+      c.appendChild(card);
+    });
+  } catch(e) { console.error(e); }
+}
+
+function v(id, val) { const el = document.getElementById(id); if (el) el.value = val ?? ''; }
+function ck(id, val) { const el = document.getElementById(id); if (el) el.checked = !!val; }
+
+function fillScenario(sc) {
+  activeScenarioData = sc;
+  const s = sc.seller, b = sc.buyer, t = sc.transfer;
+  if (currentPipeline === 'gw') {
+    v('gs_type', s.entity_type); v('gs_name', s.name); v('gs_gsa', s.gsa); v('gs_basin', s.basin || 'Kern County');
+    v('gs_alloc', s.allocation_af); v('gs_used', s.used_af); v('gs_banked', s.banked_balance_af || 0);
+    v('gs_method', s.extraction_method || 'metered');
+    v('gs_lat', s.well_lat); v('gs_lng', s.well_lng); v('gs_depth', s.well_depth_ft); v('gs_wl', s.water_level_ft);
+    v('gs_nit', s.nitrate_mg_l); v('gs_hcm', s.hcm_area);
+    v('gb_type', b.entity_type); v('gb_name', b.name); v('gb_gsa', b.gsa); v('gb_basin', b.basin || 'Kern County');
+    v('gb_alloc', b.allocation_af); v('gb_used', b.used_af); v('gb_pop', b.service_population);
+    v('gb_method', b.extraction_method || 'metered');
+    v('gb_lat', b.well_lat); v('gb_lng', b.well_lng); v('gb_depth', b.well_depth_ft); v('gb_wl', b.water_level_ft);
+    v('gb_nit', b.nitrate_mg_l); v('gb_dom', b.domestic_wells_1mi); v('gb_hcm', b.hcm_area);
+    v('gt_type', t.transfer_type); v('gt_qty', t.quantity_af); v('gt_price', t.price_per_af); v('gt_dur', t.duration_days || 365);
+    v('gt_sgsa', t.source_gsa); v('gt_dgsa', t.destination_gsa);
+  } else {
+    v('ss_type', s.entity_type); v('ss_name', s.name);
+    v('ss_right', s.water_right_type); v('ss_ewrims', s.water_right_id);
+    v('ss_face', s.face_value_af); v('ss_priority', s.priority_date);
+    v('ss_benuse', s.beneficial_use_af); v('ss_histdiv', s.historical_diversion_af);
+    v('ss_consuse', s.consumptive_use_af); v('ss_calloc', s.contract_allocation_af); v('ss_cused', s.contract_used_af);
+    v('sb_type', b.entity_type); v('sb_name', b.name); v('sb_basin', b.basin); v('sb_pop', b.service_population);
+    v('st_type', t.transfer_type); v('st_qty', t.quantity_af); v('st_price', t.price_per_af); v('st_dur', t.duration_days || 365);
+    v('st_stream', t.source_stream); v('st_pod', t.point_of_diversion); v('st_pou', t.place_of_use);
+    v('st_downstream', t.downstream_rights_count || 0);
+    v('st_convey', t.conveyance_method || 'canal_lined'); v('st_wheel', t.wheeling_agency);
+    ck('st_envflow', t.has_environmental_flow_requirement);
+    ck('st_fish', t.anadromous_fish_present);
+    ck('st_origin', t.is_area_of_origin_export);
+    ck('st_delta', t.through_delta);
+    ck('st_gwsub', t.groundwater_substitution);
+    ck('st_wheelreq', t.requires_wheeling);
+  }
+}
+
+function n(id) { const el = document.getElementById(id); return el && el.value ? parseFloat(el.value) : undefined; }
+function s(id) { const el = document.getElementById(id); return el && el.value ? el.value : undefined; }
+function c(id) { const el = document.getElementById(id); return el ? el.checked : false; }
+
+function buildGWPayload() {
+  return {
+    seller: { entity_type: s('gs_type'), name: s('gs_name'), basin: s('gs_basin'), gsa: s('gs_gsa'),
+      allocation_af: n('gs_alloc') || 0, used_af: n('gs_used') || 0, banked_balance_af: n('gs_banked') || 0,
+      extraction_method: s('gs_method'), well_lat: n('gs_lat'), well_lng: n('gs_lng'),
+      well_depth_ft: n('gs_depth'), water_level_ft: n('gs_wl'), nitrate_mg_l: n('gs_nit'), hcm_area: s('gs_hcm') },
+    buyer: { entity_type: s('gb_type'), name: s('gb_name'), basin: s('gb_basin'), gsa: s('gb_gsa'),
+      allocation_af: n('gb_alloc') || 0, used_af: n('gb_used') || 0, service_population: n('gb_pop'),
+      extraction_method: s('gb_method'), well_lat: n('gb_lat'), well_lng: n('gb_lng'),
+      well_depth_ft: n('gb_depth'), water_level_ft: n('gb_wl'), nitrate_mg_l: n('gb_nit'),
+      domestic_wells_1mi: n('gb_dom') || 0, hcm_area: s('gb_hcm') },
+    transfer: { transfer_type: s('gt_type'), quantity_af: n('gt_qty') || 0, price_per_af: n('gt_price'),
+      source_basin: s('gs_basin'), destination_basin: s('gb_basin'),
+      source_gsa: s('gt_sgsa') || s('gs_gsa'), destination_gsa: s('gt_dgsa') || s('gb_gsa'),
+      duration_days: n('gt_dur') || 365 }
+  };
+}
+
+function buildSWPayload() {
+  return {
+    seller: { entity_type: s('ss_type'), name: s('ss_name'),
+      water_right_type: s('ss_right'), water_right_id: s('ss_ewrims'),
+      ewrims_status: 'active', face_value_af: n('ss_face') || 0,
+      priority_date: s('ss_priority'), beneficial_use_af: n('ss_benuse'),
+      historical_diversion_af: n('ss_histdiv'), consumptive_use_af: n('ss_consuse'),
+      contract_allocation_af: n('ss_calloc'), contract_used_af: n('ss_cused') },
+    buyer: { entity_type: s('sb_type'), name: s('sb_name'), basin: s('sb_basin'), service_population: n('sb_pop') },
+    transfer: { transfer_type: s('st_type'), quantity_af: n('st_qty') || 0, price_per_af: n('st_price'),
+      duration_days: n('st_dur') || 365, source_stream: s('st_stream'),
+      point_of_diversion: s('st_pod'), place_of_use: s('st_pou'),
+      downstream_rights_count: n('st_downstream') || 0,
+      has_environmental_flow_requirement: c('st_envflow'), anadromous_fish_present: c('st_fish'),
+      is_area_of_origin_export: c('st_origin'), through_delta: c('st_delta'),
+      groundwater_substitution: c('st_gwsub'),
+      conveyance_method: s('st_convey'), requires_wheeling: c('st_wheelreq'),
+      wheeling_agency: s('st_wheel') }
+  };
+}
+
+async function runPipeline() {
+  const btn = document.getElementById('runBtn');
+  btn.disabled = true; btn.classList.add('loading');
+  const payload = currentPipeline === 'sw' ? buildSWPayload() : buildGWPayload();
+  const ep = currentPipeline === 'sw' ? '/transfers/run/surface-water' : '/transfers/run';
+  try {
+    const resp = await fetch(API + ep, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) });
+    if (!resp.ok) { const err = await resp.json().catch(() => ({})); throw new Error(err.detail || resp.statusText); }
+    renderResults(await resp.json());
+  } catch(e) { alert('Pipeline error: ' + e.message); }
+  finally { btn.disabled = false; btn.classList.remove('loading'); }
+}
+
+function renderResults(data) {
+  const results = document.getElementById('results');
+  results.classList.add('visible');
+  const banner = document.getElementById('decisionBanner');
+  const dec = data.decision || 'UNKNOWN';
+  const cls = dec === 'APPROVED' ? 'approved' : dec === 'CONDITIONALLY_APPROVED' ? 'conditional' : 'denied';
+  banner.className = `decision-banner ${cls}`;
+  banner.innerHTML = `<span class="badge">${dec.replace(/_/g, ' ')}</span><span class="score">${(data.composite_score * 100).toFixed(1)}%</span><span style="color:var(--gray-600);font-size:.9rem">Composite Score</span>`;
+  const grid = document.getElementById('stagesGrid');
+  grid.innerHTML = '';
+  (data.stage_results || []).forEach(sr => {
+    const pct = (sr.score * 100).toFixed(0);
+    const color = sr.finding === 'PASS' ? 'var(--green)' : sr.finding === 'CONDITIONAL' ? 'var(--amber)' : 'var(--red)';
+    grid.innerHTML += `<div class="stage-card"><div class="header"><span class="name">${sr.stage.replace(/_/g,' ')}</span><span class="finding finding-${sr.finding}">${sr.finding}</span></div><div class="reasoning">${esc(sr.reasoning)}</div><div class="score-bar"><div class="score-fill" style="width:${pct}%;background:${color}"></div></div><div style="font-size:.7rem;color:var(--gray-400);margin-top:.25rem">${pct}%</div></div>`;
+  });
+  renderList('conditionsSection', 'conditionsList', data.conditions);
+  renderList('flagsSection', 'flagsList', data.risk_flags);
+  renderList('monitoringSection', 'monitoringList', data.monitoring_requirements);
+  const ra = (data.llm_analysis || {}).rights_analysis;
+  const rs = document.getElementById('rightsSection');
+  if (ra && ra.analysis) { rs.style.display = 'block'; const t = ra.model_tier || 'unknown'; document.getElementById('rightsBox').innerHTML = `<span class="tier ${t==='large'?'tier-large':'tier-fallback'}">${t} model</span>\n${esc(ra.analysis)}`; }
+  else { rs.style.display = 'none'; }
+  document.getElementById('reportBox').textContent = data.llm_report || data.report || 'No report generated';
+  results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function renderList(sid, lid, items) {
+  const s = document.getElementById(sid), l = document.getElementById(lid);
+  if (items && items.length) { s.style.display = 'block'; l.innerHTML = items.map(i => `<li>${esc(i)}</li>`).join(''); }
+  else { s.style.display = 'none'; }
+}
+
+function esc(x) { return (x||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+loadScenarios();
+</script>
+</body>
+</html>

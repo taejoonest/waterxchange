@@ -27,5 +27,5 @@ def get_db():
 
 def create_tables():
     """Create all database tables"""
-    from models import user, order, transaction
+    from models import user, order, transaction, transfer, tracking
     Base.metadata.create_all(bind=engine)

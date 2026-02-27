@@ -1,16 +1,38 @@
+# Python
 __pycache__/
 *.pyc
 *.pyo
-venv/
+*.egg-info/
+dist/
+build/
+*.egg
 .env
 *.db
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# IDE
 .DS_Store
-*.xcuserstate
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Xcode user data
 xcuserdata/
+*.xcworkspace/xcuserdata/
 
-# Large binary files
-Kern County Subbasin Groundwater Sustainability Plan 2025 - Clean - Appendices.pdf
+# OS
+Thumbs.db
 
-# Raw downloaded CSVs (processed into JSON)
-data/monitoring/enterprise_wells.csv
-data/monitoring/wcr_wells.csv
+# Large files (GitHub 100MB limit)
+*.pdf
+knowledge_graph*.png
+
+# Secrets
+.env
+credentials.json

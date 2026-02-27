@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WaterXchange — Transfer Tracker</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #0b1d3a; --blue: #1a6fc4; --teal: #0e9aa7;
+      --sky: #e8f4f8; --white: #fff;
+      --gray-50: #f8fafc; --gray-100: #f1f5f9; --gray-200: #e2e8f0;
+      --gray-400: #94a3b8; --gray-600: #475569; --gray-800: #1e293b;
+      --green: #22c55e; --amber: #f59e0b; --red: #ef4444;
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--gray-800); background: var(--gray-50); line-height: 1.6; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; background: rgba(11,29,58,0.95); backdrop-filter: blur(12px); }
+    .nav-logo { font-size: 1.25rem; font-weight: 700; color: var(--white); }
+    .nav-logo span { color: var(--teal); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--gray-200); text-decoration: none; font-size: .9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--teal); }
+    .container { max-width: 1000px; margin: 0 auto; padding: 5rem 2rem 3rem; }
+    h1 { font-size: 2rem; margin-bottom: .5rem; color: var(--navy); }
+    .subtitle { color: var(--gray-600); margin-bottom: 2rem; }
+    .card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; }
+    .card h3 { font-size: .95rem; margin-bottom: .5rem; }
+    .badge { display: inline-block; padding: .15rem .5rem; border-radius: 4px; font-size: .75rem; font-weight: 600; }
+    .badge-approved { background: #dcfce7; color: #166534; }
+    .badge-conditional { background: #fef9c3; color: #854d0e; }
+    .badge-denied { background: #fee2e2; color: #991b1b; }
+    .badge-pending { background: #e2e8f0; color: #475569; }
+    .empty { text-align: center; color: var(--gray-400); padding: 3rem; font-size: .95rem; }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-logo">Water<span>X</span>change</div>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/monitor">Monitoring</a></li>
+      <li><a href="/pipeline">Pipeline</a></li>
+      <li><a href="/tracker" style="color:var(--teal)">Tracker</a></li>
+    </ul>
+  </nav>
+  <div class="container">
+    <h1>Transfer Tracker</h1>
+    <p class="subtitle">Post-approval monitoring and condition tracking</p>
+    <div id="content">
+      <p class="empty">Run a transfer through the Pipeline to see results here. This page tracks approved transfers, their conditions, and monitoring reports.</p>
+    </div>
+  </div>
+</body>
+</html>
