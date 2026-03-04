@@ -33,6 +33,16 @@ Thumbs.db
 *.pdf
 knowledge_graph*.png
 
+# Node
+node_modules/
+frontend/.next/
+frontend/out/
+
+# Hardware STEP files (large, downloaded separately)
+hardware/step_library/*.step
+hardware/step_library/*.STEP
+hardware/step_library/*snapshot*
+
 # Secrets
 .env
 credentials.json

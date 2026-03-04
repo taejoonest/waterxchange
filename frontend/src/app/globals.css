@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-navy: #0b1d3a;
+  --color-navy-light: #134074;
+  --color-blue: #1a6fc4;
+  --color-teal: #0e9aa7;
+  --color-teal-light: #5bc9d0;
+  --color-sky: #e8f4f8;
+  --color-green: #22c55e;
+  --color-amber: #f59e0b;
+  --color-red: #ef4444;
+  --color-orange: #f97316;
+  --color-purple: #a855f7;
+  --color-cyan: #06b6d4;
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #ffffff;
+  color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.5); }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-teal), var(--color-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Comparison bar animations */
+.bar-traditional {
+  background: linear-gradient(90deg, #e2e8f0 0%, #cbd5e1 100%);
+}
+.bar-waterx {
+  background: linear-gradient(90deg, var(--color-teal), var(--color-blue));
+}
