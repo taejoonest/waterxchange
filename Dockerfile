@@ -13,5 +13,6 @@ COPY backend/ backend/
 COPY website/ website/
 COPY --from=frontend-build /app/frontend/out frontend/out
 COPY --from=frontend-build /app/frontend/public frontend/public
-WORKDIR /app/backend
-CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+ENTRYPOINT ["/app/start.sh"]
