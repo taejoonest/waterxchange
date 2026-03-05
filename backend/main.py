@@ -4,7 +4,7 @@ FastAPI server for water trading platform with SGMA compliance
 """
 
 import os
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse
@@ -20,8 +20,6 @@ from services.knowledge_graph import SGMAKnowledgeGraph
 WEBSITE_DIR = Path(__file__).parent.parent / "website"
 FRONTEND_DIR = Path(__file__).parent.parent / "frontend" / "out"
 
-HAS_FRONTEND = FRONTEND_DIR.exists() and (FRONTEND_DIR / "index.html").exists()
-
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -30,12 +28,12 @@ async def lifespan(app: FastAPI):
     kg.load_regulations()
     app.state.sgma_graph = kg
     create_tables()
-    print(f"[startup] FRONTEND_DIR={FRONTEND_DIR}, exists={FRONTEND_DIR.exists()}, HAS_FRONTEND={HAS_FRONTEND}")
-    if HAS_FRONTEND:
-        print(f"[startup] Serving Next.js from {FRONTEND_DIR}")
-        print(f"[startup] Files: {os.listdir(FRONTEND_DIR)[:15]}")
-    else:
-        print(f"[startup] Next.js build not found, falling back to old HTML")
+    print(f"[startup] CWD={os.getcwd()}")
+    print(f"[startup] __file__={__file__}")
+    print(f"[startup] FRONTEND_DIR={FRONTEND_DIR} exists={FRONTEND_DIR.exists()}")
+    print(f"[startup] WEBSITE_DIR={WEBSITE_DIR} exists={WEBSITE_DIR.exists()}")
+    if FRONTEND_DIR.exists():
+        print(f"[startup] frontend/out contents: {os.listdir(FRONTEND_DIR)[:20]}")
     yield
 
 app = FastAPI(
@@ -53,7 +51,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# API routers (must come before static file mounts)
+# API routers
 app.include_router(auth.router, prefix="/auth", tags=["Authentication"])
 app.include_router(orders.router, prefix="/orders", tags=["Orders"])
 app.include_router(market.router, prefix="/market", tags=["Market"])
@@ -66,17 +64,20 @@ app.include_router(hardware.router, prefix="/hardware", tags=["Hardware"])
 
 @app.get("/health")
 async def health_check():
-    return {"status": "healthy", "frontend": HAS_FRONTEND}
+    return {
+        "status": "healthy",
+        "frontend_dir": str(FRONTEND_DIR),
+        "frontend_exists": FRONTEND_DIR.exists(),
+        "frontend_index": (FRONTEND_DIR / "index.html").exists(),
+    }
 
 
 # ── Page routes ──────────────────────────────────────────
 
 def _next_page(name: str):
-    """Return a Next.js static page if available, else old HTML."""
-    if HAS_FRONTEND:
-        for candidate in [FRONTEND_DIR / f"{name}.html", FRONTEND_DIR / name / "index.html"]:
-            if candidate.exists():
-                return FileResponse(candidate)
+    for candidate in [FRONTEND_DIR / f"{name}.html", FRONTEND_DIR / name / "index.html"]:
+        if candidate.exists():
+            return FileResponse(candidate)
     return None
 
 
@@ -87,7 +88,7 @@ async def root():
         return resp
     if (WEBSITE_DIR / "index.html").exists():
         return FileResponse(WEBSITE_DIR / "index.html")
-    return JSONResponse({"name": "WaterXchange API", "version": "1.0.0", "status": "running"})
+    return JSONResponse({"name": "WaterXchange API", "version": "1.0.0"})
 
 
 @app.get("/hardware")
@@ -105,7 +106,6 @@ async def transfer_page():
     return _next_page("transfer") or FileResponse(WEBSITE_DIR / "transfer.html")
 
 
-# Old interactive pages (Mapbox dashboard, transfer form)
 @app.get("/monitor-dashboard")
 async def monitor_dashboard():
     return FileResponse(WEBSITE_DIR / "monitoring.html")
@@ -118,11 +118,26 @@ async def transfer_tool():
 
 # ── Static file serving ──────────────────────────────────
 
-# Old website assets (images for old HTML pages)
+# Old website assets
 if WEBSITE_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(WEBSITE_DIR)), name="old-static")
 
-# Serve entire Next.js output at root (must be LAST mount).
-# This handles /_next/*, /logo.png, /wx_level_product.png, etc.
-if HAS_FRONTEND:
-    app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=False), name="frontend-root")
+# Next.js static files — mount at root LAST so API routes take priority.
+# We try multiple possible locations since Railway paths can differ.
+_frontend_candidates = [
+    FRONTEND_DIR,
+    Path("/app/frontend/out"),
+    Path(os.getcwd()).parent / "frontend" / "out",
+    Path(os.getcwd()) / "frontend" / "out",
+]
+
+_mounted = False
+for _candidate in _frontend_candidates:
+    if _candidate.exists() and (_candidate / "index.html").exists():
+        print(f"[mount] Serving frontend from {_candidate}")
+        app.mount("/", StaticFiles(directory=str(_candidate), html=False), name="frontend-root")
+        _mounted = True
+        break
+
+if not _mounted:
+    print(f"[mount] WARNING: No frontend/out found. Tried: {[str(c) for c in _frontend_candidates]}")
