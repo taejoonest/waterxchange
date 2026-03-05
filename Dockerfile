@@ -13,6 +13,4 @@ COPY backend/ backend/
 COPY website/ website/
 COPY --from=frontend-build /app/frontend/out frontend/out
 COPY --from=frontend-build /app/frontend/public frontend/public
-COPY start.sh /app/start.sh
-RUN chmod +x /app/start.sh
-ENTRYPOINT ["/app/start.sh"]
+CMD ["python", "backend/run.py"]
