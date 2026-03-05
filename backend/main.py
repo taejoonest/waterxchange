@@ -118,20 +118,11 @@ async def transfer_tool():
 
 # ── Static file serving ──────────────────────────────────
 
-# Next.js assets (JS/CSS bundles)
-if HAS_FRONTEND and (FRONTEND_DIR / "_next").exists():
-    app.mount("/_next", StaticFiles(directory=str(FRONTEND_DIR / "_next")), name="next-assets")
-
 # Old website assets (images for old HTML pages)
 if WEBSITE_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(WEBSITE_DIR)), name="old-static")
 
-
-# Catch-all for Next.js root-level static files (logo.png, product images, etc.)
-@app.get("/{filepath:path}")
-async def serve_frontend_file(filepath: str):
-    if HAS_FRONTEND:
-        full = FRONTEND_DIR / filepath
-        if full.exists() and full.is_file():
-            return FileResponse(full)
-    return JSONResponse({"detail": "Not found"}, status_code=404)
+# Serve entire Next.js output at root (must be LAST mount).
+# This handles /_next/*, /logo.png, /wx_level_product.png, etc.
+if HAS_FRONTEND:
+    app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=False), name="frontend-root")
