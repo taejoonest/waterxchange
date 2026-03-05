@@ -17,8 +17,21 @@ from core.config import settings
 from core.database import create_tables
 from services.knowledge_graph import SGMAKnowledgeGraph
 
-WEBSITE_DIR = Path(__file__).parent.parent / "website"
-FRONTEND_DIR = Path(__file__).parent.parent / "frontend" / "out"
+BASE_DIR = Path(__file__).parent.parent
+WEBSITE_DIR = BASE_DIR / "website"
+FRONTEND_OUT = BASE_DIR / "frontend" / "out"
+FRONTEND_PUBLIC = BASE_DIR / "frontend" / "public"
+
+
+def _find_frontend():
+    """Find the frontend build output or public directory."""
+    for d in [FRONTEND_OUT, FRONTEND_PUBLIC, Path("/app/frontend/out"), Path("/app/frontend/public")]:
+        if d.exists() and (d / "logo.png").exists():
+            return d
+    return None
+
+
+FRONTEND_STATIC = _find_frontend()
 
 
 @asynccontextmanager
@@ -28,12 +41,10 @@ async def lifespan(app: FastAPI):
     kg.load_regulations()
     app.state.sgma_graph = kg
     create_tables()
-    print(f"[startup] CWD={os.getcwd()}")
-    print(f"[startup] __file__={__file__}")
-    print(f"[startup] FRONTEND_DIR={FRONTEND_DIR} exists={FRONTEND_DIR.exists()}")
-    print(f"[startup] WEBSITE_DIR={WEBSITE_DIR} exists={WEBSITE_DIR.exists()}")
-    if FRONTEND_DIR.exists():
-        print(f"[startup] frontend/out contents: {os.listdir(FRONTEND_DIR)[:20]}")
+    print(f"[startup] BASE_DIR={BASE_DIR}")
+    print(f"[startup] FRONTEND_STATIC={FRONTEND_STATIC}")
+    print(f"[startup] FRONTEND_OUT exists={FRONTEND_OUT.exists()}")
+    print(f"[startup] FRONTEND_PUBLIC exists={FRONTEND_PUBLIC.exists()}")
     yield
 
 app = FastAPI(
@@ -66,18 +77,20 @@ app.include_router(hardware.router, prefix="/hardware", tags=["Hardware"])
 async def health_check():
     return {
         "status": "healthy",
-        "frontend_dir": str(FRONTEND_DIR),
-        "frontend_exists": FRONTEND_DIR.exists(),
-        "frontend_index": (FRONTEND_DIR / "index.html").exists(),
+        "v": 3,
+        "frontend_static": str(FRONTEND_STATIC),
+        "frontend_out_exists": FRONTEND_OUT.exists(),
+        "frontend_public_exists": FRONTEND_PUBLIC.exists(),
     }
 
 
 # ── Page routes ──────────────────────────────────────────
 
 def _next_page(name: str):
-    for candidate in [FRONTEND_DIR / f"{name}.html", FRONTEND_DIR / name / "index.html"]:
-        if candidate.exists():
-            return FileResponse(candidate)
+    if FRONTEND_OUT.exists():
+        for candidate in [FRONTEND_OUT / f"{name}.html", FRONTEND_OUT / name / "index.html"]:
+            if candidate.exists():
+                return FileResponse(candidate)
     return None
 
 
@@ -118,26 +131,13 @@ async def transfer_tool():
 
 # ── Static file serving ──────────────────────────────────
 
-# Old website assets
 if WEBSITE_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(WEBSITE_DIR)), name="old-static")
 
-# Next.js static files — mount at root LAST so API routes take priority.
-# We try multiple possible locations since Railway paths can differ.
-_frontend_candidates = [
-    FRONTEND_DIR,
-    Path("/app/frontend/out"),
-    Path(os.getcwd()).parent / "frontend" / "out",
-    Path(os.getcwd()) / "frontend" / "out",
-]
+# Serve Next.js _next/ bundles from build output
+if FRONTEND_OUT.exists() and (FRONTEND_OUT / "_next").exists():
+    app.mount("/_next", StaticFiles(directory=str(FRONTEND_OUT / "_next")), name="next-bundles")
 
-_mounted = False
-for _candidate in _frontend_candidates:
-    if _candidate.exists() and (_candidate / "index.html").exists():
-        print(f"[mount] Serving frontend from {_candidate}")
-        app.mount("/", StaticFiles(directory=str(_candidate), html=False), name="frontend-root")
-        _mounted = True
-        break
-
-if not _mounted:
-    print(f"[mount] WARNING: No frontend/out found. Tried: {[str(c) for c in _frontend_candidates]}")
+# Serve images/static files from frontend (try out/ first, then public/)
+if FRONTEND_STATIC:
+    app.mount("/", StaticFiles(directory=str(FRONTEND_STATIC)), name="frontend-files")
