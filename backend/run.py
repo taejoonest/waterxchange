@@ -1,4 +1,8 @@
 import os
+from pathlib import Path
+
+os.chdir(Path(__file__).parent)
+
 import uvicorn
 
 if __name__ == "__main__":

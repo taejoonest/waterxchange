@@ -11,6 +11,7 @@ COPY backend/requirements.txt backend/requirements.txt
 RUN pip install --no-cache-dir -r backend/requirements.txt
 COPY backend/ backend/
 COPY website/ website/
+COPY data/ data/
 COPY --from=frontend-build /app/frontend/out frontend/out
 COPY --from=frontend-build /app/frontend/public frontend/public
 CMD ["python", "backend/run.py"]

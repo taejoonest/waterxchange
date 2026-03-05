@@ -54,7 +54,7 @@ class SGMAKnowledgeGraph:
                     data_path = candidate
                     break
 
-        if Path(data_path).exists():
+        if data_path and Path(data_path).exists():
             with open(data_path) as f:
                 kg_data = json.load(f)
         else:
